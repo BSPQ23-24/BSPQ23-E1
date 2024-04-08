@@ -1,3 +1,5 @@
+package main.java.com.aerologix.app;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

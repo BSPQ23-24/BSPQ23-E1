@@ -1,4 +1,4 @@
-package com.aerologix.app;
+package main.java.com.aerologix.app;
 
 /**
  * Hello world!

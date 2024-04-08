@@ -1,3 +1,5 @@
+package main.java.com.aerologix.app;
+
 public class Booking {
 
     // Attributes
@@ -57,7 +59,8 @@ public class Booking {
 
     // Print the instance
     public String toString() {
-        return "Booking[id=" + this.getId() + ", passenger="+ this.getPassenger().getName() + ", flight=" + this.getFlight().getId() + ", user=" + this.getUser().getDNI() + "]";
+        //return "Booking[id=" + this.getId() + ", passenger="+ this.getPassenger().getName() + ", flight=" + this.getFlight().getId() + ", user=" + this.getUser().getDNI() + "]";
+        return "";
     }
 
 }
