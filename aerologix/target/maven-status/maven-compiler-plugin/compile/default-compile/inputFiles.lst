@@ -1,8 +1,8 @@
 /Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/client/Main.java
-/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/app/AeroLogixManager.java
-/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/app/Passenger.java
+/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/serialization/Booking.java
+/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/serialization/Flight.java
 /Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/server/Main.java
-/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/app/User.java
+/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/serialization/User.java
+/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/serialization/Passenger.java
 /Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/app/App.java
-/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/app/Booking.java
-/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/app/Flight.java
+/Users/juan.orts/Documentos/GitHub/BSPQ23-E1/aerologix/src/main/java/com/aerologix/server/AeroLogixManager.java

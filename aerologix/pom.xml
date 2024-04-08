@@ -22,9 +22,9 @@
   </dependencies>
 
 	<profiles>
-		<!-- run as 'mvn exec:java -Pmanager' -->
+		<!-- run as 'mvn exec:java -Pserver' -->
 		<profile>
-			<id>manager</id>
+			<id>server</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -32,7 +32,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.2.1</version>
 						<configuration>
-							<mainClass>com.aerologix.client.Main</mainClass>
+							<mainClass>com.aerologix.server.Main</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>

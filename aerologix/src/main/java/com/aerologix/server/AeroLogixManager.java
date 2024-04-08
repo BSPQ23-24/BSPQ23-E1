@@ -1,7 +1,7 @@
-package main.java.com.aerologix.app;
+package com.aerologix.server;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import com.aerologix.serialization.*;
 
 public class AeroLogixManager {
     
