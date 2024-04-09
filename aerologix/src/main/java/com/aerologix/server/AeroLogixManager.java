@@ -8,10 +8,12 @@ import com.aerologix.serialization.*;
 public class AeroLogixManager {
   
     protected HashMap<String, Booking> bookings;
-	  protected HashMap<String, Flight> flights;
-	  protected HashMap<String, Airline> airlines;
+	protected HashMap<String, Flight> flights;
+	protected HashMap<String, Airline> airlines;
     protected HashMap<String, Passenger> passengers;
 	protected HashMap<String, Aircraft> aircrafts;
+	protected HashMap<String, User> users;
+
 
 ///////BOOKINGS////////	
 
@@ -125,6 +127,7 @@ public class AeroLogixManager {
 
 /////////////////////    
 
+
 //////AIRCRAFT/////// 
 
     public Aircraft getAircraft(String id) {
@@ -141,7 +144,7 @@ public class AeroLogixManager {
         aircrafts.remove(id);
     }
 
- public void modifyAircraft(String id, String manufacturer, String type, int maxCapacity) {
+ 	public void modifyAircraft(String id, String manufacturer, String type, int maxCapacity) {
         Aircraft aircraft = getAircraft(id);
         aircraft.setManufacturer(manufacturer);
         aircraft.setType(type);
@@ -149,6 +152,36 @@ public class AeroLogixManager {
             
         
     }
-	
+
+/////////////////////
+
+//////USERS/////// 
+
+	// Retrieve User
+	public User getUser(String id) {
+		return users.get(id);
+	}
+
+	// Create User
+	public void addUser(User user) {
+		this.users.put(user.getUserId(), user);
+	}
+
+
+
+	// Modify User	
+	public void modifyUser(String id, String password, User.UserType userType, String name) {
+		User user = getUser(id);
+		user.setPassword(password);
+		user.setUserType(userType);
+		user.setName(name);
+		users.replace(id, user);
+	}
+
+	// Delete User
+	public void deleteUser(String id) {
+		users.remove(id);
+	}
+
 
 }

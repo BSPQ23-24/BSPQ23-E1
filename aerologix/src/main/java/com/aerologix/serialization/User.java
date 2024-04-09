@@ -5,7 +5,7 @@ public class User {
 	// Attributes
     protected String userId;
     protected String password;
-    enum UserType {
+    public enum UserType {
     	COUNTER_CLERK, ADMIN
     }
     protected UserType userType;
