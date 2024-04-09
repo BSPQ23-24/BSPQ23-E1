@@ -99,7 +99,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.2.1</version>
 						<configuration>
-							<mainClass>com.aerologix.client.Main</mainClass>
+							<mainClass>com.aerologix.client.LoginWindow</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
