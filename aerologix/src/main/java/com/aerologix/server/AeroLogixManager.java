@@ -14,6 +14,23 @@ public class AeroLogixManager {
 	protected HashMap<String, Aircraft> aircrafts;
 	protected HashMap<String, User> users;
 
+	public AeroLogixManager() {
+        this.bookings = new HashMap<String, Booking>();
+        this.flights = new HashMap<String, Flight>();
+        this.airlines = new HashMap<String, Airline>();
+        this.passengers = new HashMap<String, Passenger>();
+        this.aircrafts = new HashMap<String, Aircraft>();
+		this.users = new HashMap<String, User>();
+    }
+
+	public AeroLogixManager(HashMap<String, Booking> bookings, HashMap<String, Flight> flights, HashMap<String, Airline> airlines,HashMap<String, Passenger> passengers, HashMap<String, Aircraft> aircrafts, HashMap<String, User> users) {
+        this.bookings = bookings;
+        this.flights = flights;
+        this.airlines = airlines;
+        this.passengers = passengers;
+        this.aircrafts = aircrafts;
+		this.users = users;
+    }
 
 ///////BOOKINGS////////	
 
