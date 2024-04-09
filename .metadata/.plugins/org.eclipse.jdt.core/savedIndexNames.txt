@@ -11,7 +11,6 @@ INDEX VERSION 1.134+C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\.metadat
 1958492032.index
 2046833549.index
 2386581176.index
-2300231769.index
 805984262.index
 459566064.index
 3231899700.index

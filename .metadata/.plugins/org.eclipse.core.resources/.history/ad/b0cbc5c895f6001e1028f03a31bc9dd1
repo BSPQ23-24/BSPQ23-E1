@@ -30,30 +30,5 @@ public class AeroLogixManager {
     public void deleteBooking(String id) {
         bookings.remove(id);
     }
-    
-    
-    protected HashMap<String, Airline> airlines;
-
-    // Retrieve booking
-    public Airline getAirline(String id) {
-        return airlines.get(id);
-    }
-
-    // Create booking
-    public void addAirline(Airline airline) {
-        this.airlines.put(airline.getId(), airline);
-    }
-
-    // Modify booking
-    public void modifyAirline(String id, String name) {
-        Airline airline = getAirline(id);
-        airline.setName(name);
-        airlines.replace(id, airline);
-    }
-
-    // Delete booking
-    public void deleteAirline(String id) {
-        airlines.remove(id);
-    }
 
 }

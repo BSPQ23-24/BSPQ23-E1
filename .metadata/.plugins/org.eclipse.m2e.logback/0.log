@@ -725,3 +725,7 @@
 2024-04-09 18:04:43,967 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\aerologix\src\test\resources
 2024-04-09 18:05:08,096 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\aerologix\src\main\resources
 2024-04-09 18:05:08,098 [Worker-66: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\aerologix\src\test\resources
+2024-04-09 19:22:47,815 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\aerologix\src\main\resources
+2024-04-09 19:22:47,823 [Worker-71: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\aerologix\src\test\resources
+2024-04-09 19:26:49,914 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\aerologix\src\main\resources
+2024-04-09 19:26:49,920 [Worker-58: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\anagg\OneDrive\Documentos\GitHub\BSPQ23-E1\aerologix\src\test\resources
