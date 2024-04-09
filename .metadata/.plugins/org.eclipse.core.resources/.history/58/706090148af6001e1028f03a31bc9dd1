@@ -1,0 +1,5 @@
+package com.aerologix.serialization;
+
+public class Airline {
+
+}

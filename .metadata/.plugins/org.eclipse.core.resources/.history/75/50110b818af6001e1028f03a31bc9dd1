@@ -1,0 +1,6 @@
+package com.aerologix.serialization;
+
+public class Airline {
+	protected int idAirline;
+	protected String Name;
+}
