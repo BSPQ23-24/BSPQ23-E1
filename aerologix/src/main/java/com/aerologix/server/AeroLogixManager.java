@@ -7,6 +7,8 @@ public class AeroLogixManager {
     
     protected HashMap<String, Booking> bookings;
 
+    protected HashMap<String, Flight> Passenger;
+
     // Retrieve booking
     public Booking getBooking(String id) {
         return bookings.get(id);
