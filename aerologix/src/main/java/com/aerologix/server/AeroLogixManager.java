@@ -1,34 +1,68 @@
 package com.aerologix.server;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import com.aerologix.serialization.*;
 
 public class AeroLogixManager {
-    
-    protected HashMap<String, Booking> bookings;
 
-    // Retrieve booking
-    public Booking getBooking(String id) {
-        return bookings.get(id);
-    }
+	protected HashMap<String, Booking> bookings;
+	protected HashMap<String, Flight> flights;
 
-    // Create booking
-    public void addBooking(Booking booking) {
-        this.bookings.put(booking.getId(), booking);
-    }
+///////BOOKINGS////////	
 
-    // Modify booking
-    public void modifyBooking(String id, Passenger passenger, Flight flight, User user) {
-        Booking booking = getBooking(id);
-        booking.setPassenger(passenger);
-        booking.setFlight(flight);
-        booking.setUser(user);
-        bookings.replace(id, booking);
-    }
+	// Retrieve booking
+	public Booking getBooking(String id) {
+		return bookings.get(id);
+	}
 
-    // Delete booking
-    public void deleteBooking(String id) {
-        bookings.remove(id);
-    }
+	// Create booking
+	public void addBooking(Booking booking) {
+		this.bookings.put(booking.getId(), booking);
+	}
+
+	// Modify booking
+	public void modifyBooking(String id, Passenger passenger, Flight flight, User user) {
+		Booking booking = getBooking(id);
+		booking.setPassenger(passenger);
+		booking.setFlight(flight);
+		booking.setUser(user);
+		bookings.replace(id, booking);
+	}
+
+	// Delete booking
+	public void deleteBooking(String id) {
+		bookings.remove(id);
+	}
+
+///////////////////// 
+
+///////FLIGHTS////////   
+
+	// Retrieve flight
+	public Flight getFlight(String idFlight) {
+		return flights.get(idFlight);
+	}
+
+	// Create Flight
+	public void addFlight(Flight flight) {
+		this.flights.put(flight.getIdFlight(), flight);
+	}
+
+	// Modify Flight
+	public void modifyFlight(String idFlight, String origin, String destination, LocalDate date, Aircraft aircraft) {
+		Flight flight = getFlight(idFlight);
+		flight.setIdFlight(idFlight);
+		flight.setOrigin(origin);
+		flight.setDestination(destination);
+		flight.setDate(date);
+		flight.setAircraft(aircraft);
+	}
+
+	// Delete Flight
+	public void deleteFlight(String idFlight) {
+		flights.remove(idFlight);
+	}
+/////////////////////    
 
 }
