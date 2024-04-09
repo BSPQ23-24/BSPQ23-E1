@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import com.aerologix.serialization.*;
 
+
 public class AeroLogixManager {
   
     protected HashMap<String, Booking> bookings;
 	  protected HashMap<String, Flight> flights;
 	  protected HashMap<String, Airline> airlines;
     protected HashMap<String, Passenger> passengers;
+	protected HashMap<String, Aircraft> aircrafts;
 
 ///////BOOKINGS////////	
 
@@ -122,5 +124,31 @@ public class AeroLogixManager {
     }
 
 /////////////////////    
+
+//////AIRCRAFT/////// 
+
+    public Aircraft getAircraft(String id) {
+        return aircrafts.get(id);
+    }
+
+    public void addAircraft(Aircraft aircraft) {
+       
+            aircrafts.put(aircraft.getId(), aircraft);
+        
+    }
+
+    public void deleteAircraft(String id) {
+        aircrafts.remove(id);
+    }
+
+ public void modifyAircraft(String id, String manufacturer, String type, int maxCapacity) {
+        Aircraft aircraft = getAircraft(id);
+        aircraft.setManufacturer(manufacturer);
+        aircraft.setType(type);
+        aircraft.setMaxCapacity(maxCapacity);
+            
+        
+    }
+	
 
 }
