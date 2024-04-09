@@ -1,5 +1,7 @@
+com/aerologix/serialization/Aircraft.class
 com/aerologix/serialization/Booking.class
 com/aerologix/serialization/User.class
 com/aerologix/serialization/Flight.class
+com/aerologix/serialization/Airline.class
 com/aerologix/server/AeroLogixManager.class
 com/aerologix/serialization/Passenger.class

@@ -8,6 +8,7 @@ public class AeroLogixManager {
 
 	protected HashMap<String, Booking> bookings;
 	protected HashMap<String, Flight> flights;
+	protected HashMap<String, Airline> airlines;
 
 ///////BOOKINGS////////	
 
@@ -64,5 +65,29 @@ public class AeroLogixManager {
 		flights.remove(idFlight);
 	}
 /////////////////////    
+
+//////AIRLINES/////// 
+
+	// Retrieve airline
+	public Airline getAirline(String id) {
+		return airlines.get(id);
+	}
+
+	// Create airline
+	public void addAirline(Airline airline) {
+		this.airlines.put(airline.getId(), airline);
+	}
+
+	// Modify airline
+	public void modifyAirline(String id, String name) {
+		Airline airline = getAirline(id);
+		airline.setName(name);
+		airlines.replace(id, airline);
+	}
+
+	// Delete airline
+	public void deleteAirline(String id) {
+		airlines.remove(id);
+	}
 
 }
