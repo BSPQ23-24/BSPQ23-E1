@@ -5,12 +5,11 @@ import java.util.HashMap;
 import com.aerologix.serialization.*;
 
 public class AeroLogixManager {
-    
+  
     protected HashMap<String, Booking> bookings;
-	protected HashMap<String, Flight> flights;
-	protected HashMap<String, Airline> airlines;
-    protected HashMap<String, Passenger> passenger;
-
+	  protected HashMap<String, Flight> flights;
+	  protected HashMap<String, Airline> airlines;
+    protected HashMap<String, Passenger> passengers;
 
 ///////BOOKINGS////////	
 
@@ -91,18 +90,19 @@ public class AeroLogixManager {
 	public void deleteAirline(String id) {
 		airlines.remove(id);
 	}
+  
 /////////////////////    
 
 //////PASSENGERS/////// 
 
     // Retrieve Passenger
     public Passenger getPassenger(String dni) {
-        return passenger.get(dni);
+        return passengers.get(dni);
     }
 
     // Create Passenger
     public void addPassenger(Passenger passenger) {
-        this.passenger.put(passenger.getDNI(), passenger);
+        this.passengers.put(passenger.getDNI(), passenger);
     }
 
     // Modify Passenger
@@ -113,15 +113,14 @@ public class AeroLogixManager {
         passenger.setEmail(email);
         passenger.setNationality(nationality);
         passenger.setBirthdate(birthdate);
-        this.passenger.replace(dni, passenger);
+        this.passengers.replace(dni, passenger);
     }
 
     // Delete Passenger
     public void deletePassenger(String dni) {
-        passenger.remove(dni);
+        passengers.remove(dni);
     }
 
 /////////////////////    
-
 
 }
