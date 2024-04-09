@@ -6,16 +6,13 @@ public class Aircraft {
     protected String type ;
     protected int maxCapacity;
 
-
-   
+	
     public Aircraft(String manufacturer, String type, int maxCapacity) {
 	
         this.manufacturer = manufacturer;   
         this.type = type;
         this.maxCapacity = maxCapacity;
     }
-
-
 
     public String getManufacturer() {
 		
@@ -29,9 +26,7 @@ public class Aircraft {
     }
 
 
-
-    public String getType() {
-	
+   public String getType() {
 	
         return type;
     }
@@ -51,8 +46,6 @@ public class Aircraft {
         this.maxCapacity = maxCapacity;
     }
 
- 
-    @Override
     public String toString() {
         return "Aircraft{" +  "manufacturer='" +  manufacturer + '\'' +  ", type='" + type + '\'' + ", maxCapacity=" + maxCapacity +   '}';
     }
