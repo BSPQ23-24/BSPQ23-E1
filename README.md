@@ -8,5 +8,5 @@ First, the whole code can be compile using:
 Then, in three separate shell windows, run the following commands:
     
     mvn jetty:run
-    mvn exec:java -Pmanager
+    mvn exec:java -Pserver
     mvn exec:java -Pclient
