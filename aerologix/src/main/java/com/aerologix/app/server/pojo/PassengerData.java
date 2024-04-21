@@ -1,28 +1,17 @@
-package com.aerologix.serialization;
+package com.aerologix.app.server.pojo;
 
-import java.time.LocalDate;
-
-public class Passenger {
-	
-    // Attributes
+public class PassengerData {
     protected String dni;
 	protected int phone;
 	protected String name;
 	protected String email;
 	protected String nationality;
-	protected LocalDate birthdate; // he añadido este atributo
+	protected long birthdate;
 
-
-    public Passenger( String dni, int phone, String name, String email, String nationality, LocalDate birthdate) {
-        this.dni = dni;
-        this.phone = phone;
-        this.name = name;
-        this.email = email;
-        this.nationality = nationality;
-        this.birthdate = birthdate;
+    public PassengerData() {
+        // required by serialization
     }
 
-    // Getters
     public String getDNI() {
         return this.dni;
     }
@@ -43,7 +32,7 @@ public class Passenger {
         return this.nationality;
     }
 
-    public LocalDate getBirthdate() {
+    public long getBirthdate() {
         return this.birthdate;
     }
 
@@ -68,10 +57,9 @@ public class Passenger {
         this.nationality = nationality;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(long birthdate) {
         this.birthdate = birthdate;
     }
-
 
     // Print the instance
     public String toString() {
@@ -84,4 +72,5 @@ public class Passenger {
                 ", birthdate=" + birthdate +
                 '}';
     }
+    
 }

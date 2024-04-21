@@ -1,25 +1,33 @@
-package com.aerologix.serialization;
+package com.aerologix.app.server.jdo;
 
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Persistent;
+
+@PersistenceCapable
 public class Airline {
-	protected String idAirline;
+    @PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
+	protected int idAirline;
 	protected String name;
 	
 	public Airline() {
-        this.idAirline = "";
+        this.idAirline = -1;
         this.name = "";
     }
 
-    public Airline(String idAirline, String name) {
+    public Airline(int idAirline, String name) {
         this.setId(idAirline);
         this.setName(name);
     }
 
     // Getters and setters
-    public String getId() {
+    public int getId() {
         return this.idAirline;
     }
 
-    public void setId(String idAirline) {
+    public void setId(int idAirline) {
         this.idAirline = idAirline;
     }
 

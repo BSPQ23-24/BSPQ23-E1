@@ -1,9 +1,9 @@
-package com.aerologix.server;
+package com.aerologix.app.server;
 
 import java.util.HashMap;
 
-import com.aerologix.serialization.User;
-import com.aerologix.serialization.User.UserType;
+import com.aerologix.app.server.jdo.*;
+import com.aerologix.app.server.jdo.User.UserType;
 
 public class Main {
     
@@ -13,8 +13,8 @@ public class Main {
 
         HashMap<String, User> users = new HashMap<String, User>();
 
-        users.put(u1.getUserId(), u1);
-        users.put(u2.getUserId(), u2);
+        users.put(u1.getEmail(), u1);
+        users.put(u2.getEmail(), u2);
 
         System.out.println(u1);
         System.out.println(u2);

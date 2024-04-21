@@ -1,29 +1,28 @@
-package com.aerologix.server;
+package com.aerologix.app.server;
 
-import java.time.LocalDate;
 import java.util.HashMap;
-import com.aerologix.serialization.*;
+import com.aerologix.app.server.jdo.*;
 
 
 public class AeroLogixManager {
   
-    protected HashMap<String, Booking> bookings;
-	protected HashMap<String, Flight> flights;
-	protected HashMap<String, Airline> airlines;
+    protected HashMap<Integer, Booking> bookings;
+	protected HashMap<Integer, Flight> flights;
+	protected HashMap<Integer, Airline> airlines;
     protected HashMap<String, Passenger> passengers;
-	protected HashMap<String, Aircraft> aircrafts;
+	protected HashMap<Integer, Aircraft> aircrafts;
 	protected HashMap<String, User> users;
 
 	public AeroLogixManager() {
-        this.bookings = new HashMap<String, Booking>();
-        this.flights = new HashMap<String, Flight>();
-        this.airlines = new HashMap<String, Airline>();
+        this.bookings = new HashMap<Integer, Booking>();
+        this.flights = new HashMap<Integer, Flight>();
+        this.airlines = new HashMap<Integer, Airline>();
         this.passengers = new HashMap<String, Passenger>();
-        this.aircrafts = new HashMap<String, Aircraft>();
+        this.aircrafts = new HashMap<Integer, Aircraft>();
 		this.users = new HashMap<String, User>();
     }
 
-	public AeroLogixManager(HashMap<String, Booking> bookings, HashMap<String, Flight> flights, HashMap<String, Airline> airlines,HashMap<String, Passenger> passengers, HashMap<String, Aircraft> aircrafts, HashMap<String, User> users) {
+	public AeroLogixManager(HashMap<Integer, Booking> bookings, HashMap<Integer, Flight> flights, HashMap<Integer, Airline> airlines,HashMap<String, Passenger> passengers, HashMap<Integer, Aircraft> aircrafts, HashMap<String, User> users) {
         this.bookings = bookings;
         this.flights = flights;
         this.airlines = airlines;
@@ -35,7 +34,7 @@ public class AeroLogixManager {
 ///////BOOKINGS////////	
 
 	// Retrieve booking
-	public Booking getBooking(String id) {
+	public Booking getBooking(Integer id) {
 		return bookings.get(id);
 	}
 
@@ -45,7 +44,7 @@ public class AeroLogixManager {
 	}
 
 	// Modify booking
-	public void modifyBooking(String id, Passenger passenger, Flight flight, User user) {
+	public void modifyBooking(Integer id, Passenger passenger, Flight flight, User user) {
 		Booking booking = getBooking(id);
 		booking.setPassenger(passenger);
 		booking.setFlight(flight);
@@ -54,7 +53,7 @@ public class AeroLogixManager {
 	}
 
 	// Delete booking
-	public void deleteBooking(String id) {
+	public void deleteBooking(Integer id) {
 		bookings.remove(id);
 	}
 
@@ -63,7 +62,7 @@ public class AeroLogixManager {
 ///////FLIGHTS////////   
 
 	// Retrieve flight
-	public Flight getFlight(String idFlight) {
+	public Flight getFlight(Integer idFlight) {
 		return flights.get(idFlight);
 	}
 
@@ -73,7 +72,7 @@ public class AeroLogixManager {
 	}
 
 	// Modify Flight
-	public void modifyFlight(String idFlight, String origin, String destination, LocalDate date, Aircraft aircraft) {
+	public void modifyFlight(Integer idFlight, String origin, String destination, long date, Aircraft aircraft) {
 		Flight flight = getFlight(idFlight);
 		flight.setIdFlight(idFlight);
 		flight.setOrigin(origin);
@@ -83,7 +82,7 @@ public class AeroLogixManager {
 	}
 
 	// Delete Flight
-	public void deleteFlight(String idFlight) {
+	public void deleteFlight(Integer idFlight) {
 		flights.remove(idFlight);
 	}
 /////////////////////    
@@ -91,7 +90,7 @@ public class AeroLogixManager {
 //////AIRLINES/////// 
 
 	// Retrieve airline
-	public Airline getAirline(String id) {
+	public Airline getAirline(Integer id) {
 		return airlines.get(id);
 	}
 
@@ -101,14 +100,14 @@ public class AeroLogixManager {
 	}
 
 	// Modify airline
-	public void modifyAirline(String id, String name) {
+	public void modifyAirline(Integer id, String name) {
 		Airline airline = getAirline(id);
 		airline.setName(name);
 		airlines.replace(id, airline);
 	}
 
 	// Delete airline
-	public void deleteAirline(String id) {
+	public void deleteAirline(Integer id) {
 		airlines.remove(id);
 	}
   
@@ -127,7 +126,7 @@ public class AeroLogixManager {
     }
 
     // Modify Passenger
-    public void modifyPassenger(String dni, int phone, String name, String email, String nationality, LocalDate birthdate) {
+    public void modifyPassenger(String dni, int phone, String name, String email, String nationality, long birthdate) {
         Passenger passenger = getPassenger(dni);
         passenger.setPhone(phone);
         passenger.setName(name);
@@ -147,7 +146,7 @@ public class AeroLogixManager {
 
 //////AIRCRAFT/////// 
 
-    public Aircraft getAircraft(String id) {
+    public Aircraft getAircraft(Integer id) {
         return aircrafts.get(id);
     }
 
@@ -157,11 +156,11 @@ public class AeroLogixManager {
         
     }
 
-    public void deleteAircraft(String id) {
+    public void deleteAircraft(Integer id) {
         aircrafts.remove(id);
     }
 
- 	public void modifyAircraft(String id, String manufacturer, String type, int maxCapacity) {
+ 	public void modifyAircraft(Integer id, String manufacturer, String type, int maxCapacity) {
         Aircraft aircraft = getAircraft(id);
         aircraft.setManufacturer(manufacturer);
         aircraft.setType(type);
@@ -181,7 +180,7 @@ public class AeroLogixManager {
 
 	// Create User
 	public void addUser(User user) {
-		this.users.put(user.getUserId(), user);
+		this.users.put(user.getEmail(), user);
 	}
 
 

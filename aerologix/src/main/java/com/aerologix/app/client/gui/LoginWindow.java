@@ -1,4 +1,4 @@
-package com.aerologix.client;
+package com.aerologix.app.client.gui;
 import javax.swing.*;
 
 import java.awt.*;
@@ -6,20 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.SQLException;
-import java.util.logging.Level;
 
-/**
- * 	Clase de la ventana gráfica de inicio de sesión en el programa
- *
- */
+import com.aerologix.app.client.AeroLogixClient;
+
 public class LoginWindow extends JFrame {
 	
 	private static LoginWindow instanceLogin;
 	
 	private static final long serialVersionUID = 1L;
 	
-	//	Paneles
+	//	Panels
 	protected JPanel pLogin = new JPanel(new GridLayout(4,1));
 	protected JPanel pPrincipal = new JPanel(new BorderLayout());
 	protected JPanel plUser = new JPanel(new FlowLayout());
@@ -28,7 +24,7 @@ public class LoginWindow extends JFrame {
 	protected JPanel pSignup = new JPanel(new FlowLayout());
 	protected JPanel pLogo = new JPanel(new FlowLayout());
 	
-	//	Componentes login
+	//	Components login
 
 	protected JLabel lMail = new JLabel("Username: ");
 	protected JLabel lPass = new JLabel("Password: ");
@@ -42,10 +38,10 @@ public class LoginWindow extends JFrame {
 	protected JButton bSignup = new JButton("Create an account");
 	protected JLabel lLogo = new JLabel("AeroLogix");
 	
-	private LoginWindow() {
+	private LoginWindow(AeroLogixClient aerologixClient) {
 		this.setTitle("Login - AeroLogix");
 		this.setSize(450, 280);
-		centrarVentana();
+		centerWindow();
 		this.setLayout(new FlowLayout());
 		
 		//	Construccion login
@@ -84,38 +80,37 @@ public class LoginWindow extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {	
-					
-						if(true) {
-								Thread hilo = new Thread() {
+				try {
+					if(aerologixClient.login(tMail.getText(), tPass.getText())) {
+						Thread hilo = new Thread() {
 								
-									@Override
-									public void run() {
-										lError.setText("Logging in...");
-										muestraTemporal(1000);
-										lError.setText("");
-										LoginWindow.instanceLogin = null;
-										dispose();
-									}
-								};
-								hilo.start();
-						} else {
-								Thread hilo = new Thread() {
-									@Override
-									public void run() {
-										lError.setText("Login credentials are not correct.");
-										muestraTemporal(4000);
-										lError.setText("");
-									}
-								};
-								hilo.start();
-						}
+							@Override
+							public void run() {
+								lError.setText("Logging in...");
+								waitTime(1000);
+								lError.setText("");
+								LoginWindow.instanceLogin = null;
+								dispose();
+							}
+						};
+						hilo.start();
+					} else {
+						Thread hilo = new Thread() {
+							@Override
+							public void run() {
+								lError.setText("Invalid login credentials");
+								waitTime(4000);
+								lError.setText("");
+							}
+						};
+						hilo.start();
+					}
 				} catch(NullPointerException e1) {
 					Thread hilo = new Thread() {
 						@Override
 						public void run() {
-							lError.setText("Login credentials are not correct");
-							muestraTemporal(4000);
+							lError.setText("Invalid login credentials");
+							waitTime(4000);
 							lError.setText("");
 						}
 					};
@@ -140,7 +135,7 @@ public class LoginWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mostrarOcultar();
+				showHide();
 			}
 			
 		});
@@ -150,47 +145,29 @@ public class LoginWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Under development");
+				RegisterWindow rw = RegisterWindow.getInstance(aerologixClient);
+				rw.setVisible(true);
 			}
-			
 		});
 		
 	}
 	
-	public static void main(String[] args) {		//	MAIN (get data)
-		@SuppressWarnings("unused")
-		LoginWindow lv = new LoginWindow();
-	}
-	
-	/**
-	 * Método que realiza una pausa en el hilo aplicado
-	 * @param tiempo Integer del tiempo de espera en milisegundos
-	 */
-	
-	public static void muestraTemporal(int tiempo) {
+	public static void waitTime(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
 		} catch (InterruptedException e) {	}
 	}
 	
-	/**
-	 *  Método que posiciona la ventana en el centro de la pantalla
-	 */
-
-	private void centrarVentana() {
-		Dimension tamanyoVentana = getSize();
-		Dimension tamanyoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
-		int largo = (tamanyoPantalla.width-tamanyoVentana.width)/2;
-		int alto = (tamanyoPantalla.height-tamanyoVentana.height)/2;
+	private void centerWindow() {
+		Dimension windowSize = getSize();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int largo = (screenSize.width-windowSize.width)/2;
+		int alto = (screenSize.height-windowSize.height)/2;
 		
 		setLocation(largo, alto);
 	}
 	
-	/**
-	 * Método que sirve para mostrar/ocultar la contraseña en el login temporalmente
-	 */
-	
-	public void mostrarOcultar() {
+	public void showHide() {
 		Thread hilo = new Thread() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -199,7 +176,7 @@ public class LoginWindow extends JFrame {
 				tShow.setVisible(true);
 				tPass.setVisible(false);
 				plPass.updateUI();
-				muestraTemporal(1000);
+				waitTime(1000);
 				tShow.setVisible(false);
 				tPass.setVisible(true);
 				plPass.updateUI();
@@ -208,13 +185,9 @@ public class LoginWindow extends JFrame {
 		hilo.start();
 	};
 	
-	/**
-	 * Método que devuelve una instancia de la ventana siguiendo el patrón de diseño Singleton para evitar que puedan instanciarse múltiples ventanas a la vez
-	 * @return instancia de la ventana
-	 */
-	public static LoginWindow getInstanceLogin() {
+	public static LoginWindow getInstanceLogin(AeroLogixClient aeroLogixClient) {
 		if(LoginWindow.instanceLogin == null) {
-			LoginWindow.instanceLogin = new LoginWindow();
+			LoginWindow.instanceLogin = new LoginWindow(aeroLogixClient);
 		}
 		return LoginWindow.instanceLogin;
 	}

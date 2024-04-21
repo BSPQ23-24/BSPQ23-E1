@@ -1,9 +1,14 @@
-package com.aerologix.serialization;
+package com.aerologix.app.server.jdo;
 
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+
+@PersistenceCapable
 public class User {
 	
 	// Attributes
-    protected String userId;
+	@PrimaryKey
+	protected String email;
     protected String password;
     public enum UserType {
     	COUNTER_CLERK, ADMIN
@@ -13,26 +18,26 @@ public class User {
     
     // Constructors
     public User() {
-		this.userId = "";
+		this.email = "";
 		this.password = "";
 		this.userType = null;
 		this.name = "";
 	}
      
-	public User(String userId, String password, UserType userType, String name) {
-		this.setUserId(userId);
+	public User(String email, String password, UserType userType, String name) {
+		this.setEmail(email);
 		this.setPassword(password);
 		this.setUserType(userType);
 		this.setName(name);
 	}
 
 	// Getters and setters  
-	public String getUserId() {
-		return this.userId;
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -61,6 +66,6 @@ public class User {
 
 	// Print the instance
 	public String toString() {
-		return "User [userId=" + userId + ", password=" + password + ", userType=" + userType + ", name=" + name + "]";
+		return "User [email=" + email + ", password=" + password + ", userType=" + userType + ", name=" + name + "]";
 	}
 }
