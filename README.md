@@ -3,22 +3,31 @@
 AeroLogix is a Maven-based Java project that creates a management system for airports.
 
 1. **Set up the database**
-
+    ```
     mysql -u root -p < sql/create-aerologix.sql
+    ```
+    
+1. **Compile the Maven project**
 
-2. **Compile the Maven project**
-
+    ```
     mvn clean compile
+    ```
 
-3. **Create Database Schema**
+2. **Create Database Schema**
 
+    ```
     mvn datanucleus:schema-create
+    ```
 
-4. **Start the server**
+3. **Start the server**
 
+    ```
     mvn jetty:run
+    ```
 
-5. **Start the client**
 
+4. **Start the client**
+   
+    ```
     mvn exec:java -Pclient
-
+    ```
