@@ -30,6 +30,10 @@ public class Server {
         this.tx = pm.currentTransaction();
     }
 
+    /*
+     * CRUD: User
+     */
+
     @POST
     @Path("/user/register")
     public Response registerUser(UserData userData) {
@@ -104,6 +108,200 @@ public class Server {
                 tx.rollback();
             }
         }
+    }
+
+    @POST
+    @Path("/user/modify")
+    public Response modifyUser(UserData userData) {
+        return null;
+    }
+
+    @POST
+    @Path("/user/delete")
+    public Response deleteUser(String email) {
+        return null;
+    }
+
+    @POST
+    @Path("/user/get")
+    public Response getUser(int id) {
+        return null;
+    }
+
+    @POST
+    @Path("/user/getAll")
+    public Response getAllUsers() {
+        return null;
+    }
+
+    /*
+     * CRUD: Booking
+     */
+
+    @POST
+    @Path("/booking/get")
+    public Response getBooking(int id) {
+        return null;
+    }
+
+    @POST
+    @Path("/booking/getAll")
+    public Response getAllBookings() {
+        return null;
+    }
+
+    @POST
+    @Path("/booking/create")
+    public Response createBooking(BookingData bookingData) {
+        return null;
+    }
+
+    @POST
+    @Path("/booking/modify")
+    public Response modifyBooking(BookingData bookingData) {
+        return null;
+    }
+
+    @POST
+    @Path("/booking/delete")
+    public Response deleteBooking(int id) {
+        return null;
+    }
+
+    /*
+     * CRUD: Flight
+     */
+
+    @POST
+    @Path("/flight/get")
+    public Response getFlight(int id) {
+        return null;
+    }
+
+    @POST
+    @Path("/flight/getAll")
+    public Response getAllFlights() {
+        return null;
+    }
+
+    @POST
+    @Path("/flight/create")
+    public Response createFlight(FlightData flightData) {
+        return null;
+    }
+
+    @POST
+    @Path("/flight/modify")
+    public Response modifyBooking(FlightData flightData) {
+        return null;
+    }
+
+    @POST
+    @Path("/flight/delete")
+    public Response deleteFlight(int id) {
+        return null;
+    }
+    
+    /*
+     * CRUD: Passenger
+     */
+
+    @POST
+    @Path("/passenger/get")
+    public Response getPassenger(String dni) {
+        return null;
+    }
+
+    @POST
+    @Path("/passenger/getAll")
+    public Response getAllPassengers() {
+        return null;
+    }
+
+    @POST
+    @Path("/passenger/create")
+    public Response createPassenger(PassengerData passengerData) {
+        return null;
+    }
+
+    @POST
+    @Path("/passenger/modify")
+    public Response modifyPassenger(PassengerData passengerData) {
+        return null;
+    }
+
+    @POST
+    @Path("/passenger/delete")
+    public Response deletePassenger(String dni) {
+        return null;
+    }
+
+    /*
+     * CRUD: Airline
+     */
+
+    @POST
+    @Path("/airline/get")
+    public Response getAirline(int id) {
+        return null;
+    }
+
+    @POST
+    @Path("/airline/getAll")
+    public Response getAllAirlines() {
+        return null;
+    }
+
+    @POST
+    @Path("/airline/create")
+    public Response createAirline(AirlineData airlineData) {
+        return null;
+    }
+
+    @POST
+    @Path("/airline/modify")
+    public Response modifyAirline(AirlineData airlineData) {
+        return null;
+    }
+
+    @POST
+    @Path("/airline/delete")
+    public Response deleteAirline(int id) {
+        return null;
+    }
+    
+    /*
+     * CRUD: Aircraft
+     */
+
+    @POST
+    @Path("/aircraft/get")
+    public Response getAircraft(int id) {
+        return null;
+    }
+
+    @POST
+    @Path("/aircraft/getAll")
+    public Response getAllAircrafts() {
+        return null;
+    }
+
+    @POST
+    @Path("/aircraft/create")
+    public Response createAircraft(AircraftData aircraftData) {
+        return null;
+    }
+
+    @POST
+    @Path("/aircraft/modify")
+    public Response modifyAircraft(AircraftData aircraftData) {
+        return null;
+    }
+
+    @POST
+    @Path("/aircraft/delete")
+    public Response deleteAircraft(int id) {
+        return null;
     }
 
 }
