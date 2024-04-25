@@ -14,6 +14,7 @@ import jakarta.ws.rs.core.*;
 
 import com.aerologix.app.server.pojo.*;
 import com.aerologix.app.server.jdo.*;
+import com.aerologix.app.server.jdo.User.UserType;
 
 @Path("/aerologix")
 @Produces(MediaType.APPLICATION_JSON)
@@ -113,19 +114,115 @@ public class Server {
     @POST
     @Path("/user/modify")
     public Response modifyUser(UserData userData) {
-        return null;
+        try{
+            tx.begin();
+            // Get current user data
+            logger.info("Get the current user data for: {}", userData.getEmail());
+            User user = null;
+            try { 
+                user = pm.getObjectById(User.class, userData.getEmail());
+            } catch(JDOObjectNotFoundException e) {
+                logger.info("User with email '{}' does not exist in the database.", userData.getEmail());
+            }
+
+            if(user != null) {
+                // Modify all data except primary key (email)
+                user.setName(userData.getName());
+                user.setPassword(userData.getPassword());
+                user.setUserType(UserType.valueOf(userData.getUserType()));
+
+                pm.makePersistent(user);
+                logger.info("User modified: {}", user);
+                tx.commit();
+                return Response.ok().build();
+            } else {
+                logger.error("There is no user registered with email: {}", userData.getEmail());
+                tx.commit();
+                return Response.status(Response.Status.UNAUTHORIZED).entity("No user found").build();
+            }
+            
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+        }  
     }
 
     @POST
     @Path("/user/delete")
     public Response deleteUser(String email) {
-        return null;
+        try{
+            tx.begin();
+            logger.info("Checking if user {} exists in the database...", email);
+            User user = null;
+            try { 
+                user = pm.getObjectById(User.class, email);
+            } catch(JDOObjectNotFoundException e) {
+                logger.info("User with email '{}' does not exist in the database.", email);
+            }
+
+            if(user != null) {
+                // Delete user
+                pm.deletePersistent(user);
+                logger.info("User deleted: {}", email);
+                tx.commit();
+                return Response.ok().build();
+            } else {
+                logger.error("There is no user registered with email: {}", email);
+                tx.commit();
+                return Response.status(Response.Status.UNAUTHORIZED).entity("No user found").build();
+            }
+            
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+        }
     }
 
-    @POST
+    @GET
     @Path("/user/get")
-    public Response getUser(int id) {
-        return null;
+    public Response getUser(@QueryParam("email") String email) {
+        try{
+            tx.begin();
+            logger.info("Checking if the user '{}' already exists or not...", email);
+            User user = null;
+            
+            try { 
+                user = pm.getObjectById(User.class, email);
+            } catch(JDOObjectNotFoundException e) {
+                logger.info("User with email '{}' does not exist in the database.", email);
+            }
+
+            tx.commit();
+
+            // If user exists
+            if (user != null) {
+                UserData userData = new UserData();
+                userData.setEmail(user.getEmail());
+                userData.setPassword(user.getPassword());
+                userData.setUserType(user.getUserType().name());
+                userData.setName(user.getName());
+                
+                logger.info("Sending userData to client...");
+                return Response.ok().entity(userData).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
+            }
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+        }
     }
 
     @POST
