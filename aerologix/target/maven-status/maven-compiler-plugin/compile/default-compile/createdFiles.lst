@@ -33,3 +33,4 @@ com/aerologix/app/server/pojo/BookingData.class
 com/aerologix/app/server/AeroLogixManager.class
 com/aerologix/app/client/gui/LoginWindow$3.class
 com/aerologix/app/server/pojo/LoginData.class
+com/aerologix/app/client/AeroLogixClient$1.class

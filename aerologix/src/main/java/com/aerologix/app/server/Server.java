@@ -1,10 +1,9 @@
 package com.aerologix.app.server;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.JDOObjectNotFoundException;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.jdo.Transaction;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.jdo.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -213,6 +212,7 @@ public class Server {
                 logger.info("Sending userData to client...");
                 return Response.ok().entity(userData).build();
             } else {
+                logger.info("User not found");
                 return Response.status(Response.Status.NOT_FOUND).entity("User not found").build();
             }
         }
@@ -225,10 +225,47 @@ public class Server {
         }
     }
 
-    @POST
+    @GET
     @Path("/user/getAll")
     public Response getAllUsers() {
-        return null;
+        try{
+            tx.begin();
+
+            ArrayList<UserData> userList = new ArrayList<UserData>();
+
+            logger.info("Retrieving all users from database...");
+
+            Extent<User> e = pm.getExtent(User.class, true);
+            Iterator<User> iter=e.iterator();
+            while (iter.hasNext())
+            {
+                User user = (User)iter.next();
+                if(!user.getUserType().name().equals("ADMIN")) {
+                    UserData userData = new UserData();
+                    userData.setEmail(user.getEmail());
+                    userData.setPassword(user.getPassword());
+                    userData.setUserType(user.getUserType().name());
+                    userData.setName(user.getName());
+                    userList.add(userData);
+                }
+            }
+            tx.commit();
+
+            if(userList.size() > 0){
+                logger.info("Sending all users to client...");
+                return Response.ok().entity(userList).build();
+            } else {
+                logger.error("No users registered");
+                return Response.status(Response.Status.NO_CONTENT).entity("No users registered").build();
+            }
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+        }
     }
 
     /*

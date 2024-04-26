@@ -1,5 +1,7 @@
 package com.aerologix.app.client;
 
+import java.util.ArrayList;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -111,6 +113,23 @@ public class AeroLogixClient {
             return null;
         }
     }
+
+    public ArrayList<UserData> getAllUsers() {
+        WebTarget getAllUsersWebTarget = webTarget.path("/user/getAll");
+        Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
+        Response response = invocationBuilder.get();
+    
+        if (response.getStatus() == Status.OK.getStatusCode()) {
+            logger.info("All users retrieved successfully");
+            return response.readEntity(new GenericType<ArrayList<UserData>>() {});
+        } else if (response.getStatus() == Status.NO_CONTENT.getStatusCode()) {
+            logger.error("No users registered");
+            return new ArrayList<UserData>(); // Return an empty list if no users are registered
+        } else {
+            logger.error("Failed to get all users. Status code: {}", response.getStatus());
+            return null;
+        }
+    }
     
     // Main
     public static void main(String[] args) {
@@ -125,17 +144,23 @@ public class AeroLogixClient {
         AeroLogixClient aerologixClient = new AeroLogixClient(hostname, port);
         
         // Sample data
-        aerologixClient.registerUser("juan.orts@opendeusto.es", "juan1234", "COUNTER_CLERK", "Juan Orts");
-        aerologixClient.registerUser("admin", "admin", "ADMIN", "admin");
+        //aerologixClient.registerUser("juan@mail.es", "juan1234", "COUNTER_CLERK", "Juan");
+        //aerologixClient.registerUser("admin", "admin", "ADMIN", "admin");
+        //aerologixClient.registerUser("userTest@mail.com", "test1234", "COUNTER_CLERK", "Test");
 
         // Login Window
         //LoginWindow lw = LoginWindow.getInstanceLogin(aerologixClient);
         //lw.setVisible(true);
 
         // Modify user
-        aerologixClient.modifyUser("juan.orts@opendeusto.es", "juan2002", "COUNTER_CLERK", "Juan Orts Madina");
-        aerologixClient.deleteUser("admin");
+        //aerologixClient.modifyUser("juan@mail.es", "juan2002", "COUNTER_CLERK", "Juan O.");
+        //aerologixClient.deleteUser("admin");
 
-        System.out.println(aerologixClient.getUser("juan.orts@opendeusto.es"));
+        // Get all users
+        ArrayList<UserData> userList = aerologixClient.getAllUsers();
+        
+        for(UserData user : userList) {
+            System.out.println(user.getEmail());
+        }
     }
 }
