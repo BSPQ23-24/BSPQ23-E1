@@ -12,6 +12,7 @@ com/aerologix/app/server/pojo/FlightData.class
 com/aerologix/app/client/gui/LoginWindow$1.class
 com/aerologix/app/client/AeroLogixClient.class
 com/aerologix/app/server/pojo/AirlineData.class
+com/aerologix/app/client/AeroLogixClient$2.class
 com/aerologix/app/server/Main.class
 com/aerologix/app/server/jdo/User.class
 com/aerologix/app/server/pojo/AircraftData.class

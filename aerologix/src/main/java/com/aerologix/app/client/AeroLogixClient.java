@@ -130,6 +130,96 @@ public class AeroLogixClient {
             return null;
         }
     }
+
+    /*
+     * CRUD: booking
+     */
+
+    public int createBooking(String passengerDNI, int flightId, String userEmail, int airlineId) {
+        WebTarget registerUserWebTarget = webTarget.path("/booking/create");
+        Invocation.Builder invocationBuilder = registerUserWebTarget.request(MediaType.APPLICATION_JSON);
+
+        BookingData bookingData = new BookingData();
+        bookingData.setPassengerDNI(passengerDNI);
+        bookingData.setFlightId(flightId);
+        bookingData.setUserEmail(userEmail);
+        bookingData.setAirlineId(airlineId);
+
+        Response response = invocationBuilder.post(Entity.entity(bookingData, MediaType.APPLICATION_JSON));
+        if (response.getStatus() != Status.OK.getStatusCode()) {
+            logger.error("Cannot create a booking with data that does not exist in the database. Error code: {}", response.getStatus());
+            return -1;
+        } else {
+            logger.info("Booking correctly registered");
+            return 0;
+        }
+    }
+
+    public int deleteBooking(String bookingId) {
+        WebTarget deleteUserWebTarget = webTarget.path("/booking/delete");
+        Invocation.Builder invocationBuilder = deleteUserWebTarget.request(MediaType.APPLICATION_JSON);
+
+        Response response = invocationBuilder.post(Entity.entity(bookingId, MediaType.APPLICATION_JSON));
+        if(response.getStatus() != Status.OK.getStatusCode()) {
+            logger.error("There is no booking with id {}. Code: {}", bookingId, response.getStatus());
+            return -1;
+        } else {
+            logger.info("Booking '{}' deleted succesfully", bookingId);
+            return 0;
+        }
+    }
+
+    public int modifyBooking(int id, String passengerDNI, int flightId, String userEmail, int airlineId) {
+        WebTarget modifyUserWebTarget = webTarget.path("/booking/modify");
+        Invocation.Builder invocationBuilder = modifyUserWebTarget.request(MediaType.APPLICATION_JSON);
+
+        BookingData bookingData = new BookingData();
+        bookingData.setId(id);
+        bookingData.setPassengerDNI(passengerDNI);
+        bookingData.setFlightId(flightId);
+        bookingData.setUserEmail(userEmail);
+        bookingData.setAirlineId(airlineId);
+
+        Response response = invocationBuilder.post(Entity.entity(bookingData, MediaType.APPLICATION_JSON));
+        if(response.getStatus() != Status.OK.getStatusCode()) {
+            logger.error("There is no booking with that id. Code: {}", response.getStatus());
+            return -1;
+        } else {
+            logger.info("Booking '{}' modified succesfully", bookingData.getId());
+            return 0;
+        }
+    }
+
+    public BookingData getBooking(int id) {
+        WebTarget getUserWebTarget = webTarget.path("/booking/get").queryParam("id", id);
+        Invocation.Builder invocationBuilder = getUserWebTarget.request(MediaType.APPLICATION_JSON);
+        Response response = invocationBuilder.get();
+
+        if (response.getStatus() == Status.OK.getStatusCode()) {
+            logger.info("Booking retrieved succesfully");
+            return response.readEntity(BookingData.class);
+        } else {
+            logger.error("Failed to get booking '{}'. Status code: {}", id, response.getStatus());
+            return null;
+        }
+    }
+
+    public ArrayList<BookingData> getAllBookings() {
+        WebTarget getAllUsersWebTarget = webTarget.path("/booking/getAll");
+        Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
+        Response response = invocationBuilder.get();
+    
+        if (response.getStatus() == Status.OK.getStatusCode()) {
+            logger.info("All bookings retrieved successfully");
+            return response.readEntity(new GenericType<ArrayList<BookingData>>() {});
+        } else if (response.getStatus() == Status.NO_CONTENT.getStatusCode()) {
+            logger.error("No bookings registered");
+            return new ArrayList<BookingData>(); // Return an empty list if no bookings are registered
+        } else {
+            logger.error("Failed to get all bookings. Status code: {}", response.getStatus());
+            return null;
+        }
+    }
     
     // Main
     public static void main(String[] args) {
@@ -157,10 +247,28 @@ public class AeroLogixClient {
         //aerologixClient.deleteUser("admin");
 
         // Get all users
-        ArrayList<UserData> userList = aerologixClient.getAllUsers();
+        //ArrayList<UserData> userList = aerologixClient.getAllUsers();
         
-        for(UserData user : userList) {
-            System.out.println(user.getEmail());
-        }
+        //for(UserData user : userList) {
+        //    System.out.println(user.getEmail());
+        //}
+
+        // Create booking
+        //aerologixClient.createBooking("12345678A", 0, "prueba@mail.com", 0);
+        //aerologixClient.createBooking("00000000C", 0, "prueba@mail.com", 0);
+        //aerologixClient.deleteBooking("51");
+
+        // Modify booking
+        //aerologixClient.modifyBooking(71, "00000000B", 0, "juan@mail.es", 0);
+
+        // Get booking
+        //System.out.println(aerologixClient.getBooking(71));
+        
+        // Get all bookings
+        //ArrayList<BookingData> bookingList = aerologixClient.getAllBookings();
+        
+        //for(BookingData booking : bookingList) {
+        //    System.out.println(booking.getId());
+        //}
     }
 }
