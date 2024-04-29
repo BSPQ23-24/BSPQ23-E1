@@ -191,7 +191,7 @@ public class AeroLogixClient {
     }
     
     public int createAirline(String name, int airlineId) {
-        WebTarget registerAirlineWebTarget = webTarget.path("/booking/create");
+        WebTarget registerAirlineWebTarget = webTarget.path("/airline/create");
         Invocation.Builder invocationBuilder = registerAirlineWebTarget.request(MediaType.APPLICATION_JSON);
 
         AirlineData airlineData = new AirlineData();

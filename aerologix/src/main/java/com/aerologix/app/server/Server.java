@@ -536,7 +536,7 @@ public class Server {
 	 * CRUD: Airline
 	 */
 
-	@POST
+	@GET
 	@Path("/airline/get")
 	public Response getAirline(@QueryParam("id") String id) {
 		try {
@@ -571,7 +571,7 @@ public class Server {
 		}
 	}
 
-	@POST
+	@GET
 	@Path("/airline/getAll")
 	public Response getAllAirlines() {
 		try {
