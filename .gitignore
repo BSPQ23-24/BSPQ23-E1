@@ -1,6 +1,5 @@
-**/.metadata/
-**/target/
-**/.metadata/
+**/target
+**/.metadata
 **/.classpath
 **/.project
 **/datanucleus.log
