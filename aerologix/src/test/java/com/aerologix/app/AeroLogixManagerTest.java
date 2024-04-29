@@ -2,8 +2,6 @@ package com.aerologix.app;
 
 import com.aerologix.app.server.AeroLogixManager;
 import com.aerologix.app.server.jdo.*;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;

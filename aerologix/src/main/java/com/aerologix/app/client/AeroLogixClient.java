@@ -115,8 +115,8 @@ public class AeroLogixClient {
     }
 
     public ArrayList<UserData> getAllUsers() {
-        WebTarget getAllBookingsWebTarget = webTarget.path("/user/getAll");
-        Invocation.Builder invocationBuilder = getAllBookingsWebTarget.request(MediaType.APPLICATION_JSON);
+        WebTarget getAllUsersWebTarget = webTarget.path("/user/getAll");
+        Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
     
         if (response.getStatus() == Status.OK.getStatusCode()) {
