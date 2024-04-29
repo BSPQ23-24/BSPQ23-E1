@@ -701,7 +701,7 @@ public class Server {
 			} else {
 				logger.error("There is no airline with id: {}", id);
 				tx.commit();
-				return Response.status(Response.Status.UNAUTHORIZED).entity("No booking found").build();
+				return Response.status(Response.Status.UNAUTHORIZED).entity("No airline found").build();
 			}
 
 		} finally {
