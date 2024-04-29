@@ -623,7 +623,7 @@ public class Server {
 			airlineId = airlineData.getId();
 			name = airlineData.getName();
 
-			// Create Booking instance and make it persistent
+			// Create Airline instance and make it persistent
 			Airline airline = new Airline(airlineId, name);
 
 			pm.makePersistent(airline);
@@ -643,7 +643,7 @@ public class Server {
 	public Response modifyAirline(AirlineData airlineData) {
 		try {
 			tx.begin();
-			// Get current booking data
+			// Get current airline data
 			logger.info("Get the current booking data for: {}", airlineData.getId());
 			Airline airline = null;
 			try {
