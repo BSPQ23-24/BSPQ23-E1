@@ -9,7 +9,6 @@ import jakarta.ws.rs.client.*;
 import jakarta.ws.rs.core.*;
 import jakarta.ws.rs.core.Response.Status;
 
-import com.aerologix.app.client.controller.UserController;
 import com.aerologix.app.client.gui.LoginWindow;
 import com.aerologix.app.server.pojo.*;
 
@@ -129,6 +128,7 @@ public class AeroLogixClient {
         String hostname = args[0];
         String port = args[1];
 
+        // DO NOT REMOVE THESE TWO LINES
         System.setProperty("aerologix.hostname", hostname);
         System.setProperty("aerologix.port", port);
 

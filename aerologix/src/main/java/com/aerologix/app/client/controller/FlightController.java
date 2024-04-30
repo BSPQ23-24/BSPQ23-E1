@@ -6,13 +6,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.aerologix.app.server.jdo.Aircraft;
-import com.aerologix.app.server.jdo.Booking;
-import com.aerologix.app.server.pojo.BookingData;
+import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.FlightData;
 
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
@@ -24,25 +20,29 @@ import jakarta.ws.rs.core.Response.Status;
 public class FlightController {
 
 	protected static final Logger logger = LogManager.getLogger();
+    
+    private static FlightController instance;
 
-    private Client client;
-    private WebTarget webTarget;
-
-    public FlightController(Client client, WebTarget webTarget) {
-        this.client = client;
-        this.webTarget = webTarget;
+    private FlightController() {
     }
 
-	public int createFlight(String origin, String destination, long date, int aircraft, List<Integer> bookings) {
-		WebTarget registerUserWebTarget = webTarget.path("/flight/create");
-        Invocation.Builder invocationBuilder = registerUserWebTarget.request(MediaType.APPLICATION_JSON);
+    public static synchronized FlightController getInstance() {
+		if (instance == null) {
+			instance = new FlightController();
+		}
+		return instance;
+	}
+
+	public int createFlight(String origin, String destination, long date, int aircraft) {
+		WebTarget registerFlightWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/create");
+        Invocation.Builder invocationBuilder = registerFlightWebTarget.request(MediaType.APPLICATION_JSON);
         
         FlightData flightData = new FlightData();
         flightData.setAircraftId(aircraft);
         flightData.setOrigin(origin);
         flightData.setDestination(destination);
         flightData.setDate(date);
-        flightData.setBookingIds(bookings);
+        flightData.setBookingIds(new ArrayList<Integer>());
         
         Response response = invocationBuilder.post(Entity.entity(flightData, MediaType.APPLICATION_JSON));
 		
@@ -54,8 +54,8 @@ public class FlightController {
             return 0;
         }
 	}
-	public int deleteFlight(String flightId) {
-		WebTarget deleteUserWebTarget = webTarget.path("/flight/delete");
+	public int deleteFlight(int flightId) {
+		WebTarget deleteUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/delete");
         Invocation.Builder invocationBuilder = deleteUserWebTarget.request(MediaType.APPLICATION_JSON);
 
         Response response = invocationBuilder.post(Entity.entity(flightId, MediaType.APPLICATION_JSON));
@@ -68,10 +68,11 @@ public class FlightController {
         }
 	}
 	public int modifyFlight(int idFlight, String origin, String destination, long date, int aircraft, List<Integer> bookings) {
-		WebTarget modifyUserWebTarget = webTarget.path("/flight/modify");
+		WebTarget modifyUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/modify");
         Invocation.Builder invocationBuilder = modifyUserWebTarget.request(MediaType.APPLICATION_JSON);
 		
         FlightData flightData = new FlightData();
+        flightData.setIdFlight(idFlight);
         flightData.setAircraftId(aircraft);
         flightData.setOrigin(origin);
         flightData.setDestination(destination);
@@ -89,7 +90,7 @@ public class FlightController {
 	}
 	
 	public FlightData getFlight(int id) {
-        WebTarget getUserWebTarget = webTarget.path("/flight/get").queryParam("id", id);
+        WebTarget getUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getUserWebTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
 
@@ -102,7 +103,7 @@ public class FlightController {
         }
     }
 	public ArrayList<FlightData> getAllFlights() {
-        WebTarget getAllUsersWebTarget = webTarget.path("/flight/getAll");
+        WebTarget getAllUsersWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/getAll");
         Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
     

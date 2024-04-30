@@ -1,8 +1,5 @@
 package com.aerologix.app.server;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.jdo.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -37,40 +34,6 @@ public class AeroLogixServer {
 
 	public PersistenceManagerFactory getPersistenceManagerFactory() {
 		return this.pmf;
-	}
-
-	/*
-	 * CRUD: Flight
-	 */
-
-	@POST
-	@Path("/flight/get")
-	public Response getFlight(int id) {
-		return null;
-	}
-
-	@POST
-	@Path("/flight/getAll")
-	public Response getAllFlights() {
-		return null;
-	}
-
-	@POST
-	@Path("/flight/create")
-	public Response createFlight(FlightData flightData) {
-		return null;
-	}
-
-	@POST
-	@Path("/flight/modify")
-	public Response modifyBooking(FlightData flightData) {
-		return null;
-	}
-
-	@POST
-	@Path("/flight/delete")
-	public Response deleteFlight(int id) {
-		return null;
 	}
 
 	/*

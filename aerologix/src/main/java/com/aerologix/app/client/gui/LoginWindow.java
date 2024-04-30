@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.client.controller.UserController;
 
 public class LoginWindow extends JFrame {

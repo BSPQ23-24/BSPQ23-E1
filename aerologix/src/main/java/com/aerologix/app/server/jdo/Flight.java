@@ -22,9 +22,17 @@ public class Flight {
 	
 	@Persistent(mappedBy = "flight")
 	protected List<Booking> bookings;
-
-	protected boolean overbooking;
 	
+	public Flight() {
+		super();
+		this.idFlight = -1;
+		this.origin = null;
+		this.destination = null;
+		this.date = -1;
+		this.aircraft = null;
+		this.bookings = null;
+	}
+
 	public Flight(int idFlight, String origin, String destination, long date, Aircraft aircraft, List<Booking> bookings) {
 		super();
 		this.idFlight = idFlight;
@@ -33,7 +41,6 @@ public class Flight {
 		this.date = date;
 		this.aircraft = aircraft;
 		this.bookings = bookings;
-		this.overbooking = this.isOverbooked();
 	}
 
 
@@ -84,18 +91,6 @@ public class Flight {
 
 	public void setAircraft(Aircraft aircraft) {
 		this.aircraft = aircraft;
-	}
-
-	public boolean isOverbooked() {
-		if(bookings.size() > aircraft.getMaxCapacity()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public void setOverbooking() {
-		this.overbooking = true;
 	}
 
 	public List<Booking> getBookings() {

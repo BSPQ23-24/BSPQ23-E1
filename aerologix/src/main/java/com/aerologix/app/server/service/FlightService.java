@@ -12,22 +12,24 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
 import com.aerologix.app.server.pojo.*;
+import com.aerologix.app.server.AeroLogixServer;
 import com.aerologix.app.server.jdo.*;
-import com.aerologix.app.server.jdo.User.UserType;
+
+@Path("/aerologix")
+@Produces(MediaType.APPLICATION_JSON)
 public class FlightService {
-	
 	
 	protected static final Logger logger = LogManager.getLogger();
 	
+    private PersistenceManagerFactory pmf;
 	private PersistenceManager pm;
     private Transaction tx;
 	
-    public FlightService(PersistenceManager pm, Transaction tx) {
-        
-        this.pm = pm;
-        this.tx = tx;
+    public FlightService() {
+        this.pmf = AeroLogixServer.getInstance().getPersistenceManagerFactory();
+        this.pm = pmf.getPersistenceManager();
+        this.tx = pm.currentTransaction();
     }
-	
 	
 	 /*
      * CRUD: Flight
@@ -35,9 +37,7 @@ public class FlightService {
 
     @GET
     @Path("/flight/get")
-    public Response getFlight(@QueryParam("idFlight") int id) {
-    	
-    	
+    public Response getFlight(@QueryParam("id") int id) {
     	try {
 			tx.begin();
 			logger.info("Checking if flight {} exists in the database...", id);
@@ -87,9 +87,7 @@ public class FlightService {
     			
     		}
 		}
-        
     
-
     @GET
     @Path("/flight/getAll")
     public Response getAllFlights() {
@@ -162,19 +160,18 @@ public class FlightService {
                 aircraft = pm.getObjectById(Aircraft.class, flightData.getAircraftId());
                 logger.info("Retrieving all bookings...");
                 for(int id : flightData.getBookingIds()) {
-                	
                 	bookings.add(pm.getObjectById(Booking.class, id));
                 }
             } catch(JDOObjectNotFoundException e) {
                 logger.info("At least one object of the Flight '{}' not found: {}", flightData.getIdFlight(), e);
                 notFound = true;
             }
-            Flight flight = new Flight(
-            		flightData.getIdFlight(),
-            		flightData.getOrigin(),
-            		flightData.getDestination(),
-            		flightData.getDate(),
-            		aircraft,bookings);
+            Flight flight = new Flight();
+            flight.setOrigin(flightData.getOrigin());
+            flight.setDestination(flightData.getDestination());
+            flight.setDate(flightData.getDate());
+            flight.setAircraft(aircraft);
+            flight.setBookings(bookings);
 
             if(notFound) {
                 tx.commit();
@@ -226,12 +223,12 @@ public class FlightService {
                      logger.info("At least one object of the Flight '{}' not found: {}", flightData.getIdFlight(), e);
                      
                  }
-            	 	flight = new Flight(
-                 		flightData.getIdFlight(),
-                 		flightData.getOrigin(),
-                 		flightData.getDestination(),
-                 		flightData.getDate(),
-                 		aircraft,bookings);
+                    flight.setIdFlight(flightData.getIdFlight());
+                    flight.setOrigin(flightData.getOrigin());
+                    flight.setDestination(flightData.getDestination());
+                    flight.setDate(flightData.getDate());
+                    flight.setAircraft(aircraft);
+                    flight.setBookings(bookings);
 
                  // Modify all data except primary key (id)
                 

@@ -8,6 +8,7 @@ com/aerologix/app/client/gui/LoginWindow$1$3.class
 com/aerologix/app/client/gui/RegisterWindow.class
 com/aerologix/app/client/gui/LoginWindow$1$1.class
 com/aerologix/app/server/pojo/FlightData.class
+com/aerologix/app/server/service/FlightService.class
 com/aerologix/app/client/gui/LoginWindow$1.class
 com/aerologix/app/client/AeroLogixClient.class
 com/aerologix/app/server/pojo/AirlineData.class
@@ -31,6 +32,7 @@ com/aerologix/app/client/controller/BookingController.class
 com/aerologix/app/server/jdo/Aircraft.class
 com/aerologix/app/client/gui/RegisterWindow$1.class
 com/aerologix/app/server/jdo/Booking.class
+com/aerologix/app/client/controller/FlightController$1.class
 com/aerologix/app/client/gui/LoginWindow$2.class
 com/aerologix/app/server/pojo/UserData$UserType.class
 com/aerologix/app/server/pojo/BookingData.class
@@ -39,3 +41,4 @@ com/aerologix/app/server/AeroLogixManager.class
 com/aerologix/app/client/gui/LoginWindow$3.class
 com/aerologix/app/server/pojo/LoginData.class
 com/aerologix/app/client/AeroLogixClient$1.class
+com/aerologix/app/client/controller/FlightController.class

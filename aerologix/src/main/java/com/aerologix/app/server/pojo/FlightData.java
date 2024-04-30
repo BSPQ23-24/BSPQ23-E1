@@ -10,7 +10,6 @@ public class FlightData {
 	protected long date;
     protected Integer aircraftId;
     protected List<Integer> bookingsIds;
-    protected boolean overbooking;
 
     public FlightData() {
         // required by serialization
@@ -65,14 +64,6 @@ public class FlightData {
 		this.aircraftId = aircraftid;
 	}
 
-	public boolean isOverbooked() {
-        return overbooking;
-	}
-
-	public void setOverbooking() {
-		this.overbooking = true;
-	}
-
 	public List<Integer> getBookingIds() {
 		return this.bookingsIds;
 	}
@@ -85,6 +76,4 @@ public class FlightData {
   
 		return "Flight[id=" + this.getIdFlight() + ", Origin="+ this.getOrigin() + ", Destination=" + this.getDestination() + ", Date=" + this.getDate() + ", Aircraft=" + this.getAircraftId() + "]";
     }
-
-    
 }
