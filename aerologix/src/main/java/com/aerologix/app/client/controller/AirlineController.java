@@ -13,6 +13,7 @@ import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.*;
 
 public class AirlineController {
+
     protected static final Logger logger = LogManager.getLogger();
 
     private static AirlineController instance;
@@ -27,28 +28,33 @@ public class AirlineController {
 		return instance;
 	}
 
-    public int createAirline(String name, int airlineId) {
+    /*
+     * CRUD: airline
+     */
+
+    public int createAirline(String name) {
         WebTarget registerAirlineWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/create");
         Invocation.Builder invocationBuilder = registerAirlineWebTarget.request(MediaType.APPLICATION_JSON);
 
         AirlineData airlineData = new AirlineData();
-        airlineData.setId(airlineId);
         airlineData.setName(name);
 
+        logger.info("Sending POST request to server to create a new airline...");
         Response response = invocationBuilder.post(Entity.entity(airlineData, MediaType.APPLICATION_JSON));
         if (response.getStatus() != Status.OK.getStatusCode()) {
-            logger.error("Cannot create a airline with data that does not exist in the database. Error code: {}", response.getStatus());
+            logger.error("Cannot connect to the server. Error code: {}", response.getStatus());
             return -1;
         } else {
-            logger.info("Airline correctly registered");
+            logger.info("Airline correctly registered: {}", airlineData.getId());
             return 0;
         }
     }
     
-    public int deleteAirline(String airlineId) {
+    public int deleteAirline(int airlineId) {
         WebTarget deleteAirlineWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/delete");
         Invocation.Builder invocationBuilder = deleteAirlineWebTarget.request(MediaType.APPLICATION_JSON);
 
+        logger.info("Sending POST request to server to delete airline with id '{}'...", airlineId);
         Response response = invocationBuilder.post(Entity.entity(airlineId, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no airline with id {}. Code: {}", airlineId, response.getStatus());
@@ -67,6 +73,7 @@ public class AirlineController {
         airlineData.setId(id);
         airlineData.setName(name);
 
+        logger.info("Sending POST request to server to modify airline with id '{}'...", id);
         Response response = invocationBuilder.post(Entity.entity(airlineData, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no airline with that id. Code: {}", response.getStatus());
@@ -80,6 +87,8 @@ public class AirlineController {
     public AirlineData getAirline(int id) {
         WebTarget getAirlineWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getAirlineWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve airline with id '{}'...", id);
         Response response = invocationBuilder.get();
 
         if (response.getStatus() == Status.OK.getStatusCode()) {
@@ -92,12 +101,10 @@ public class AirlineController {
     }
     
     public ArrayList<AirlineData> getAllAirlines(){
-    	WebTarget getAllAirlinesWebTarget = 
-        
-        
-        
-        AeroLogixClient.getInstance().getWebTarget().path("/airline/getAll");
+    	WebTarget getAllAirlinesWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/getAll");
         Invocation.Builder invocationBuilder = getAllAirlinesWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve all airlines...");
         Response response = invocationBuilder.get();
     
         if (response.getStatus() == Status.OK.getStatusCode()) {

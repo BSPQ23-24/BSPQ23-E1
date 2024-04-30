@@ -42,6 +42,7 @@ public class UserController {
         userData.setUserType(userType);
         userData.setName(name);
 
+        logger.info("Sending POST request to server to register a new user...");
         Response response = invocationBuilder.post(Entity.entity(userData, MediaType.APPLICATION_JSON));
         if (response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("Email '{}' is already in use. Code: {}", userData.getEmail() ,response.getStatus());
@@ -60,6 +61,7 @@ public class UserController {
         loginData.setEmail(email);
         loginData.setPassword(password);
 
+        logger.info("Sending POST request to server to validate login credentials for user with email '{}'...", email);
         Response response = invocationBuilder.post(Entity.entity(loginData, MediaType.APPLICATION_JSON));
         if (response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("Login credentials invalid. Code: {}", response.getStatus());
@@ -80,6 +82,7 @@ public class UserController {
         userData.setUserType(userType);
         userData.setName(name);
 
+        logger.info("Sending POST request to server to modify user with email '{}'...", email);
         Response response = invocationBuilder.post(Entity.entity(userData, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no user registered with that email. Code: {}", response.getStatus());
@@ -94,6 +97,7 @@ public class UserController {
         WebTarget deleteUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/user/delete");
         Invocation.Builder invocationBuilder = deleteUserWebTarget.request(MediaType.APPLICATION_JSON);
 
+        logger.info("Sending POST request to server to delete user with email '{}'...", email);
         Response response = invocationBuilder.post(Entity.entity(email, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no user registered with that email. Code: {}", response.getStatus());
@@ -107,6 +111,8 @@ public class UserController {
     public UserData getUser(String email) {
         WebTarget getUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/user/get").queryParam("email", email);
         Invocation.Builder invocationBuilder = getUserWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve user with email '{}'...", email);
         Response response = invocationBuilder.get();
 
         if (response.getStatus() == Status.OK.getStatusCode()) {
@@ -121,6 +127,8 @@ public class UserController {
     public ArrayList<UserData> getAllUsers() {
         WebTarget getAllUsersWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/user/getAll");
         Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve all users...");
         Response response = invocationBuilder.get();
     
         if (response.getStatus() == Status.OK.getStatusCode()) {

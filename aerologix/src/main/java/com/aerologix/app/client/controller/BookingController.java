@@ -42,6 +42,7 @@ public class BookingController {
         bookingData.setUserEmail(userEmail);
         bookingData.setAirlineId(airlineId);
 
+        logger.info("Sending POST request to server to create a new booking...");
         Response response = invocationBuilder.post(Entity.entity(bookingData, MediaType.APPLICATION_JSON));
         if (response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("Cannot create a booking with data that does not exist in the database. Error code: {}", response.getStatus());
@@ -56,6 +57,7 @@ public class BookingController {
         WebTarget deleteBookingWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/delete");
         Invocation.Builder invocationBuilder = deleteBookingWebTarget.request(MediaType.APPLICATION_JSON);
 
+        logger.info("Sending POST request to server to delete booking with id '{}'...", bookingId);
         Response response = invocationBuilder.post(Entity.entity(bookingId, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no booking with id {}. Code: {}", bookingId, response.getStatus());
@@ -77,6 +79,7 @@ public class BookingController {
         bookingData.setUserEmail(userEmail);
         bookingData.setAirlineId(airlineId);
 
+        logger.info("Sending POST request to server to modify booking with id '{}'...", id);
         Response response = invocationBuilder.post(Entity.entity(bookingData, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no booking with that id. Code: {}", response.getStatus());
@@ -90,6 +93,8 @@ public class BookingController {
     public BookingData getBooking(int id) {
         WebTarget getBookingWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getBookingWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve booking with id '{}'...", id);
         Response response = invocationBuilder.get();
 
         if (response.getStatus() == Status.OK.getStatusCode()) {
@@ -104,6 +109,8 @@ public class BookingController {
     public ArrayList<BookingData> getAllBookings() {
         WebTarget getAllBookingsWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/getAll");
         Invocation.Builder invocationBuilder = getAllBookingsWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve all bookings...");
         Response response = invocationBuilder.get();
     
         if (response.getStatus() == Status.OK.getStatusCode()) {

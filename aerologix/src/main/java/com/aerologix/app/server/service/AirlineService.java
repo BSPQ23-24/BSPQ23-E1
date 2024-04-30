@@ -43,12 +43,12 @@ public class AirlineService {
 			try {
 				airline = pm.getObjectById(Airline.class, id);
 			} catch (JDOObjectNotFoundException e) {
-				logger.info("Booking with id '{}' does not exist in the database.", id);
+				logger.info("Airline with id '{}' does not exist in the database.", id);
 			}
 
 			tx.commit();
 
-			// If booking exists
+			// If airline exists
 			if (airline != null) {
 				AirlineData airlineData = new AirlineData();
 				airlineData.setId(airline.getId());
@@ -90,7 +90,7 @@ public class AirlineService {
 			tx.commit();
 
 			if (airlineList.size() > 0) {
-				logger.info("Sending all airline to client...");
+				logger.info("Sending all airlines to client...");
 				return Response.ok().entity(airlineList).build();
 			} else {
 				logger.error("No airlines registered");
@@ -109,20 +109,12 @@ public class AirlineService {
 		try {
 			tx.begin();
 
-			boolean notFound = false;
-
-			// Retrieve all linked classes
-			int airlineId = 0;
-			String name = null;
-
-			logger.info("Retrieving all data required for the airline");
-			airlineId = airlineData.getId();
-			name = airlineData.getName();
-
 			// Create Airline instance and make it persistent
-			Airline airline = new Airline(airlineId, name);
+			Airline airline = new Airline();
+			airline.setName(airlineData.getName());
 
 			pm.makePersistent(airline);
+
 			tx.commit();
 			logger.info("Airline created succesfully");
 			return Response.ok().build();
@@ -140,7 +132,7 @@ public class AirlineService {
 		try {
 			tx.begin();
 			// Get current airline data
-			logger.info("Get the current booking data for: {}", airlineData.getId());
+			logger.info("Get the current airline data for: {}", airlineData.getId());
 			Airline airline = null;
 			try {
 				airline = pm.getObjectById(Airline.class, airlineData.getId());
@@ -149,18 +141,11 @@ public class AirlineService {
 			}
 
 			if (airline != null) {
-				int airlineId = 0;
-				String name = null;
-				
-				logger.info("Retrieving all data required for the modified airline");
-				name = airlineData.getName();
-				airlineId = airlineData.getId();
-
 				// Modify all data except primary key (id)
 				airline.setId(airlineData.getId());
 				airline.setName(airlineData.getName());
-				tx.commit();
 				logger.info("Airline modified: {}", airline.getId());
+				tx.commit();
 				return Response.ok().build();
 			} else {
 				logger.error("There is no airline with id: {}", airlineData.getId());
@@ -191,7 +176,7 @@ public class AirlineService {
 			if (airline != null) {
 				// Delete airline
 				pm.deletePersistent(airline);
-				logger.info("Airline deleted {}");
+				logger.info("Airline deleted '{}'", id);
 				tx.commit();
 				return Response.ok().build();
 			} else {

@@ -16,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.client.controller.UserController;
 
 public class RegisterWindow extends JFrame {
@@ -26,7 +25,7 @@ public class RegisterWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	// Panels
 	protected JPanel pPrincipal = new JPanel(new GridLayout(2, 1));
-	protected JPanel pSignup = new JPanel(new GridLayout(7, 1));
+	protected JPanel pSignup = new JPanel(new GridLayout(5, 1));
 	protected JPanel pUser = new JPanel(new FlowLayout());
 	protected JPanel psb = new JPanel(new FlowLayout());
 	protected JPanel pPass = new JPanel(new FlowLayout());
@@ -48,7 +47,7 @@ public class RegisterWindow extends JFrame {
 	private RegisterWindow() {
 
 		this.setTitle("Register - AeroLogix");
-		this.setSize(450, 350);
+		this.setSize(450, 300);
 		centerWindow();
 		this.setLayout(new FlowLayout());
 

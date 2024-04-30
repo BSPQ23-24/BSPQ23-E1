@@ -44,6 +44,7 @@ public class FlightController {
         flightData.setDate(date);
         flightData.setBookingIds(new ArrayList<Integer>());
         
+        logger.info("Sending POST request to server to create a new flight...");
         Response response = invocationBuilder.post(Entity.entity(flightData, MediaType.APPLICATION_JSON));
 		
         if (response.getStatus() != Status.OK.getStatusCode()) {
@@ -58,6 +59,7 @@ public class FlightController {
 		WebTarget deleteUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/delete");
         Invocation.Builder invocationBuilder = deleteUserWebTarget.request(MediaType.APPLICATION_JSON);
 
+        logger.info("Sending POST request to server to delete flight with id '{}'...", flightId);
         Response response = invocationBuilder.post(Entity.entity(flightId, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no flight with id {}. Code: {}", flightId, response.getStatus());
@@ -79,6 +81,7 @@ public class FlightController {
         flightData.setDate(date);
         flightData.setBookingIds(bookings);
         
+        logger.info("Sending POST request to server to modify flight with id '{}'...", idFlight);
         Response response = invocationBuilder.post(Entity.entity(flightData, MediaType.APPLICATION_JSON));
         if(response.getStatus() != Status.OK.getStatusCode()) {
             logger.error("There is no flight with that id. Code: {}", response.getStatus());
@@ -92,6 +95,8 @@ public class FlightController {
 	public FlightData getFlight(int id) {
         WebTarget getUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getUserWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve flight with id '{}'...", id);
         Response response = invocationBuilder.get();
 
         if (response.getStatus() == Status.OK.getStatusCode()) {
@@ -105,6 +110,8 @@ public class FlightController {
 	public ArrayList<FlightData> getAllFlights() {
         WebTarget getAllUsersWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/getAll");
         Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
+        
+        logger.info("Sending GET request to server to retrieve all flights...");
         Response response = invocationBuilder.get();
     
         if (response.getStatus() == Status.OK.getStatusCode()) {
