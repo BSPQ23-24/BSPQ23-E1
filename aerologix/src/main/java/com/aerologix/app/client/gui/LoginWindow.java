@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.aerologix.app.client.AeroLogixClient;
+import com.aerologix.app.client.controller.UserController;
 
 public class LoginWindow extends JFrame {
 	
@@ -38,7 +39,7 @@ public class LoginWindow extends JFrame {
 	protected JButton bSignup = new JButton("Create an account");
 	protected JLabel lLogo = new JLabel("AeroLogix");
 	
-	private LoginWindow(AeroLogixClient aerologixClient) {
+	private LoginWindow() {
 		this.setTitle("Login - AeroLogix");
 		this.setSize(450, 280);
 		centerWindow();
@@ -81,7 +82,7 @@ public class LoginWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(aerologixClient.login(tMail.getText(), tPass.getText())) {
+					if(UserController.getInstance().login(tMail.getText(), tPass.getText())) {
 						Thread hilo = new Thread() {
 								
 							@Override
@@ -145,7 +146,7 @@ public class LoginWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RegisterWindow rw = RegisterWindow.getInstance(aerologixClient);
+				RegisterWindow rw = RegisterWindow.getInstance();
 				rw.setVisible(true);
 			}
 		});
@@ -185,9 +186,9 @@ public class LoginWindow extends JFrame {
 		hilo.start();
 	};
 	
-	public static LoginWindow getInstanceLogin(AeroLogixClient aeroLogixClient) {
+	public static LoginWindow getInstanceLogin() {
 		if(LoginWindow.instanceLogin == null) {
-			LoginWindow.instanceLogin = new LoginWindow(aeroLogixClient);
+			LoginWindow.instanceLogin = new LoginWindow();
 		}
 		return LoginWindow.instanceLogin;
 	}
