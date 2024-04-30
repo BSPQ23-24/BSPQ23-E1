@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.aerologix.app.client.AeroLogixClient;
+import com.aerologix.app.client.controller.UserController;
 
 public class RegisterWindow extends JFrame {
 
@@ -44,7 +45,7 @@ public class RegisterWindow extends JFrame {
 	protected JButton bSignup = new JButton("Register");
 	protected JLabel lsError = new JLabel("");
 
-	private RegisterWindow(AeroLogixClient aerologixClient) {
+	private RegisterWindow() {
 
 		this.setTitle("Register - AeroLogix");
 		this.setSize(450, 350);
@@ -88,7 +89,7 @@ public class RegisterWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (!tsMail.getText().isEmpty() & !tsPass.getText().isEmpty() & !tssPass.getText().isEmpty() & !tsNombre.getText().isEmpty()) {
 					if (tsPass.getText().equals(tssPass.getText())) {
-						int code = aerologixClient.registerUser(tsMail.getText(), tsPass.getText(), "COUNTER_CLERK", tsNombre.getText());
+						int code = UserController.getInstance().registerUser(tsMail.getText(), tsPass.getText(), "COUNTER_CLERK", tsNombre.getText());
 						if (code == 0) {
 							lsError.setText("");
 							tsMail.setText("");
@@ -157,9 +158,9 @@ public class RegisterWindow extends JFrame {
 		}
 	}
 
-	public static RegisterWindow getInstance(AeroLogixClient aerologixClient) {
+	public static RegisterWindow getInstance() {
 		if (RegisterWindow.instance == null) {
-			RegisterWindow.instance = new RegisterWindow(aerologixClient);
+			RegisterWindow.instance = new RegisterWindow();
 		}
 		return RegisterWindow.instance;
 	}
