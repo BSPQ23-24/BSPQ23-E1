@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -26,23 +28,45 @@ public class LoginWindow extends JFrame {
 	
 	//	Components login
 
-	protected JLabel lMail = new JLabel("Username: ");
+	protected JLabel lMail = new JLabel("Mail: ");
 	protected JLabel lPass = new JLabel("Password: ");
 	protected JTextField tMail = new JTextField(15);
 	protected JPasswordField tPass = new JPasswordField(15);
 	protected JButton bLogin = new JButton("Login");
 	protected JLabel lError = new JLabel("");
-	protected JButton bShow = new JButton("Show");
+	protected JButton bShow = new JButton("👁");
 	protected JTextField tShow = new JTextField(15);
 	protected JLabel lSignup = new JLabel("¿Not registered?");
 	protected JButton bSignup = new JButton("Create an account");
 	protected JLabel lLogo = new JLabel("AeroLogix");
+	
+	
+	
+	//	Palette
+	
+	protected final Color background = new Color(240, 240, 240);
+	protected final Color url = new Color(0, 93, 232);
 	
 	private LoginWindow(AeroLogixClient aerologixClient) {
 		this.setTitle("Login - AeroLogix");
 		this.setSize(450, 280);
 		centerWindow();
 		this.setLayout(new FlowLayout());
+		
+		//	Background Selection
+		this.getContentPane().setBackground(background);
+		pLogin.setBackground(background);
+		pPrincipal.setBackground(background);
+		plUser.setBackground(background);
+		plb.setBackground(background);
+		plPass.setBackground(background);
+		pSignup.setBackground(background);
+		pLogo.setBackground(background);
+		bShow.setBackground(background);
+		removeBtnClickBg(bShow);
+		bSignup.setBackground(background);
+		removeBtnClickBg(bSignup);
+		bSignup.setForeground(url);
 		
 		//	Construccion login
 		plUser.add(lMail);
@@ -52,15 +76,16 @@ public class LoginWindow extends JFrame {
 		tShow.setVisible(false);
 		tShow.setEditable(false);
 		plPass.add(tShow);
+		bShow.setBorder(BorderFactory.createEmptyBorder());
+		bShow.setFont(new Font(null, Font.BOLD, 25));
 		plPass.add(bShow);
 		pLogin.add(plUser);
 		pLogin.add(plPass);
 		plb.add(bLogin);
 		plb.add(lError);
 		pLogin.add(plb);
-		lSignup.setForeground(new Color(0, 93, 232));
 		pSignup.add(lSignup);
-		bSignup.setForeground(new Color(0, 93, 232));
+		bSignup.setBorder(BorderFactory.createEmptyBorder());
 		pSignup.add(bSignup);
 		pLogin.add(pSignup);
 		lLogo.setFont(new Font("Arial", Font.BOLD, 30));
@@ -190,6 +215,18 @@ public class LoginWindow extends JFrame {
 			LoginWindow.instanceLogin = new LoginWindow(aeroLogixClient);
 		}
 		return LoginWindow.instanceLogin;
+	}
+	
+	public void removeBtnClickBg(JButton button) {
+	    button.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            button.setBackground(background);
+	        }
+	    });
+
+	    // Desactivar el pintado del foco
+	    button.setFocusPainted(false);
 	}
 	
 }
