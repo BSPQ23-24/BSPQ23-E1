@@ -18,8 +18,25 @@ public class AirlineTest {
     }
 
     @Test
-    public void TestCreateAirline() {
-    	assertEquals(1,airline.getId());
-    	assertEquals("Prueba001",airline.getName());
+    public void testCreateAirline() {
+        assertEquals(1, airline.getId());
+        assertEquals("Prueba001", airline.getName());
     }
+
+    @Test
+    public void testSetAndGetId() {
+        airline.setId(2);
+        assertEquals(2, airline.getId());
+    }
+
+    @Test
+    public void testSetAndGetName() {
+        airline.setName("Prueba002");
+        assertEquals("Prueba002", airline.getName());
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("AirlinePrueba001id:1", airline.toString());
+    }   
 }
