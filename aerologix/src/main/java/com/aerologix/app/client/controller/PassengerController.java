@@ -30,7 +30,7 @@ public class PassengerController {
 
 
     public int createPassenger(PassengerData passengerData) {
-        WebTarget registerPassengerWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/passenger/register");
+        WebTarget registerPassengerWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/passenger/create");
         Invocation.Builder invocationBuilder = registerPassengerWebTarget.request(MediaType.APPLICATION_JSON);
 
         logger.info("Sending POST request to server to register a new passenger...");
