@@ -247,7 +247,22 @@ public class UserService {
 			}
 		}
 	}
+	
+	// Other methods
 
+		// In UserService class
+	    void setPersistenceManagerFactory(PersistenceManagerFactory pmf) {
+	        this.pmf = pmf;
+	    }
+
+	    // Similarly, create a setter for the PersistenceManager if necessary
+	    void setPersistenceManager(PersistenceManager pm) {
+	        this.pm = pm;
+	    }
+
+		void setTransaction(Transaction tx) {
+			this.tx = tx;
+		}
 
 
 }
