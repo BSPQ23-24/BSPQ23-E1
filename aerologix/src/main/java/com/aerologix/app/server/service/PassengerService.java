@@ -34,8 +34,8 @@ public class PassengerService {
     // CRUD methods
 
 	@POST
-	@Path("/passenger/register")
-	public Response registerPassenger(PassengerData passengerData) {
+	@Path("/passenger/create")
+	public Response createPassenger(PassengerData passengerData) {
 		try {
 			tx.begin();
 			logger.info("Checking if passenger '{}' already exists or not", passengerData.getDNI());
