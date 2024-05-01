@@ -7,15 +7,20 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import com.aerologix.app.server.pojo.BookingData;
 import com.aerologix.app.server.pojo.PassengerData;
 import com.aerologix.app.server.service.BookingService;
 import com.aerologix.app.server.jdo.Booking;
 import com.aerologix.app.server.jdo.Passenger;
+import com.aerologix.app.server.jdo.Airline;
+import com.aerologix.app.server.jdo.User;
+import com.aerologix.app.server.jdo.Flight;
 
 import javax.jdo.*;
 
+import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.core.Response;
 
 import java.util.Iterator;
@@ -26,6 +31,14 @@ public class BookingServiceTest {
     private PersistenceManagerFactory pmfMock;
     private PersistenceManager pmMock;
     private Transaction txMock;
+    @Mock
+    private Passenger passenger;
+    @Mock
+    private Flight flight;
+    @Mock
+    private User user;
+    @Mock
+    private Airline airline;
 
     @BeforeEach
     public void setUp() {

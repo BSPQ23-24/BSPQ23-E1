@@ -244,5 +244,17 @@ public class BookingService {
 			}
 		}
 	}
+	
+	void setPersistenceManagerFactory(PersistenceManagerFactory pmf) {
+	        this.pmf = pmf;
+	    }
+
+	void setPersistenceManager(PersistenceManager pm) {
+	        this.pm = pm;
+	    }
+
+	void setTransaction(Transaction tx) {
+			this.tx = tx;
+		}
     
 }
