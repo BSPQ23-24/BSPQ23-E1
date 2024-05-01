@@ -1,7 +1,7 @@
 package com.aerologix.app.server.pojo;
 
 public class BookingData {
-    protected int id;
+    protected static int id;
     protected String passengerDNI;
     protected Integer flightId;
     protected String userEmail;
@@ -11,8 +11,8 @@ public class BookingData {
         // required by serialization
     }
 
-    public int getId() {
-        return this.id;
+    public static int getId() {
+        return id;
     }
 
     public void setId(int id) {
