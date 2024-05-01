@@ -7,7 +7,6 @@ import jakarta.ws.rs.client.*;
 
 import com.aerologix.app.client.gui.*;
 
-
 public class AeroLogixClient {
     
     protected static final Logger logger = LogManager.getLogger();
@@ -50,6 +49,5 @@ public class AeroLogixClient {
         // Login Window
         LoginWindow lw = LoginWindow.getInstanceLogin();
         lw.setVisible(true);
-
     }
 }

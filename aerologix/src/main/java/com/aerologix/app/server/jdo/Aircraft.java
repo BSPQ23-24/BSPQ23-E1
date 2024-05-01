@@ -16,6 +16,13 @@ public class Aircraft {
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
 	protected int id;
 
+    public Aircraft() {
+        this.id = -1;
+        this.manufacturer = null;
+        this.type = null;
+        this.maxCapacity = -1;
+    }
+
     public Aircraft(int id,  String manufacturer, String type,  int maxCapacity ) {
         this.id = id;
         this.manufacturer = manufacturer;   
