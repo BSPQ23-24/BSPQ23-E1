@@ -18,7 +18,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
 public class FlightController {
-
+//And
 	protected static final Logger logger = LogManager.getLogger();
     
     private static FlightController instance;
