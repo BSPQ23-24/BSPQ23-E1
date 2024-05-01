@@ -101,4 +101,67 @@ class AeroLogixManagerTest {
         assertNull(manager.getUser("Test@Aerologix.com"));
         assertNull(manager.getUser(resultUser.getEmail()));
     }
+    
+//////Airlines///////
+  @Test
+  void getAirline() {
+      airlines = Mockito.mock(HashMap.class);
+      manager = new AeroLogixManager(bookings, flights, airlines, passengers, aircrafts, users);
+      Airline mockAirline = new Airline();
+      mockAirline.setId(0);
+      mockAirline.setName("Test");
+
+      Mockito.when(airlines.get(0)).thenReturn(mockAirline);
+
+      Airline resultAirline = manager.getAirline(0);
+      assertEquals(resultAirline, mockAirline);
+      assertEquals(resultAirline.getId(), 0);
+      assertEquals(resultAirline.getName(), "Test");
+  }
+
+  @Test
+  void addAirline() {
+      airlines = new HashMap<Integer, Airline>();
+      manager = new AeroLogixManager(bookings, flights, airlines, passengers, aircrafts, users);
+
+      Airline resultAirline = new Airline();
+      resultAirline.setId(0);
+      resultAirline.setName("Test");
+
+      manager.addAirline(resultAirline);
+
+      assertEquals(manager.getAirline(0), resultAirline);
+      assertEquals(manager.getAirline(0).getId(), resultAirline.getId());
+  }
+  
+  @Test
+  void modifyAirline() {
+      Airline resultAirline = new Airline();
+      resultAirline.setId(0);
+      resultAirline.setName("Test");
+
+      airlines = new HashMap<Integer, Airline>();
+      airlines.put(resultAirline.getId(), resultAirline);
+      manager = new AeroLogixManager(bookings, flights, airlines, passengers, aircrafts, users);
+
+      manager.modifyAirline(resultAirline.getId(), "Test");
+
+      assertEquals(manager.getAirline(0).getId(), 0);
+      assertEquals(manager.getAirline(0).getName(), "Test");
+  }
+
+  @Test
+  void deleteAirline() {
+      Airline resultAirline = new Airline();
+      resultAirline.setId(0);
+      resultAirline.setName("Test");
+      airlines = new HashMap<Integer, Airline>();
+      airlines.put(resultAirline.getId(), resultAirline);
+      manager = new AeroLogixManager(bookings, flights, airlines, passengers, aircrafts, users);
+
+      manager.deleteAirline(resultAirline.getId());
+
+      assertNull(manager.getAirline(0));
+      assertNull(manager.getAirline(resultAirline.getId()));
+  }
 }
