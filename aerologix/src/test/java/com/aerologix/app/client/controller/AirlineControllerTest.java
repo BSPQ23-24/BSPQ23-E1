@@ -1,18 +1,16 @@
 package com.aerologix.app.client.controller;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.AirlineData;
-import com.aerologix.app.server.pojo.PassengerData;
 
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
@@ -71,7 +69,7 @@ public class AirlineControllerTest {
 
 
     @Test
-    public void testDeletePassenger() {
+    public void testDeleteAirline() {
         int id = 0;
 
         int result = airlineController.deleteAirline(id);

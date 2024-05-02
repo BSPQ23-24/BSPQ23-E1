@@ -18,23 +18,24 @@ import com.aerologix.app.server.jdo.*;
 @Path("/aerologix")
 @Produces(MediaType.APPLICATION_JSON)
 public class AirlineService {
-    protected static final Logger logger = LogManager.getLogger();
+
+	protected static final Logger logger = LogManager.getLogger();
 
 	private PersistenceManagerFactory pmf;
 	private PersistenceManager pm;
 	private Transaction tx;
 
-    public AirlineService() {
-        this.pmf = AeroLogixServer.getInstance().getPersistenceManagerFactory();
+	public AirlineService() {
+		this.pmf = AeroLogixServer.getInstance().getPersistenceManagerFactory();
 		this.pm = pmf.getPersistenceManager();
 		this.tx = pm.currentTransaction();
-    }
+	}
 
-    //  CRUD methods
+	// CRUD methods
 
- 	@GET
+	@GET
 	@Path("/airline/get")
-	public Response getAirline(@QueryParam("id") String id) {
+	public Response getAirline(@QueryParam("id") int id) {
 		try {
 			tx.begin();
 			logger.info("Checking if the airline '{}' already exists or not...", id);
@@ -108,17 +109,28 @@ public class AirlineService {
 	public Response createAirline(AirlineData airlineData) {
 		try {
 			tx.begin();
+			logger.info("Checking if airline '{}' already exists or not", airlineData.getId());
+			Airline airline = null;
 
-			// Create Airline instance and make it persistent
-			Airline airline = new Airline();
-			airline.setName(airlineData.getName());
+			try {
+				airline = pm.getObjectById(Airline.class, airlineData.getId());
+			} catch (JDOObjectNotFoundException e) {
+				logger.info("Airline with ID '{}' does not exist in the database.", airlineData.getId());
+			}
 
-			pm.makePersistent(airline);
+			if (airline == null) {
+				logger.info("Creating airline...");
+				airline = new Airline(airlineData.getId(), airlineData.getName());
+				pm.makePersistent(airline);
+				logger.info("Airline created: {}", airline);
+				tx.commit();
+				return Response.ok().build();
+			} else {
+				logger.error("ID '{}' is already in use", airlineData.getId());
+				tx.commit();
+				return Response.status(Response.Status.UNAUTHORIZED).entity("ID is already in use").build();
+			}
 
-			tx.commit();
-			logger.info("Airline created succesfully");
-			return Response.ok().build();
-			
 		} finally {
 			if (tx.isActive()) {
 				tx.rollback();
@@ -190,5 +202,21 @@ public class AirlineService {
 				tx.rollback();
 			}
 		}
+	}
+
+	// Other methods
+
+	// In AirlineService class
+	void setPersistenceManagerFactory(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}
+
+	// Similarly, create a setter for the PersistenceManager if necessary
+	void setPersistenceManager(PersistenceManager pm) {
+		this.pm = pm;
+	}
+
+	void setTransaction(Transaction tx) {
+		this.tx = tx;
 	}
 }
