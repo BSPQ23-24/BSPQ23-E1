@@ -19,19 +19,19 @@ import com.aerologix.app.server.jdo.*;
 @Produces(MediaType.APPLICATION_JSON)
 public class BookingService {
 
-    protected static final Logger logger = LogManager.getLogger();
+	protected static final Logger logger = LogManager.getLogger();
 
 	private PersistenceManagerFactory pmf;
 	private PersistenceManager pm;
 	private Transaction tx;
 
-    public BookingService() {
-        this.pmf = AeroLogixServer.getInstance().getPersistenceManagerFactory();
+	public BookingService() {
+		this.pmf = AeroLogixServer.getInstance().getPersistenceManagerFactory();
 		this.pm = pmf.getPersistenceManager();
 		this.tx = pm.currentTransaction();
-    }
+	}
 
-    //  CRUD methods
+	// CRUD methods
 
 	@GET
 	@Path("/booking/get")
@@ -73,7 +73,7 @@ public class BookingService {
 
 	@GET
 	@Path("/booking/getAll")
-	public Response getAllBooking() {
+	public Response getAllBookings() {
 		try {
 			tx.begin();
 
@@ -244,17 +244,17 @@ public class BookingService {
 			}
 		}
 	}
-	
+
 	void setPersistenceManagerFactory(PersistenceManagerFactory pmf) {
-	        this.pmf = pmf;
-	    }
+		this.pmf = pmf;
+	}
 
 	void setPersistenceManager(PersistenceManager pm) {
-	        this.pm = pm;
-	    }
+		this.pm = pm;
+	}
 
 	void setTransaction(Transaction tx) {
-			this.tx = tx;
-		}
-    
+		this.tx = tx;
+	}
+
 }

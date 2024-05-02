@@ -88,7 +88,7 @@ public class BookingServiceTest {
     }
     
     @Test
-    public void testGetAllBooking() {
+    public void testGetAllBookings() {
     	Extent<Booking> extentMock = mock(Extent.class);
         Iterator<Booking> iteratorMock = mock(Iterator.class);
         Booking bookingMock = mock(Booking.class);
@@ -98,7 +98,7 @@ public class BookingServiceTest {
         when(iteratorMock.hasNext()).thenReturn(true, false);
         when(iteratorMock.next()).thenReturn(bookingMock);
 
-        Response response = bookingService.getAllBooking();
+        Response response = bookingService.getAllBookings();
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     }
     
