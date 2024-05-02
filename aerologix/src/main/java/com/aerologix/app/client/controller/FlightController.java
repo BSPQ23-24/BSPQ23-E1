@@ -22,13 +22,15 @@ public class FlightController {
 	protected static final Logger logger = LogManager.getLogger();
     
     private static FlightController instance;
-
-    private FlightController() {
+    private AeroLogixClient client;
+    
+    private FlightController(AeroLogixClient client) {
+    	this.client = client;
     }
 
-    public static synchronized FlightController getInstance() {
+    public static synchronized FlightController getInstance(AeroLogixClient client) {
 		if (instance == null) {
-			instance = new FlightController();
+			instance = new FlightController(client);
 		}
 		return instance;
 	}
