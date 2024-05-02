@@ -15,25 +15,22 @@ import com.aerologix.app.server.pojo.*;
 public class AirlineController {
 
     protected static final Logger logger = LogManager.getLogger();
-
     private static AirlineController instance;
+    private AeroLogixClient client;
 
-    private AirlineController() {
+    private AirlineController(AeroLogixClient client) {
+    	this.client = client;
     }
 
-    public static synchronized AirlineController getInstance() {
+    public static synchronized AirlineController getInstance(AeroLogixClient client) {
 		if (instance == null) {
-			instance = new AirlineController();
+			instance = new AirlineController(client);
 		}
 		return instance;
 	}
 
-    /*
-     * CRUD: airline
-     */
-
     public int createAirline(String name) {
-        WebTarget registerAirlineWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/create");
+        WebTarget registerAirlineWebTarget = client.getWebTarget().path("/airline/create");
         Invocation.Builder invocationBuilder = registerAirlineWebTarget.request(MediaType.APPLICATION_JSON);
 
         AirlineData airlineData = new AirlineData();
@@ -51,7 +48,7 @@ public class AirlineController {
     }
     
     public int deleteAirline(int airlineId) {
-        WebTarget deleteAirlineWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/delete");
+        WebTarget deleteAirlineWebTarget = client.getWebTarget().path("/airline/delete");
         Invocation.Builder invocationBuilder = deleteAirlineWebTarget.request(MediaType.APPLICATION_JSON);
 
         logger.info("Sending POST request to server to delete airline with id '{}'...", airlineId);
@@ -66,7 +63,7 @@ public class AirlineController {
     }
     
     public int modifyAirline(int id, String name) {
-        WebTarget modifyAirlineWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/modify");
+        WebTarget modifyAirlineWebTarget = client.getWebTarget().path("/airline/modify");
         Invocation.Builder invocationBuilder = modifyAirlineWebTarget.request(MediaType.APPLICATION_JSON);
 
         AirlineData airlineData = new AirlineData();
@@ -85,7 +82,7 @@ public class AirlineController {
     }
     
     public AirlineData getAirline(int id) {
-        WebTarget getAirlineWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/get").queryParam("id", id);
+        WebTarget getAirlineWebTarget = client.getWebTarget().path("/airline/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getAirlineWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve airline with id '{}'...", id);
@@ -101,7 +98,7 @@ public class AirlineController {
     }
     
     public ArrayList<AirlineData> getAllAirlines(){
-    	WebTarget getAllAirlinesWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/airline/getAll");
+    	WebTarget getAllAirlinesWebTarget = client.getWebTarget().path("/airline/getAll");
         Invocation.Builder invocationBuilder = getAllAirlinesWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve all airlines...");
