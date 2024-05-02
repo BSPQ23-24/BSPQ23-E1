@@ -59,12 +59,15 @@ public class FlightControllerTest {
 
         Response response = Response.ok().build();
         when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
+        
         assertEquals(0,flightController.createFlight("Bilbao", "Madrid", 1, 1));
         
         
         verify(webTarget.request(MediaType.APPLICATION_JSON)).post(flightDataEntityCaptor.capture());
         assertEquals("Bilbao", flightDataEntityCaptor.getValue().getEntity().getOrigin());
-       // assertEquals("passwd", flightDataEntityCaptor.getValue().getEntity().);
+        assertEquals("Madrid", flightDataEntityCaptor.getValue().getEntity().getDestination());
+        assertEquals(1,flightDataEntityCaptor.getValue().getEntity().getDate());
+        assertEquals(1,flightDataEntityCaptor.getValue().getEntity());
     }
 
 	
