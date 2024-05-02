@@ -17,23 +17,24 @@ public class BookingController {
     protected static final Logger logger = LogManager.getLogger();
 
     private static BookingController instance;
+    private AeroLogixClient client;
 
-    private BookingController() {
+    private BookingController(AeroLogixClient client) {
+    	this.client = client;
     }
 
-    public static synchronized BookingController getInstance() {
+    public static synchronized BookingController getInstance(AeroLogixClient client) {
 		if (instance == null) {
-			instance = new BookingController();
+			instance = new BookingController(client);
 		}
 		return instance;
 	}
 
-    /*
-     * CRUD: booking
-     */
+    private BookingController() {
+    }
 
     public int createBooking(String passengerDNI, int flightId, String userEmail, int airlineId) {
-        WebTarget registerBookingWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/create");
+        WebTarget registerBookingWebTarget = client.getWebTarget().path("/booking/create");
         Invocation.Builder invocationBuilder = registerBookingWebTarget.request(MediaType.APPLICATION_JSON);
 
         BookingData bookingData = new BookingData();
@@ -54,7 +55,7 @@ public class BookingController {
     }
 
     public int deleteBooking(String bookingId) {
-        WebTarget deleteBookingWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/delete");
+        WebTarget deleteBookingWebTarget = client.getWebTarget().path("/booking/delete");
         Invocation.Builder invocationBuilder = deleteBookingWebTarget.request(MediaType.APPLICATION_JSON);
 
         logger.info("Sending POST request to server to delete booking with id '{}'...", bookingId);
@@ -69,7 +70,7 @@ public class BookingController {
     }
 
     public int modifyBooking(int id, String passengerDNI, int flightId, String userEmail, int airlineId) {
-        WebTarget modifyBookingWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/modify");
+        WebTarget modifyBookingWebTarget = client.getWebTarget().path("/booking/modify");
         Invocation.Builder invocationBuilder = modifyBookingWebTarget.request(MediaType.APPLICATION_JSON);
 
         BookingData bookingData = new BookingData();
@@ -91,7 +92,7 @@ public class BookingController {
     }
 
     public BookingData getBooking(int id) {
-        WebTarget getBookingWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/get").queryParam("id", id);
+        WebTarget getBookingWebTarget = client.getWebTarget().path("/booking/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getBookingWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve booking with id '{}'...", id);
@@ -107,7 +108,7 @@ public class BookingController {
     }
 
     public ArrayList<BookingData> getAllBookings() {
-        WebTarget getAllBookingsWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/booking/getAll");
+        WebTarget getAllBookingsWebTarget = client.getWebTarget().path("/booking/getAll");
         Invocation.Builder invocationBuilder = getAllBookingsWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve all bookings...");

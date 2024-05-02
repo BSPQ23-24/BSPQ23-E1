@@ -36,7 +36,7 @@ public class FlightController {
 	}
 
 	public int createFlight(String origin, String destination, long date, int aircraft) {
-		WebTarget registerFlightWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/create");
+		WebTarget registerFlightWebTarget = client.getWebTarget().path("/flight/create");
         Invocation.Builder invocationBuilder = registerFlightWebTarget.request(MediaType.APPLICATION_JSON);
         
         FlightData flightData = new FlightData();
@@ -58,7 +58,7 @@ public class FlightController {
         }
 	}
 	public int deleteFlight(int flightId) {
-		WebTarget deleteUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/delete");
+		WebTarget deleteUserWebTarget = client.getWebTarget().path("/flight/delete");
         Invocation.Builder invocationBuilder = deleteUserWebTarget.request(MediaType.APPLICATION_JSON);
 
         logger.info("Sending POST request to server to delete flight with id '{}'...", flightId);
@@ -72,7 +72,7 @@ public class FlightController {
         }
 	}
 	public int modifyFlight(int idFlight, String origin, String destination, long date, int aircraft, List<Integer> bookings) {
-		WebTarget modifyUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/modify");
+		WebTarget modifyUserWebTarget = client.getWebTarget().path("/flight/modify");
         Invocation.Builder invocationBuilder = modifyUserWebTarget.request(MediaType.APPLICATION_JSON);
 		
         FlightData flightData = new FlightData();
@@ -95,7 +95,7 @@ public class FlightController {
 	}
 	
 	public FlightData getFlight(int id) {
-        WebTarget getUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/get").queryParam("id", id);
+        WebTarget getUserWebTarget = client.getWebTarget().path("/flight/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getUserWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve flight with id '{}'...", id);
@@ -110,7 +110,7 @@ public class FlightController {
         }
     }
 	public ArrayList<FlightData> getAllFlights() {
-        WebTarget getAllUsersWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/flight/getAll");
+        WebTarget getAllUsersWebTarget = client.getWebTarget().path("/flight/getAll");
         Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve all flights...");

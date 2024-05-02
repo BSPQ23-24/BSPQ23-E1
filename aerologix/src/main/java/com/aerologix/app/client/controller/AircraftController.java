@@ -22,19 +22,25 @@ public class AircraftController {
     protected static final Logger logger = LogManager.getLogger();
     
     private static AircraftController instance;
+    
+    private AeroLogixClient client;
 
-    private AircraftController() {
+    private AircraftController(AeroLogixClient client) {
+    	this.client = client;
     }
 
-    public static synchronized AircraftController getInstance() {
+    public static synchronized AircraftController getInstance(AeroLogixClient client) {
 		if (instance == null) {
-			instance = new AircraftController();
+			instance = new AircraftController(client);
 		}
 		return instance;
 	}
 
+    private AircraftController() {
+    }
+
     public int createAircraft(String manufacturer, String type, int maxCapacity) {
-		WebTarget registerFlightWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/aircraft/create");
+		WebTarget registerFlightWebTarget = client.getWebTarget().path("/aircraft/create");
         Invocation.Builder invocationBuilder = registerFlightWebTarget.request(MediaType.APPLICATION_JSON);
         
         AircraftData aircraftData = new AircraftData();
@@ -54,7 +60,7 @@ public class AircraftController {
         }
 	}
 	public int deleteAircraft(int id) {
-		WebTarget deleteUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/aircraft/delete");
+		WebTarget deleteUserWebTarget = client.getWebTarget().path("/aircraft/delete");
         Invocation.Builder invocationBuilder = deleteUserWebTarget.request(MediaType.APPLICATION_JSON);
 
         logger.info("Sending POST request to server to delete aircraft with id '{}'...", id);
@@ -68,7 +74,7 @@ public class AircraftController {
         }
 	}
 	public int modifyAircraft(int id, String manufacturer, String type, int maxCapacity) {
-		WebTarget modifyUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/aircraft/modify");
+		WebTarget modifyUserWebTarget = client.getWebTarget().path("/aircraft/modify");
         Invocation.Builder invocationBuilder = modifyUserWebTarget.request(MediaType.APPLICATION_JSON);
 		
         AircraftData aircraftData = new AircraftData();
@@ -89,7 +95,7 @@ public class AircraftController {
 	}
 	
 	public AircraftData getAircraft(int id) {
-        WebTarget getUserWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/aircraft/get").queryParam("id", id);
+        WebTarget getUserWebTarget = client.getWebTarget().path("/aircraft/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getUserWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve aircraft with id '{}'...", id);
@@ -104,7 +110,7 @@ public class AircraftController {
         }
     }
 	public ArrayList<AircraftData> getAllAircrafts() {
-        WebTarget getAllUsersWebTarget = AeroLogixClient.getInstance().getWebTarget().path("/aircraft/getAll");
+        WebTarget getAllUsersWebTarget = client.getWebTarget().path("/aircraft/getAll");
         Invocation.Builder invocationBuilder = getAllUsersWebTarget.request(MediaType.APPLICATION_JSON);
         
         logger.info("Sending GET request to server to retrieve all aircrafts...");
