@@ -43,5 +43,5 @@ AeroLogix is a Maven-based Java project that creates a management system for air
 2. **Run performance tests**
 
     ```
-    mvn verify -Pperformance-test
+    mvn verify -Pperformance-tests
     ```
