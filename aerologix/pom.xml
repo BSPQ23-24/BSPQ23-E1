@@ -5,33 +5,33 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-  	<groupId>com.aerologix.app</groupId>
+	<groupId>com.aerologix.app</groupId>
   	<artifactId>aerologix</artifactId>
   	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
   	<name>aerologix</name>
 
-    <properties>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jersey.version>3.1.5</jersey.version>
 		<server.hostname>127.0.0.1</server.hostname>
 		<server.port>8080</server.port>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
-  	</properties>
+	</properties>
 
-  	<dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.glassfish.jersey</groupId>
-                <artifactId>jersey-bom</artifactId>
-                <version>${jersey.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-  	</dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.glassfish.jersey</groupId>
+				<artifactId>jersey-bom</artifactId>
+				<version>${jersey.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-  	<dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>javax.jdo</artifactId>
@@ -40,68 +40,69 @@
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-core</artifactId>
-			<version>[6.0.0-m1, 6.9)</version>
+			<version>[6.0.7, )</version>
 		</dependency>
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-api-jdo</artifactId>
-			<version>[6.0.0-m1, 6.9)</version>
+			<version>[6.0.2, )</version>
 		</dependency>
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-rdbms</artifactId>
-			<version>[6.0.0-m1, 6.9)</version>
+			<version>[6.0.7, )</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<version>8.3.0</version>
 		</dependency>
 		<dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>[2.17.1, 2.39.1]</version>
-        </dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.23.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>[2.17.1, 2.39.1]</version>
+			<version>2.23.1</version>
 		</dependency>
-    	<dependency>
-        	<groupId>org.glassfish.jersey.containers</groupId>
-        	<artifactId>jersey-container-servlet-core</artifactId>
-   		</dependency>
-    	<dependency>
-        	<groupId>org.glassfish.jersey.inject</groupId>
-        	<artifactId>jersey-hk2</artifactId>
-    	</dependency>
-    	<dependency>
-        	<groupId>org.glassfish.jersey.media</groupId>
-        	<artifactId>jersey-media-json-jackson</artifactId>
-    	</dependency>
-		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.10.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>5.11.0</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-inline</artifactId>
-			<version>5.2.0</version>
-			<scope>test</scope>
+			<groupId>com.github.noconnor</groupId>
+			<artifactId>junitperf</artifactId>
+			<version>1.35.0</version>
 		</dependency>
-  	</dependencies>
+	</dependencies>
 
 	<build>
 		<resources>
@@ -123,7 +124,7 @@
 				<configuration>
 					<api>JDO</api>
 					<verbose>true</verbose>
-            		<fork>false</fork>   <!-- Solve windows line too long error -->
+					<fork>false</fork>
 					<props>${config.files.dir}/datanucleus.properties</props>
 				</configuration>
 				<executions>
@@ -154,6 +155,16 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+				<configuration>
+					<excludedGroups>PerformanceTest</excludedGroups>
+					<!-- Allow JUnitPerf to access the test classes in JDK17 -->
+					<argLine>@{argLine} --add-opens
+						java.base/java.lang=ALL-UNNAMED</argLine>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<pluginManagement>
@@ -182,10 +193,6 @@
 					<version>3.13.0</version>
 				</plugin>
 				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.2.5</version>
-				</plugin>
-				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>3.4.0</version>
@@ -200,7 +207,14 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7.1</version>
+					<version>3.12.1</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.jacoco</groupId>
+							<artifactId>jacoco-maven-plugin</artifactId>
+							<version>0.8.12</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -239,7 +253,6 @@
 		</pluginManagement>
 	</build>
 
-
 	<profiles>
 		<!-- run server as 'mvn jetty:run' -->
 		<profile>
@@ -269,7 +282,120 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>integration-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<skipTests>true</skipTests>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.22.0</version>
+						<configuration>
+							<includes>
+								<include>**/*IntegrationTest.java</include>
+							</includes>
+							<groups>IntegrationTest</groups>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>performance-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<skipTests>true</skipTests>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.22.0</version>
+						<configuration>
+							<includes>
+								<include>**/PassengerServicePerfTest.java</include>
+							</includes>
+							<groups>PerformanceTest</groups>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<show>private</show>
+					<nohelp>true</nohelp>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.9</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jdepend-maven-plugin</artifactId>
+				<version>2.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>
+					maven-surefire-report-plugin</artifactId>
+				<version>2.21.0</version>
+			</plugin>
+			<plugin>
+				<groupId>com.googlecode.maven-overview-plugin</groupId>
+				<artifactId>maven-overview-plugin</artifactId>
+				<version>1.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.11.0</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
-</project>  
+</project>
