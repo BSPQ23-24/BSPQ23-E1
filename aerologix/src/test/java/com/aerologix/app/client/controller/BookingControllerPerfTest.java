@@ -6,13 +6,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.aerologix.app.client.AeroLogixClient;
-import com.aerologix.app.server.pojo.FlightData;
+import com.aerologix.app.server.pojo.BookingData;
+import com.github.noconnor.junitperf.JUnitPerfRule;
+import com.github.noconnor.junitperf.JUnitPerfTest;
+import com.github.noconnor.junitperf.reporting.providers.HtmlReportGenerator;
 
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.Invocation;
@@ -22,12 +26,16 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-public class FlightControllerTest {
+@Tag("PerformanceTest")
+public class BookingControllerPerfTest {
 
-    private FlightController flightController;
+    private BookingController bookingController;
     private WebTarget webTargetMock;
     private Invocation.Builder invocationBuilderMock;
     private AeroLogixClient clientMock;
+
+    @Rule
+    public JUnitPerfRule perfTestRule = new JUnitPerfRule(new HtmlReportGenerator("/target/junitperf/report.html"));
 
     @BeforeEach
     public void setUp() {
@@ -41,45 +49,48 @@ public class FlightControllerTest {
         when(webTargetMock.queryParam(any(), any())).thenReturn(webTargetMock);
         when(webTargetMock.request(MediaType.APPLICATION_JSON)).thenReturn(invocationBuilderMock);
 
-        flightController = FlightController.getInstance(clientMock);
+        bookingController = BookingController.getInstance(clientMock);
 
         Response responseMock = mock(Response.class);
         when(responseMock.getStatus()).thenReturn(Status.OK.getStatusCode());
-        when(responseMock.readEntity(FlightData.class)).thenReturn(new FlightData());
-        when(responseMock.readEntity(new GenericType<ArrayList<FlightData>>() {})).thenReturn(new ArrayList<>());
+        when(responseMock.readEntity(BookingData.class)).thenReturn(new BookingData());
+        when(responseMock.readEntity(new GenericType<ArrayList<BookingData>>() {})).thenReturn(new ArrayList<>());
         when(invocationBuilderMock.get()).thenReturn(responseMock);
         when(invocationBuilderMock.post(any(Entity.class))).thenReturn(responseMock);
     }
 
     @Test
-    public void testCreateFlight() {
-        int result = flightController.createFlight("Origin", "Destination", 1234567890L, 1);
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
+    public void testCreateBooking() {
+        int result = bookingController.createBooking("1234567890", 1, "test@example.com", 1);
         assertEquals(0, result);
     }
 
     @Test
-    public void testDeleteFlight() {
-        int result = flightController.deleteFlight(1);
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
+    public void testDeleteBooking() {
+        int result = bookingController.deleteBooking("abc123");
         assertEquals(0, result);
     }
 
     @Test
-    public void testModifyFlight() {
-        List<Integer> bookings = new ArrayList<>();
-        bookings.add(1);
-        int result = flightController.modifyFlight(1, "Origin", "Destination", 1234567890L, 1, bookings);
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
+    public void testModifyBooking() {
+        int result = bookingController.modifyBooking(1, "0987654321", 2, "test@example.com", 2);
         assertEquals(0, result);
     }
 
     @Test
-    public void testGetFlight() {
-        FlightData flight = flightController.getFlight(1);
-        assertNotNull(flight);
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
+    public void testGetBooking() {
+        BookingData booking = bookingController.getBooking(1);
+        assertNotNull(booking);
     }
 
     @Test
-    public void testGetAllFlights() {
-        ArrayList<FlightData> flightList = flightController.getAllFlights();
-        assertNotNull(flightList);
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
+    public void testGetAllBookings() {
+        ArrayList<BookingData> bookingList = bookingController.getAllBookings();
+        assertNotNull(bookingList);
     }
 }

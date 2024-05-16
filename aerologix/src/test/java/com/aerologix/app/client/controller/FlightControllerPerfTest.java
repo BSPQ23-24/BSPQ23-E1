@@ -8,11 +8,16 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.FlightData;
+import com.github.noconnor.junitperf.JUnitPerfRule;
+import com.github.noconnor.junitperf.JUnitPerfTest;
+import com.github.noconnor.junitperf.reporting.providers.HtmlReportGenerator;
 
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.Invocation;
@@ -22,12 +27,16 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-public class FlightControllerTest {
+@Tag("PerformanceTest")
+public class FlightControllerPerfTest {
 
     private FlightController flightController;
     private WebTarget webTargetMock;
     private Invocation.Builder invocationBuilderMock;
     private AeroLogixClient clientMock;
+
+    @Rule
+    public JUnitPerfRule perfTestRule = new JUnitPerfRule(new HtmlReportGenerator("/target/junitperf/report.html"));
 
     @BeforeEach
     public void setUp() {
@@ -52,18 +61,21 @@ public class FlightControllerTest {
     }
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testCreateFlight() {
         int result = flightController.createFlight("Origin", "Destination", 1234567890L, 1);
         assertEquals(0, result);
     }
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testDeleteFlight() {
         int result = flightController.deleteFlight(1);
         assertEquals(0, result);
     }
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testModifyFlight() {
         List<Integer> bookings = new ArrayList<>();
         bookings.add(1);
@@ -72,12 +84,14 @@ public class FlightControllerTest {
     }
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testGetFlight() {
         FlightData flight = flightController.getFlight(1);
         assertNotNull(flight);
     }
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testGetAllFlights() {
         ArrayList<FlightData> flightList = flightController.getAllFlights();
         assertNotNull(flightList);

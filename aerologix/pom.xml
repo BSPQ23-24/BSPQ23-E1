@@ -330,7 +330,7 @@
 						<version>2.22.0</version>
 						<configuration>
 							<includes>
-								<include>**/PassengerServicePerfTest.java</include>
+								<include>**/*PerfTest.java</include>
 							</includes>
 							<groups>PerformanceTest</groups>
 						</configuration>

@@ -5,7 +5,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import jakarta.ws.rs.client.*;
@@ -13,13 +15,20 @@ import jakarta.ws.rs.core.*;
 
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.PassengerData;
+import com.github.noconnor.junitperf.JUnitPerfRule;
+import com.github.noconnor.junitperf.JUnitPerfTest;
+import com.github.noconnor.junitperf.reporting.providers.HtmlReportGenerator;
 
-public class PassengerControllerTest {
+@Tag("PerformanceTest")
+public class PassengerControllerPerfTest {
 
     private PassengerController passengerController;
     private WebTarget webTargetMock;
     private Invocation.Builder invocationBuilderMock;
     private AeroLogixClient clientMock;
+
+    @Rule
+    public JUnitPerfRule perfTestRule = new JUnitPerfRule(new HtmlReportGenerator("/target/junitperf/report.html"));
 
     @BeforeEach
     public void setUp() {
@@ -43,6 +52,7 @@ public class PassengerControllerTest {
     }
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testCreatePassenger() {
         PassengerData passengerData = new PassengerData();
         passengerData.setDNI("12345678A");
@@ -60,6 +70,7 @@ public class PassengerControllerTest {
     }
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testModifyPassenger() {
         PassengerData passengerData = new PassengerData();
         passengerData.setDNI("12345678A");
@@ -71,14 +82,12 @@ public class PassengerControllerTest {
 
 
     @Test
+    @JUnitPerfTest(threads = 10, durationMs = 2000)
     public void testDeletePassenger() {
         String dni = "12345678A";
 
         int result = passengerController.deletePassenger(dni);
         assertEquals(0, result);
     }
-
-    
-
 
 }
