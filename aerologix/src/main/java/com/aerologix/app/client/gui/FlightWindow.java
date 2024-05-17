@@ -1,12 +1,12 @@
 package com.aerologix.app.client.gui;
 
+// import statements
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,18 +23,22 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import com.aerologix.app.client.AeroLogixClient;
-import com.aerologix.app.client.controller.AirlineController;
 import com.aerologix.app.client.controller.BookingController;
 import com.aerologix.app.client.controller.FlightController;
 import com.aerologix.app.client.controller.PassengerController;
 import com.aerologix.app.server.pojo.BookingData;
 import com.aerologix.app.server.pojo.PassengerData;
-import com.aerologix.app.server.service.BookingService;
-import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import java.awt.Color;
 import java.awt.Dimension;
 
+/**
+ * Class for the window that displays the details of a flight.
+ * <p>
+ * It contains list of all registered bookings for a flight. It
+ * is the management window for all bookings in a flight, it allows 
+ * to create and delete bookings.
+ */
 public class FlightWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
@@ -43,7 +47,12 @@ public class FlightWindow extends JFrame {
 	static JScrollPane scrollPane;
 	static JPanel pBookings;
 	
-	public FlightWindow(int flightId, String userEmail) {
+	/**
+	 * Private constructor of the window.
+	 * @param flightId	Identification integer of the flight.
+	 * @param userEmail	Email address of the user in the counter.
+	 */
+	private FlightWindow(int flightId, String userEmail) {
 		getContentPane().setLayout(null);
 		getContentPane().setPreferredSize(new Dimension(800, 500));
 		this.setSize(new Dimension(830, 500));
@@ -91,7 +100,9 @@ public class FlightWindow extends JFrame {
 		bRefresh.setBounds(696, 423, 117, 29);
 		getContentPane().add(bRefresh);
 		
-		// Book flight
+		/**
+		 * ActionListener that books a flight when '{@code bNewBooking}' button is pressed.
+		 */
 		bNewBooking.addActionListener(new ActionListener() {
 
 			@Override
@@ -101,7 +112,9 @@ public class FlightWindow extends JFrame {
 			
 		});
 		
-		// Refresh list
+		/**
+		 * ActionListener that refreshes the booking list when '{@code bRefresh}' button is pressed.
+		 */
 		bRefresh.addActionListener(new ActionListener() {
 
 			@Override
@@ -113,11 +126,19 @@ public class FlightWindow extends JFrame {
 			
 		});
 		
-		// Show bookings the first time
 		showBookings(flightId);
 		
 	}
 	
+	/**
+	 * Method that registers a booking in the system.
+	 * <p>
+	 * It shows a JOptionPane message with a {@link BookingFormPanel}
+	 * to manually type in the passenger details and select the airline.
+	 * 
+	 * @param flightId	Identification integer of the flight in which to make a booking.
+	 * @param userEmail	Email address of the user in the counter which is making the booking for the passenger.
+	 */
 	public static void bookFlight(int flightId, String userEmail) {
 		// Create a panel of the data form
 		BookingFormPanel panel = BookingFormPanel.getInstance(flightId);
@@ -145,6 +166,15 @@ public class FlightWindow extends JFrame {
 		}
 	}
 	
+	/**
+	 * Method that shows all the registered bookings in a flight.
+	 * <p>
+	 * It iterates over the list of bookings and adds a JPanel with
+	 * some basic information about each of them, plus it adds a JButton
+	 * for viewing the details of the booking and another one to cancel a booking.
+	 * 
+	 * @param flightId	Identification integer of the flight.
+	 */
 	public static void showBookings(int flightId) {
 		// Get all booking data
 		ArrayList<BookingData> bookingData = new ArrayList<BookingData>();
@@ -205,6 +235,13 @@ public class FlightWindow extends JFrame {
 		}
 	}
 	
+	/**
+	 * Method that returns the singleton instance of {@link FlightWindow}.
+	 * 
+	 * @param flightId	Identification integer of the flight.
+	 * @param userEmail	Email address of the user in the airport counter.
+	 * @return	Instance of {@link FlightWindow}.
+	 */
 	public static FlightWindow getInstance(int flightId, String userEmail) {
         if (instance == null) {
             instance = new FlightWindow(flightId, userEmail);

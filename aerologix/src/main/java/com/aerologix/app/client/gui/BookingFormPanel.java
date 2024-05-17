@@ -1,5 +1,6 @@
 package com.aerologix.app.client.gui;
 
+// import statements
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -8,6 +9,8 @@ import org.jdatepicker.*;
 
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.client.controller.AirlineController;
+import com.aerologix.app.server.jdo.Flight;
+import com.aerologix.app.server.jdo.Passenger;
 import com.aerologix.app.server.pojo.AirlineData;
 
 import java.awt.Font;
@@ -15,7 +18,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -23,6 +25,15 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JComboBox;
 
+/**
+ * Class of the panel for the form to register a new booking.
+ * <p>
+ * It is a JPanel that contains multiple JTextFields
+ * to manually type in the {@link com.aerologix.app.server.jdo.Passenger Passenger}
+ * information and a JDatePicker
+ * for the passenger birth date. Additionally, it contains a 
+ * JComboBox to select the airline for the booking.
+ */
 public class BookingFormPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField tDNI;
@@ -36,7 +47,12 @@ public class BookingFormPanel extends JPanel {
 	
 	private static BookingFormPanel instance;
 	
-	public BookingFormPanel(int flightId) {
+	/**
+	 * This is the private constructor of the panel.
+	 * 
+	 * @param flightId	Identification integer of a {@link com.aerologix.app.server.jdo.Flight Flight} for which the booking is being created.
+	 */
+	private BookingFormPanel(int flightId) {
 		setLayout(null);
 		setSize(340, 500);
 		
@@ -156,6 +172,10 @@ public class BookingFormPanel extends JPanel {
 		
 		loadAirlines();
 		
+		/**
+		 * ActionListener that refreshes the JComboBox of
+		 * airlines when '{@code bRefresh}' button is pressed.
+		 */
 		bRefresh.addActionListener(new ActionListener() {
 
 			@Override
@@ -167,6 +187,10 @@ public class BookingFormPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Method that cleans the items in the JComboBox that contains the
+	 * airlines and adds the latest airline list available.
+	 */
 	public void loadAirlines() {
 		cbAirline.removeAllItems();	// Initialize empty
 		ArrayList<AirlineData> lAD = AirlineController.getInstance(AeroLogixClient.getInstance()).getAllAirlines();
@@ -175,6 +199,12 @@ public class BookingFormPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Method that returns the singleton instance of BookingFormPanel.
+	 * 
+	 * @param flightId	Identification integer of a flight.
+	 * @return	Instance of {@link BookingFormPanel}.
+	 */
 	public static BookingFormPanel getInstance(int flightId) {
         if (instance == null) {
             instance = new BookingFormPanel(flightId);
@@ -182,26 +212,50 @@ public class BookingFormPanel extends JPanel {
         return instance;
     }
 	
+	/**
+	 * Method that returns the value in the JTextField of the DNI.
+	 * @return {@link java.lang.String String} with the DNI of the passenger.
+	 */
 	public String getDNI() {
 		return tDNI.getText();
 	}
 	
+	/**
+	 * Method that returns the value in the JTextField of the phone number.
+	 * @return {@link java.lang.String String} with the phone number of the passenger.
+	 */
 	public String getPhone() {
 		return tPhone.getText();
 	}
 	
+	/**
+	 * Method that returns the value in the JTextField of the email.
+	 * @return {@link java.lang.String String} with the email address of the passenger.
+	 */
 	public String getEmail() {
 		return tEmail.getText();
 	}
 	
+	/**
+	 * Method that returns the value in the JTextField of the full name.
+	 * @return {@link java.lang.String String} with the full name of the passenger.
+	 */
 	public String getName() {
 		return tName.getText();
 	}
 	
+	/**
+	 * Method that returns the value in the JTextField of the nationality.
+	 * @return {@link java.lang.String String} with the nationality of the passenger.
+	 */
 	public String getNationality() {
 		return tNationality.getText();
 	}
 	
+	/**
+	 * Method that returns the value of the birthdate in the UtilDateModel from the JDatePicker.
+	 * @return long with the birth date of the passenger in milliseconds.
+	 */
 	public long getBirthdate() {
 		if(model.getValue() != null) {
 			return model.getValue().getTime();
@@ -210,6 +264,9 @@ public class BookingFormPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Method that cleans all previous input in all JTextFields.
+	 */
 	public void emptyInputs() {
 		tDNI.setText("");
 		tPhone.setText("");
@@ -219,6 +276,10 @@ public class BookingFormPanel extends JPanel {
 		model.setSelected(false);
 	}
 	
+	/**
+	 * Method that returns the identification integer of the selected airline in the JComboBox.
+	 * @return Identification integer of an {@link com.aerologix.app.server.jdo.Airline Airline}.
+	 */
 	public int getAirlineId() {
 		return cbAirline.getSelectedIndex()+1;
 	}
