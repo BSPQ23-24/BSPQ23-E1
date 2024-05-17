@@ -2,6 +2,7 @@ package com.aerologix.app.server.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.jdo.*;
 
@@ -52,7 +53,7 @@ public class BookingService {
 			// If booking exists
 			if (booking != null) {
 				BookingData bookingData = new BookingData();
-				bookingData.setId(booking.getId());
+				bookingData.setId(booking.getId());				
 				bookingData.setPassengerDNI(booking.getPassenger().getDNI());
 				bookingData.setFlightId(booking.getFlight().getIdFlight());
 				bookingData.setUserEmail(booking.getUser().getEmail());
@@ -116,6 +117,8 @@ public class BookingService {
 		try {
 			tx.begin();
 
+			System.out.println("\n\n" + bookingData + "\n\n");
+			
 			boolean notFound = false;
 
 			// Retrieve all linked classes
@@ -125,11 +128,15 @@ public class BookingService {
 			Airline airline = null;
 
 			try {
-				logger.info("Retrieving all data required for the booking");
-				passenger = pm.getObjectById(Passenger.class, bookingData.getPassengerDNI());
+				logger.info("Retrieving all data required for the booking...");
 				flight = pm.getObjectById(Flight.class, bookingData.getFlightId());
+				logger.info("Flight retrieved succesfully for booking");
 				user = pm.getObjectById(User.class, bookingData.getUserEmail());
+				logger.info("User retrieved succesfully for booking");
 				airline = pm.getObjectById(Airline.class, bookingData.getAirlineId());
+				logger.info("Airline retrieved succesfully for booking");
+				passenger = pm.getObjectById(Passenger.class, bookingData.getPassengerDNI());
+				logger.info("Passenger retrieved succesfully for booking");
 			} catch (JDOObjectNotFoundException e) {
 				logger.info("At least one object of the Booking '{}' not found: {}", bookingData.getId(), e);
 				notFound = true;
@@ -141,6 +148,11 @@ public class BookingService {
 			booking.setFlight(flight);
 			booking.setUser(user);
 			booking.setAirline(airline);
+			
+			// Add the booking to the list in flight
+			Set<Booking> bookings = flight.getBookings();
+			bookings.add(booking);
+			flight.setBookings(bookings);
 
 			if (notFound) {
 				tx.commit();
@@ -229,7 +241,7 @@ public class BookingService {
 			if (booking != null) {
 				// Delete user
 				pm.deletePersistent(booking);
-				logger.info("Booking deleted {}");
+				logger.info("Booking deleted {}", id);
 				tx.commit();
 				return Response.ok().build();
 			} else {

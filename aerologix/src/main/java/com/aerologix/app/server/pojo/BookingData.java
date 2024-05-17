@@ -1,7 +1,7 @@
 package com.aerologix.app.server.pojo;
 
 public class BookingData {
-    protected static int id;
+    protected Integer id = null;
     protected String passengerDNI;
     protected Integer flightId;
     protected String userEmail;
@@ -11,8 +11,8 @@ public class BookingData {
         // required by serialization
     }
 
-    public static int getId() {
-        return id;
+    public int getId() {
+        return this.id;
     }
 
     public void setId(int id) {
@@ -53,7 +53,12 @@ public class BookingData {
 
     // Print the instance
     public String toString() {
-        return "Booking[id=" + this.getId() + ", passenger="+ this.getPassengerDNI() + ", flight=" + this.getFlightId() + ", user=" + this.getUserEmail() + "]";
+    	if(this.id != null) {
+    		return "Booking[id=" + this.getId() + ", passenger="+ this.getPassengerDNI() + ", flight=" + this.getFlightId() + ", user=" + this.getUserEmail() + "]";
+    	} else {
+    		return "Booking[id=NOT_DEFINED_YET" + ", passenger="+ this.getPassengerDNI() + ", flight=" + this.getFlightId() + ", user=" + this.getUserEmail() + "]";
+    	}
+        
     }
 
 }

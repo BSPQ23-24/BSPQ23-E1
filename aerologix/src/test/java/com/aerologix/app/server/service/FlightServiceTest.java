@@ -17,6 +17,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Iterator;
 
 
@@ -58,7 +59,7 @@ public class FlightServiceTest {
         bookingsMock.add(mock(Booking.class));
 
         when(flightMock.getAircraft()).thenReturn(aircraftMock);
-        when(flightMock.getBookings()).thenReturn(bookingsMock);
+        when(flightMock.getBookings()).thenReturn((Set<Booking>) bookingsMock);
 
         when(pmMock.getObjectById(Flight.class, 1)).thenReturn(flightMock);
 

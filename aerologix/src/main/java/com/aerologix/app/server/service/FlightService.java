@@ -1,8 +1,10 @@
 package com.aerologix.app.server.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.jdo.*;
 
@@ -49,8 +51,6 @@ public class FlightService {
                 logger.info("Flight with id '{}' does not exist in the database.", id);
             }
 
-            tx.commit();
-
             if (flight != null) {
                 FlightData flightData = new FlightData();
                 flightData.setIdFlight(flight.getIdFlight());
@@ -60,18 +60,17 @@ public class FlightService {
                 flightData.setDate(flight.getDate());
 
                 // Setting the booking id list
-                List<Booking> bookings = flight.getBookings();
-
-                ArrayList<Integer> bookingIdList = new ArrayList<Integer>();
-                Iterator<Booking> iter = bookings.iterator();
-                logger.info("Retrieving booking list...");
-                while (iter.hasNext()) {
-                    bookingIdList.add((Integer) iter.next().getId());
+                ArrayList<Integer> bookingIds = new ArrayList<Integer>();
+                
+                for(Booking b : flight.getBookings()) {
+                	bookingIds.add(b.getId());
                 }
 
-                flightData.setBookingIds(bookingIdList);
+                flightData.setBookingIds(bookingIds);
 
                 logger.info("Sending flightData to client...");
+                
+                tx.commit();
                 return Response.ok().entity(flightData).build();
             } else {
                 logger.info("Flight not found");
@@ -108,13 +107,12 @@ public class FlightService {
                 flightData.setDate(flight.getDate());
 
                 // Setting the booking id list
-                List<Booking> bookings = flight.getBookings();
+                Set<Booking> bookings = flight.getBookings();
 
                 ArrayList<Integer> bookingIdList = new ArrayList<Integer>();
-                Iterator<Booking> iter2 = bookings.iterator();
-                logger.info("Retrieving booking list...");
-                while (iter2.hasNext()) {
-                    bookingIdList.add((Integer) iter2.next().getId());
+                
+                for(Booking b : bookings) {
+                	bookingIdList.add(b.getId());
                 }
 
                 flightData.setBookingIds(bookingIdList);
@@ -147,15 +145,9 @@ public class FlightService {
 
             Aircraft aircraft = null;
 
-            List<Booking> bookings = new ArrayList<Booking>();
-
             try {
                 logger.info("Retrieving all data required for the flight");
                 aircraft = pm.getObjectById(Aircraft.class, flightData.getAircraftId());
-                logger.info("Retrieving all bookings...");
-                for (int id : flightData.getBookingIds()) {
-                    bookings.add(pm.getObjectById(Booking.class, id));
-                }
             } catch (JDOObjectNotFoundException e) {
                 logger.info("At least one object of the Flight '{}' not found: {}", flightData.getIdFlight(), e);
                 notFound = true;
@@ -165,7 +157,7 @@ public class FlightService {
             flight.setDestination(flightData.getDestination());
             flight.setDate(flightData.getDate());
             flight.setAircraft(aircraft);
-            flight.setBookings(bookings);
+            flight.setBookings(new HashSet<Booking>());
 
             if (notFound) {
                 tx.commit();
@@ -203,7 +195,7 @@ public class FlightService {
             if (flight != null) {
                 Aircraft aircraft = null;
 
-                List<Booking> bookings = new ArrayList<Booking>();
+                Set<Booking> bookings = new HashSet<Booking>();
                 try {
                     logger.info("Retrieving all data required for the flight");
                     aircraft = pm.getObjectById(Aircraft.class, flightData.getAircraftId());

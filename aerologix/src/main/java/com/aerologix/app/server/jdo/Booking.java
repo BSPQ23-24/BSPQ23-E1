@@ -5,29 +5,26 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable(detachable="true")
+@PersistenceCapable
 public class Booking {
 
-    // Attributes
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
-    protected int id;
+    protected Integer id = null;
 
-    @Persistent(defaultFetchGroup="true")
-    protected Passenger passenger;
+    @Persistent(defaultFetchGroup = "true")
+    protected Passenger passenger = null;
 
-    @Persistent(defaultFetchGroup="true")
-    protected Flight flight;
+    protected Flight flight = null;
 
-    @Persistent(defaultFetchGroup="true")
-    protected User user;
+    @Persistent(defaultFetchGroup = "true")
+    protected User user = null;
 
-    @Persistent(defaultFetchGroup="true")
-    protected Airline airline;
+    @Persistent(defaultFetchGroup = "true")
+    protected Airline airline = null;
 
-    // Constructors
     public Booking() {
-        this.id = -1;
+        super();
         this.passenger = null;
         this.flight = null;
         this.user = null;
@@ -35,11 +32,12 @@ public class Booking {
     }
 
     public Booking(int id, Passenger passenger, Flight flight, User user, Airline airline) {
-        this.setId(id);
-        this.setPassenger(passenger);
-        this.setFlight(flight);
-        this.setUser(user);
-        this.setAirline(airline);
+        super();
+        this.id = id;
+        this.passenger = passenger;
+        this.flight = flight;
+        this.user = user;
+        this.airline = airline;
     }
 
     // Getters and setters

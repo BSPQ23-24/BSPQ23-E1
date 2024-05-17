@@ -1,8 +1,10 @@
 package com.aerologix.app.server.jdo;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -10,37 +12,41 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable
 public class Flight {
 
-	@PrimaryKey
+    @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.INCREMENT)
-	protected int idFlight;
-	protected String origin;
-	protected String destination;
-	protected long date;
+    protected Integer idFlight = null;
 
-	@Persistent(defaultFetchGroup="true")
-	protected Aircraft aircraft;
-	
-	@Persistent(mappedBy = "flight")
-	protected List<Booking> bookings;
-	
-	public Flight() {
-		super();
-		this.idFlight = -1;
-		this.origin = null;
-		this.destination = null;
-		this.date = -1;
-		this.aircraft = null;
-		this.bookings = null;
-	}
+    @Persistent
+    protected String origin = null;
 
-	public Flight(int idFlight, String origin, String destination, long date, Aircraft aircraft, List<Booking> bookings) {
+    @Persistent
+    protected String destination = null;
+
+    @Persistent
+    protected long date;
+
+    @Persistent(defaultFetchGroup = "true")
+    protected Aircraft aircraft = null;
+
+    @Persistent(mappedBy="flight", dependentElement="true")
+	@Join
+    protected Set<Booking> bookings = new HashSet<>();
+	
+    public Flight() {
+        super();
+        this.origin = null;
+        this.destination = null;
+        this.date = -1;
+        this.aircraft = null;
+    }
+
+	public Flight(int idFlight, String origin, String destination, long date, Aircraft aircraft, Set<Booking> bookings) {
 		super();
 		this.idFlight = idFlight;
 		this.origin = origin;
 		this.destination = destination;
 		this.date = date;
 		this.aircraft = aircraft;
-		this.bookings = bookings;
 	}
 
 
@@ -93,11 +99,11 @@ public class Flight {
 		this.aircraft = aircraft;
 	}
 
-	public List<Booking> getBookings() {
+	public Set<Booking> getBookings() {
 		return this.bookings;
 	}
 
-	public void setBookings(List<Booking> bookings) {
+	public void setBookings(Set<Booking> bookings) {
 		this.bookings = bookings;
 	}
 	

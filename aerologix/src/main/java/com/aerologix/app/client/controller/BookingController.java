@@ -38,10 +38,13 @@ public class BookingController {
         Invocation.Builder invocationBuilder = registerBookingWebTarget.request(MediaType.APPLICATION_JSON);
 
         BookingData bookingData = new BookingData();
+        bookingData.setId(-1);
         bookingData.setPassengerDNI(passengerDNI);
         bookingData.setFlightId(flightId);
         bookingData.setUserEmail(userEmail);
         bookingData.setAirlineId(airlineId);
+        
+        System.out.println(bookingData);
 
         logger.info("Sending POST request to server to create a new booking...");
         Response response = invocationBuilder.post(Entity.entity(bookingData, MediaType.APPLICATION_JSON));
