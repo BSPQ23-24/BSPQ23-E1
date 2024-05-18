@@ -4,11 +4,7 @@ package com.aerologix.app.client.gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
-import java.awt.Font;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,6 +87,7 @@ public class BookingDetailsWindow extends JFrame {
         bClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                deinit();
                 dispose();
             }
         });
@@ -101,5 +98,9 @@ public class BookingDetailsWindow extends JFrame {
             instance = new BookingDetailsWindow(bookingId);
         }
         return instance;
+    }
+
+    public static void deinit() {
+        instance = null;
     }
 }

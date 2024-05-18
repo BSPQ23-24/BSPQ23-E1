@@ -13,6 +13,9 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -128,6 +131,12 @@ public class FlightWindow extends JFrame {
 		
 		showBookings(flightId);
 		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				deinit();
+			}
+		});
 	}
 	
 	/**
@@ -158,11 +167,14 @@ public class FlightWindow extends JFrame {
 				BookingController.getInstance(AeroLogixClient.getInstance()).createBooking(pd.getDNI(), flightId, userEmail, panel.getAirlineId());
 				JOptionPane.showMessageDialog(null, "Booking registered succesfully", "Flight booked", JOptionPane.PLAIN_MESSAGE);
 				
-				// Empty the form panel inputs
-				panel.emptyInputs();
+				// Close the instance of the panel
+				BookingFormPanel.deinit();
 			} else {
+				BookingFormPanel.deinit();
 				JOptionPane.showMessageDialog(null, "No empty fields are allowed.", "Empty values", JOptionPane.ERROR_MESSAGE);
 			}
+		} else {
+			BookingFormPanel.deinit();
 		}
 	}
 	
@@ -249,4 +261,8 @@ public class FlightWindow extends JFrame {
         }
         return instance;
     }
+
+	public static void deinit() {
+		instance = null;
+	}
 }

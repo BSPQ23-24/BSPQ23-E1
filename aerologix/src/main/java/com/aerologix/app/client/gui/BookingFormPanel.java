@@ -9,8 +9,6 @@ import org.jdatepicker.*;
 
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.client.controller.AirlineController;
-import com.aerologix.app.server.jdo.Flight;
-import com.aerologix.app.server.jdo.Passenger;
 import com.aerologix.app.server.pojo.AirlineData;
 
 import java.awt.Font;
@@ -265,15 +263,10 @@ public class BookingFormPanel extends JPanel {
 	}
 	
 	/**
-	 * Method that cleans all previous input in all JTextFields.
+	 * Method that ends the current instance of the panel.
 	 */
-	public void emptyInputs() {
-		tDNI.setText("");
-		tPhone.setText("");
-		tEmail.setText("");
-		tName.setText("");
-		tNationality.setText("");
-		model.setSelected(false);
+	public static void deinit() {
+		instance = null;
 	}
 	
 	/**

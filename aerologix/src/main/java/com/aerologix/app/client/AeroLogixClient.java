@@ -108,7 +108,6 @@ public class AeroLogixClient {
         System.setProperty("aerologix.hostname", hostname);
         System.setProperty("aerologix.port", port);
 
-
         // Login Window
         LoginWindow lw = LoginWindow.getInstanceLogin();
         lw.setVisible(true);

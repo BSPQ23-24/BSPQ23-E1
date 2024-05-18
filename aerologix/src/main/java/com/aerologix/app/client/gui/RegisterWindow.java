@@ -77,7 +77,8 @@ public class RegisterWindow extends JFrame {
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				closeWindow();
+				deinit();
+				dispose();
 			}
 		});
 
@@ -164,9 +165,8 @@ public class RegisterWindow extends JFrame {
 		return RegisterWindow.instance;
 	}
 
-	public static void closeWindow() {
-		RegisterWindow.instance.dispose();
-		RegisterWindow.instance = null;
+	public static void deinit() {
+		instance = null;
 	}
 
 }

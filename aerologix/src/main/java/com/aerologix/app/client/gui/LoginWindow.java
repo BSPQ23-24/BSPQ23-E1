@@ -145,8 +145,9 @@ public class LoginWindow extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 				
 			@Override
-			public void windowClosing(WindowEvent e) {	
-				System.exit(0);
+			public void windowClosing(WindowEvent e) {
+				deinit();	
+				dispose();
 			}
 			
 		});
@@ -211,6 +212,10 @@ public class LoginWindow extends JFrame {
 			LoginWindow.instanceLogin = new LoginWindow();
 		}
 		return LoginWindow.instanceLogin;
+	}
+
+	public static void deinit() {
+		instanceLogin = null;
 	}
 	
 }
