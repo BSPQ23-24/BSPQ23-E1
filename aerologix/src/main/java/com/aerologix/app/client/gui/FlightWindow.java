@@ -199,7 +199,8 @@ public class FlightWindow extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// Open booking window
+					BookingDetailsWindow bw = BookingDetailsWindow.getInstance(booking.getId());
+					bw.setVisible(true);
 					
 				}
 				

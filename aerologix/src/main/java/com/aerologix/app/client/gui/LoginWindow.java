@@ -168,7 +168,7 @@ public class LoginWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				RegisterWindow rw = RegisterWindow.getInstance();
 				rw.setVisible(true);
-			}
+			} 
 		});
 		
 	}
