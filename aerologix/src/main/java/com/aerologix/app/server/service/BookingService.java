@@ -36,7 +36,7 @@ public class BookingService {
 
 	@GET
 	@Path("/booking/get")
-	public Response getBooking(@QueryParam("id") String id) {
+	public Response getBooking(@QueryParam("id") int id) {
 		try {
 			tx.begin();
 			logger.info("Checking if the booking '{}' already exists or not...", id);

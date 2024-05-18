@@ -16,6 +16,7 @@ import javax.jdo.*;
 import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
@@ -54,7 +55,7 @@ public class FlightServiceTest {
         Aircraft aircraftMock = mock(Aircraft.class);
         when(aircraftMock.getId()).thenReturn(123);
 
-        List<Booking> bookingsMock = new ArrayList<>();
+        Set<Booking> bookingsMock = new HashSet<>();
         bookingsMock.add(mock(Booking.class));
         bookingsMock.add(mock(Booking.class));
 
