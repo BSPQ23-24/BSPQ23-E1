@@ -57,7 +57,7 @@ public class FlightService {
      *     <li>If the flight exists, construct a FlightData object containing the flight details and associated booking IDs.</li>
      *     <li>Commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database).</li>
      *     <li>If the flight does not exist, return a 404 Not Found response.</li>
-     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>
      */
     @GET
@@ -117,7 +117,7 @@ public class FlightService {
      *     <li>For each flight, construct a FlightData object containing the flight details and associated booking IDs.</li>
      *     <li>Commit the transaction and return the list of FlightData objects.(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
      *     <li>If no flights are found, return a 204 No Content response.</li>
-     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>
      */
     @GET
@@ -184,7 +184,7 @@ public class FlightService {
      *     <li> We make the flight persistent in the database.</li>
      *     <li>commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
      *     <li>If something from the flight data does not exist, return a 401 UNAUTHORIZED.</li>
-     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>
      */
     @POST
@@ -244,7 +244,7 @@ public class FlightService {
      *     <li>If all the information can be found, we modify the data from the {@link Flight} using all the data.</li>
      *     <li>commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
      *     <li>If something from the flight data does not exist, return a 401 Unauthorized.</li>
-     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>
      */
     @POST
@@ -313,7 +313,7 @@ public class FlightService {
      *     <li>If the flight exists, we delete the flight from the database.</li>
      *     <li>Commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database).</li>
      *     <li>If the flight does not exist, return a 401 Unauthorized.</li>
-     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>
      */
     @POST
