@@ -14,29 +14,53 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
 import com.aerologix.app.server.pojo.*;
+import com.aerologix.app.client.gui.FlightWindow;
 import com.aerologix.app.server.AeroLogixServer;
 import com.aerologix.app.server.jdo.*;
 
+
+/**
+ * Service class for managing flight-related operations.
+ * <p>
+ * This class provides CRUD operations for flights.
+ */
 @Path("/aerologix")
 @Produces(MediaType.APPLICATION_JSON)
 public class FlightService {
-
+	/** Logger for logging messages. */
     protected static final Logger logger = LogManager.getLogger();
-
+    /** PersistenceManagerFactory for creating PersistenceManager instances. */
     private PersistenceManagerFactory pmf;
+    /** PersistenceManager for managing JDO operations. */
     private PersistenceManager pm;
+    /** Transaction for managing database transactions. */
     private Transaction tx;
-
+    
+    /**
+     * Default constructor initializing persistence manager and transaction.
+     */
     public FlightService() {
         this.pmf = AeroLogixServer.getInstance().getPersistenceManagerFactory();
         this.pm = pmf.getPersistenceManager();
         this.tx = pm.currentTransaction();
     }
 
-    /*
-     * CRUD: Flight
+    /**
+     * Retrieves flight details for a given flight ID.
+     *
+     * @param id The ID of the flight to retrieve.
+     * @return A Response containing the flight details or an error message.
+     * <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve the flight from the database using the provided ID.</li>
+     *     <li>If the flight exists, construct a FlightData object containing the flight details and associated booking IDs.</li>
+     *     <li>Commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database).</li>
+     *     <li>If the flight does not exist, return a 404 Not Found response.</li>
+     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
      */
-
     @GET
     @Path("/flight/get")
     public Response getFlight(@QueryParam("id") int id) {
@@ -83,7 +107,20 @@ public class FlightService {
 
         }
     }
-
+    /**
+     * Retrieves all flights.
+     *
+     * @return A Response containing a list of all flights or an error message.
+     * <p>
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Retrieve all flights from the database.</li>
+     *     <li>For each flight, construct a FlightData object containing the flight details and associated booking IDs.</li>
+     *     <li>Commit the transaction and return the list of FlightData objects.(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If no flights are found, return a 204 No Content response.</li>
+     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
     @GET
     @Path("/flight/getAll")
     public Response getAllFlights() {
@@ -133,7 +170,24 @@ public class FlightService {
             }
         }
     }
-
+    
+    /**
+     * Creates a new flight.
+     *
+     * @param flightData The data of the flight to create.
+     * @return A Response indicating the result of the creation operation.
+     *<p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve all the required information to create the flight using the provided {@link FlightData}.</li>
+     *     <li>If all the information can be found, we create a {@link Flight} using all the data.</li>
+     *     <li> We make the flight persistent in the database.</li>
+     *     <li>commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If something from the flight data does not exist, return a 401 UNAUTHORIZED.</li>
+     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
     @POST
     @Path("/flight/create")
     public Response createFlight(FlightData flightData) {
@@ -176,7 +230,24 @@ public class FlightService {
             }
         }
     }
-
+    
+    /**
+     * Modifies an existing flight.
+     *
+     * @param flightData The data of the flight to modify.
+     * @return A Response indicating the result of the modification operation.
+     *<p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve the flight from the database using the provided ID.</li>
+     *     <li>Attempt to retrieve all the required information to modify the flight using the provided {@link FlightData}.</li>
+     *     <li>If all the information can be found, we modify the data from the {@link Flight} using all the data.</li>
+     *     <li>commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If something from the flight data does not exist, return a 401 Unauthorized.</li>
+     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
     @POST
     @Path("/flight/modify")
     public Response modifyFlight(FlightData flightData) {
@@ -230,7 +301,22 @@ public class FlightService {
             }
         }
     }
-
+    /**
+     * Deletes an existing flight by ID.
+     *
+     * @param id The ID of the flight to delete.
+     * @return A Response indicating the result of the deletion operation.
+      <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve the flight from the database using the provided ID.</li>
+     *     <li>If the flight exists, we delete the flight from the database.</li>
+     *     <li>Commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database).</li>
+     *     <li>If the flight does not exist, return a 401 Unauthorized.</li>
+     *     <li>Rollback the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
     @POST
     @Path("/flight/delete")
     public Response deleteFlight(int id) {
@@ -263,16 +349,34 @@ public class FlightService {
         }
     }
 
-	
+    /**
+     * Sets the persistence manager factory.
+     * <p>
+     * This method is primarily used for testing purposes.
+     *
+     * @param pmf The {@link PersistenceManagerFactory} to set.
+     */
     void setPersistenceManagerFactory(PersistenceManagerFactory pmf) {
         this.pmf = pmf;
     }
 
-   
+    /**
+     * Sets the persistence manager.
+     * <p>
+     * This method is primarily used for testing purposes.
+     *
+     * @param pm The {@link PersistenceManager} to set.
+     */
     void setPersistenceManager(PersistenceManager pm) {
         this.pm = pm;
     }
-
+    /**
+     * Sets the transaction.
+     * <p>
+     * This method is primarily used for testing purposes.
+     *
+     * @param tx The {@link Transaction} to set.
+     */
 	void setTransaction(Transaction tx) {
 		this.tx = tx;
 	}
