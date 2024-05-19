@@ -14,7 +14,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
 import com.aerologix.app.server.pojo.*;
-import com.aerologix.app.client.gui.FlightWindow;
 import com.aerologix.app.server.AeroLogixServer;
 import com.aerologix.app.server.jdo.*;
 
@@ -331,6 +330,11 @@ public class FlightService {
             }
 
             if (flight != null) {
+                // First delete all bookings in a flight
+                for(Booking b : flight.getBookings()) {
+                    logger.info("Booking deleted '{}'", b.getId());
+                    pm.deletePersistent(b);
+                }
                 // Delete flight
                 pm.deletePersistent(flight);
                 logger.info("Flight deleted '{}'", id);
