@@ -45,3 +45,9 @@ AeroLogix is a Maven-based Java project that creates a management system for air
     ```
     mvn verify -Pperformance-tests
     ```
+
+3. **Run integration tests**
+
+    ```
+    mvn verify -Pintegration-tests
+    ```

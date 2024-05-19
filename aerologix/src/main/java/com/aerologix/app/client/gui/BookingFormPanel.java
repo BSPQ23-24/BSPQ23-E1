@@ -212,7 +212,7 @@ public class BookingFormPanel extends JPanel {
 	
 	/**
 	 * Method that returns the value in the JTextField of the DNI.
-	 * @return {@link java.lang.String String} with the DNI of the passenger.
+	 * @return String with the DNI of the passenger.
 	 */
 	public String getDNI() {
 		return tDNI.getText();
@@ -220,7 +220,7 @@ public class BookingFormPanel extends JPanel {
 	
 	/**
 	 * Method that returns the value in the JTextField of the phone number.
-	 * @return {@link java.lang.String String} with the phone number of the passenger.
+	 * @return String with the phone number of the passenger.
 	 */
 	public String getPhone() {
 		return tPhone.getText();
@@ -228,7 +228,7 @@ public class BookingFormPanel extends JPanel {
 	
 	/**
 	 * Method that returns the value in the JTextField of the email.
-	 * @return {@link java.lang.String String} with the email address of the passenger.
+	 * @return String with the email address of the passenger.
 	 */
 	public String getEmail() {
 		return tEmail.getText();
@@ -236,7 +236,7 @@ public class BookingFormPanel extends JPanel {
 	
 	/**
 	 * Method that returns the value in the JTextField of the full name.
-	 * @return {@link java.lang.String String} with the full name of the passenger.
+	 * @return String with the full name of the passenger.
 	 */
 	public String getName() {
 		return tName.getText();
@@ -244,7 +244,7 @@ public class BookingFormPanel extends JPanel {
 	
 	/**
 	 * Method that returns the value in the JTextField of the nationality.
-	 * @return {@link java.lang.String String} with the nationality of the passenger.
+	 * @return String with the nationality of the passenger.
 	 */
 	public String getNationality() {
 		return tNationality.getText();

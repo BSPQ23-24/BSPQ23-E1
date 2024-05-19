@@ -77,7 +77,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pDNI);
 		pDNI.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lDNI = new JLabel("Type in passenger DNI");
+		JLabel lDNI = new JLabel("Passenger DNI");
 		lDNI.setFont(new Font("Arial", Font.PLAIN, 13));
 		pDNI.add(lDNI);
 		
@@ -86,6 +86,7 @@ public class BookingModifyPanel extends JPanel {
 		pDNI.add(tDNI);
 		tDNI.setColumns(10);
 		tDNI.setEditable(false);
+		tDNI.setEnabled(false);
 		
 		JPanel pPhone = new JPanel();
 		pForm.add(pPhone);

@@ -116,8 +116,6 @@ public class BookingService {
 	public Response createBooking(BookingData bookingData) {
 		try {
 			tx.begin();
-
-			System.out.println("\n\n" + bookingData + "\n\n");
 			
 			boolean notFound = false;
 

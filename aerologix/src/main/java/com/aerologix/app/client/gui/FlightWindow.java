@@ -96,7 +96,7 @@ public class FlightWindow extends JFrame {
 		
 		scrollPane = new JScrollPane(pBookings);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(153, 67, 494, 331);
+		scrollPane.setBounds(140, 67, 560, 331);
 		getContentPane().add(scrollPane);
 		
 		JButton bRefresh = new JButton("Refresh list");
@@ -206,7 +206,7 @@ public class FlightWindow extends JFrame {
 			JButton bModifyBooking = new JButton("Modify booking");
 			JButton bDeleteBooking = new JButton("Cancel booking");
 			bViewBooking.setForeground(Color.BLUE);
-			bModifyBooking.setForeground(Color.ORANGE);
+			bModifyBooking.setForeground(new Color(240, 118, 5));
 			bDeleteBooking.setForeground(Color.RED);
 			
 			// Button actions
@@ -216,7 +216,6 @@ public class FlightWindow extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					BookingDetailsWindow bw = BookingDetailsWindow.getInstance(booking.getId());
 					bw.setVisible(true);
-					
 				}
 				
 			});
@@ -226,7 +225,6 @@ public class FlightWindow extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					modifyBooking(booking.getId(), flightId, userEmail);
-					
 				}
 				
 			});
@@ -265,7 +263,7 @@ public class FlightWindow extends JFrame {
 	public static void modifyBooking(int bookingId, int flightId, String userEmail ) {
 		// Create a panel of the data form
 		BookingModifyPanel panel = BookingModifyPanel.getInstance(bookingId);
-		panel.setPreferredSize(new Dimension(340, 500));
+		panel.setPreferredSize(new Dimension(340, 510));
 		Object[] texts = {"Accept","Cancel"};
 		int option = JOptionPane.showOptionDialog(null, panel, "Modifying booking " + bookingId, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, texts, texts[0]);
 		if (option == JOptionPane.OK_OPTION) { //This is accept button

@@ -304,7 +304,7 @@
 						<version>2.22.0</version>
 						<configuration>
 							<includes>
-								<include>**/*IntegrationTest.java</include>
+								<include>**/*IntegrationTests.java</include>
 							</includes>
 							<groups>IntegrationTest</groups>
 						</configuration>

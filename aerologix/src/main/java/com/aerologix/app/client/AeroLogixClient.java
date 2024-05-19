@@ -37,6 +37,10 @@ public class AeroLogixClient {
         return instance;
     }
 
+    public void setWebTarget(String hostname, String port) {
+        this.webTarget = client.target(String.format("http://%s:%s/rest/aerologix", hostname, port));
+    }
+
     public WebTarget getWebTarget() {
         return this.webTarget;
     }
