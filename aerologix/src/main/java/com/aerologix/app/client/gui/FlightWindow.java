@@ -124,12 +124,12 @@ public class FlightWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pBookings.removeAll(); // Remove all containers
 				pBookings.setLayout(new GridLayout(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getBookingIds().size(), 1));
-				showBookings(flightId);	// Add them again
+				showBookings(flightId, userEmail);	// Add them again
 			}
 			
 		});
 		
-		showBookings(flightId);
+		showBookings(flightId, userEmail);
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -187,7 +187,7 @@ public class FlightWindow extends JFrame {
 	 * 
 	 * @param flightId	Identification integer of the flight.
 	 */
-	public static void showBookings(int flightId) {
+	public static void showBookings(int flightId, String userEmail) {
 		// Get all booking data
 		ArrayList<BookingData> bookingData = new ArrayList<BookingData>();
 		for(int bookingId: FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getBookingIds()) {
@@ -197,13 +197,16 @@ public class FlightWindow extends JFrame {
 		
 		// For each booking create a panel
 		for(BookingData booking : bookingData) {
-			JPanel lPanelBooking = new JPanel(new GridLayout(2, 2));
+			JPanel lPanelBooking = new JPanel(new GridLayout(2, 3));
 			lPanelBooking.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
 			JLabel lBookingId = new JLabel("Booking: " + Integer.toString(booking.getId()));
 			JLabel lPassenger = new JLabel("Passenger DNI: " + booking.getPassengerDNI());
+			JPanel pEmpty = new JPanel();
 			JButton bViewBooking = new JButton("View booking details");
+			JButton bModifyBooking = new JButton("Modify booking");
 			JButton bDeleteBooking = new JButton("Cancel booking");
 			bViewBooking.setForeground(Color.BLUE);
+			bModifyBooking.setForeground(Color.ORANGE);
 			bDeleteBooking.setForeground(Color.RED);
 			
 			// Button actions
@@ -213,6 +216,16 @@ public class FlightWindow extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					BookingDetailsWindow bw = BookingDetailsWindow.getInstance(booking.getId());
 					bw.setVisible(true);
+					
+				}
+				
+			});
+			
+			bModifyBooking.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					modifyBooking(booking.getId(), flightId, userEmail);
 					
 				}
 				
@@ -234,9 +247,10 @@ public class FlightWindow extends JFrame {
 			});
 			
 			lPanelBooking.add(lBookingId);
-			lPanelBooking.add(lBookingId);
 			lPanelBooking.add(lPassenger);
+			lPanelBooking.add(pEmpty);
 			lPanelBooking.add(bViewBooking);
+			lPanelBooking.add(bModifyBooking);
 			lPanelBooking.add(bDeleteBooking);
 			
 			// Add it to the JScrollPane
@@ -247,6 +261,44 @@ public class FlightWindow extends JFrame {
 			scrollPane.revalidate();
 		}
 	}
+	
+	public static void modifyBooking(int bookingId, int flightId, String userEmail ) {
+		// Create a panel of the data form
+		BookingModifyPanel panel = BookingModifyPanel.getInstance(bookingId);
+		panel.setPreferredSize(new Dimension(340, 500));
+		Object[] texts = {"Accept","Cancel"};
+		int option = JOptionPane.showOptionDialog(null, panel, "Modifying booking " + bookingId, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, texts, texts[0]);
+		if (option == JOptionPane.OK_OPTION) { //This is accept button
+			if (panel.hasBeenModifyied(bookingId)) {
+				int option2 = JOptionPane.showConfirmDialog(null, "Booking will be modified. Are you sure?", "Modify booking " + bookingId, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if(option2 == JOptionPane.YES_OPTION && (!panel.getDNI().isBlank() && !panel.getPhone().isBlank() && !panel.getEmail().isBlank() && !panel.getName().isBlank() && !panel.getNationality().isBlank() && panel.getBirthdate() != -1)) {
+					PassengerData pd = new PassengerData();
+					pd.setDNI(panel.getDNI());
+					pd.setPhone(Integer.parseInt(panel.getPhone()));
+					pd.setEmail(panel.getEmail());
+					pd.setName(panel.getName());
+					pd.setNationality(panel.getNationality());
+					pd.setBirthdate(panel.getBirthdate());
+					PassengerController.getInstance(AeroLogixClient.getInstance()).modifyPassenger(pd);
+					BookingController.getInstance(AeroLogixClient.getInstance()).modifyBooking(bookingId, pd.getDNI(), flightId, userEmail, panel.getAirlineId());
+					JOptionPane.showMessageDialog(null, "Booking modified succesfully", "Booking modified", JOptionPane.PLAIN_MESSAGE);
+					
+					// Close the instance of the panel
+					BookingModifyPanel.deinit();
+					
+					} else {
+						BookingModifyPanel.deinit();
+						JOptionPane.showMessageDialog(null, "No empty fields are allowed.", "Empty values", JOptionPane.ERROR_MESSAGE);
+					}
+			} else {
+				JOptionPane.showMessageDialog(null, "Booking data is the same. Booking not be modified.", "Booking not modified", JOptionPane.INFORMATION_MESSAGE);
+			}
+		} else {
+			BookingModifyPanel.deinit();
+		}
+	}
+	
+	
 	
 	/**
 	 * Method that returns the singleton instance of {@link FlightWindow}.
@@ -259,8 +311,8 @@ public class FlightWindow extends JFrame {
         if (instance == null) {
             instance = new FlightWindow(flightId, userEmail);
         }
-        return instance;
-    }
+		return instance;
+	}
 
 	public static void deinit() {
 		instance = null;
