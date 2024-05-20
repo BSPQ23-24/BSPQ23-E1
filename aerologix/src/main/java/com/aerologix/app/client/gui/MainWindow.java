@@ -5,10 +5,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -59,15 +63,23 @@ public class MainWindow extends JFrame {
     private JSpinner dateFilter;
     private JLabel dateLabel;
     private JButton bookFlightButton; // Nuevo botón
+    protected JPanel pLanguage = new JPanel(new FlowLayout());
+    protected JComboBox<Locale> languageSelector;
 
     private JTable flightTable;
     private DefaultTableModel flightTableModel;
     private ArrayList<FlightData> flights;
     private JScrollPane scrollPane;
+    
+    private ResourceBundle messages;
 
-    private MainWindow(UserData user) {
+    private MainWindow(UserData user, Locale locale) {
         this.user = user;
-
+        initResourceBundle(Locale.getDefault());
+        languageSelector = new JComboBox<>(new Locale[]{new Locale("es", "ES"),Locale.US});
+        
+        
+        messages = ResourceBundle.getBundle("Multilingual.messages", locale);
         panel = new JPanel();
         logoPanel = new JPanel();
         logo = new JLabel();
@@ -87,19 +99,19 @@ public class MainWindow extends JFrame {
         dateFP = new JPanel();
         dateFilter = new JSpinner();
         dateLabel = new JLabel();
-        bookFlightButton = new JButton("Book flight"); // Nuevo botón con texto "Book flight"
+        bookFlightButton = new JButton(messages.getString("book_flight")); // Nuevo botón con texto "Book flight"
 
         getContentPane().setLayout(new BorderLayout());
         this.setSize(new Dimension(1000, 500));
         this.setVisible(true);
 
-        this.setTitle("AeroLogix - Menu");
+        this.setTitle(messages.getString("title"));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         panel.setLayout(new BorderLayout());
         getContentPane().add(panel, BorderLayout.CENTER);
 
-        logo.setText("Aerologix");
+        logo.setText(messages.getString("logo"));
         logo.setFont(new Font("Arial", Font.BOLD, 20));
         logoPanel.setBorder(BorderFactory.createEmptyBorder(16, 10, 16, 0));
         logoPanel.add(logo);
@@ -110,7 +122,7 @@ public class MainWindow extends JFrame {
 
         flightFP.setLayout(new BoxLayout(flightFP, BoxLayout.Y_AXIS));
         flightFilter.setPreferredSize(new Dimension(200, 20));
-        flightLabel.setText("Flight name");
+        flightLabel.setText(messages.getString("flight_name"));
         flightLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         flightFilter.setAlignmentX(Component.LEFT_ALIGNMENT);
         flightFP.add(flightLabel);
@@ -122,7 +134,7 @@ public class MainWindow extends JFrame {
 
         airlinesFP.setLayout(new BoxLayout(airlinesFP, BoxLayout.Y_AXIS));
         airlinesFilter.setPreferredSize(new Dimension(100, 20));
-        airlinesLabel.setText("Airline");
+        airlinesLabel.setText(messages.getString("airline"));
         airlinesLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         airlinesFilter.setAlignmentX(Component.LEFT_ALIGNMENT);
         airlinesFP.add(airlinesLabel);
@@ -134,7 +146,7 @@ public class MainWindow extends JFrame {
 
         originFP.setLayout(new BoxLayout(originFP, BoxLayout.Y_AXIS));
         originFilter.setPreferredSize(new Dimension(100, 20));
-        originLabel.setText("Origin");
+        originLabel.setText(messages.getString("origin"));
         originLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         originFilter.setAlignmentX(Component.LEFT_ALIGNMENT);
         originFP.add(originLabel);
@@ -146,7 +158,7 @@ public class MainWindow extends JFrame {
 
         destinationFP.setLayout(new BoxLayout(destinationFP, BoxLayout.Y_AXIS));
         destinationFilter.setPreferredSize(new Dimension(100, 20));
-        destinationLabel.setText("Destination");
+        destinationLabel.setText(messages.getString("destination"));
         destinationLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         destinationFilter.setAlignmentX(Component.LEFT_ALIGNMENT);
         destinationFP.add(destinationLabel);
@@ -171,7 +183,7 @@ public class MainWindow extends JFrame {
         formatter.setOverwriteMode(true); // Permite sobrescribir el texto seleccionado
         dateFilter.setEditor(editor);
         dateFilter.setPreferredSize(new Dimension(150, 20)); // Ajustado el tamaño
-        dateLabel.setText("Date");
+        dateLabel.setText(messages.getString("date"));
         dateLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         dateFilter.setAlignmentX(Component.LEFT_ALIGNMENT);
         dateFP.add(dateLabel);
@@ -191,13 +203,51 @@ public class MainWindow extends JFrame {
 
         scrollPane = new JScrollPane(flightTable);
         panel.add(scrollPane, BorderLayout.CENTER);
+        pLanguage.add(new JLabel("Language:"));
+        pLanguage.add(languageSelector);
+        panel.add(pLanguage,BorderLayout.SOUTH);
         panel.revalidate();
         panel.repaint();
+        
+        languageSelector.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeLanguage((Locale) languageSelector.getSelectedItem());
+            }
+        });
     }
 
-    private void loadFlights() {
-        String[] columnNames = { "ID", "Origin", "Destination", "Date", "Aircraft ID", "Bookings" };
+    private void initResourceBundle(Locale locale) {
+        try {
+            messages = ResourceBundle.getBundle("Multilingual.messages", locale);
+        } catch (Exception e) {
+            System.err.println("Failed to load resource bundle: " + e.getMessage());
+        }
+    }
+    private void changeLanguage(Locale locale) {
+        Locale.setDefault(locale);
+        initResourceBundle(locale);
+        loadFlights();
+        updateComponents();
+    }
 
+    private void updateComponents() {
+    	flightLabel.setText(messages.getString("flight_name"));
+        airlinesLabel.setText(messages.getString("airline"));
+        originLabel.setText(messages.getString("origin"));
+        destinationLabel.setText(messages.getString("destination"));
+        dateLabel.setText(messages.getString("date"));
+        bookFlightButton.setText(messages.getString("book_flight"));
+
+        this.setTitle(messages.getString("title"));
+        
+    }
+    
+ 
+    private void loadFlights() {
+    	String[] columnNames = new String[]{ "ID", messages.getString("origin"), messages.getString("destination"),
+                messages.getString("date"), "Aircraft ID", messages.getString("bookings") };
+    	
         flightTableModel = new DefaultTableModel(columnNames, 0) {
 			private static final long serialVersionUID = 1L;
 
@@ -232,10 +282,10 @@ public class MainWindow extends JFrame {
         }
     }
 
-
-    public static MainWindow getInstance(UserData user) {
+    
+    public static MainWindow getInstance(UserData user, Locale locale) {
         if (instance == null) {
-            instance = new MainWindow(user);
+            instance = new MainWindow(user, locale);
         }
         return instance;
     }

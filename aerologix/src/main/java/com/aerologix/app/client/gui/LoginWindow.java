@@ -26,7 +26,6 @@ public class LoginWindow extends JFrame {
     protected JPanel pSignup = new JPanel(new FlowLayout());
     protected JPanel pLogo = new JPanel(new FlowLayout());
     protected JPanel pLanguage = new JPanel(new FlowLayout());
-    private JList<String> stat1Info;
 
     // Components login
     private ResourceBundle messages;
@@ -133,7 +132,7 @@ public class LoginWindow extends JFrame {
 								user.setName("");
 								user.setPassword(lPass.getText());
 								user.setUserType(UserType.COUNTER_CLERK.toString());
-								MainWindow mw = MainWindow.getInstance(user);
+								MainWindow mw = MainWindow.getInstance(user,new Locale("es", "ES"));
 							}
 						};
 						hilo.start();
