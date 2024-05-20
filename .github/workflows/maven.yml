@@ -39,7 +39,8 @@ jobs:
       run: mvn verify -Pperformance-tests
     - name: Run the server
       run: mvn jetty:run
-    - name: mvn verify -Pintegration-tests
+    - name: Run integration tests
+      run: mvn verify -Pintegration-tests
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
