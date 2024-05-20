@@ -12,16 +12,36 @@ import jakarta.ws.rs.core.Response.Status;
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.*;
 
+/**
+ * Controller class for managing airline-related operations.
+ * <p>
+ * This class provides methods to interact with the airline service.
+ */
 public class AirlineController {
 
+    /** Logger for logging messages. */
     protected static final Logger logger = LogManager.getLogger();
+    /** Singleton instance of AirlineController. */
     private static AirlineController instance;
+    /** Client for connecting to the server. */
     private AeroLogixClient client;
 
+
+    /**
+     * Private constructor to initialize the client.
+     *
+     * @param client The client to be used for server communication.
+     */
     private AirlineController(AeroLogixClient client) {
     	this.client = client;
     }
 
+    /**
+     * Returns the singleton instance of AirlineController.
+     *
+     * @param client The client to be used for server communication.
+     * @return The singleton instance of AirlineController.
+     */
     public static synchronized AirlineController getInstance(AeroLogixClient client) {
 		if (instance == null) {
 			instance = new AirlineController(client);
@@ -29,6 +49,19 @@ public class AirlineController {
 		return instance;
 	}
 
+    /**
+     * Creates a new airline.
+     *
+     * @param name The name of the airline to be created.
+     * @return 0 if the airline was created successfully, -1 otherwise.
+     * <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Create a {@link AirlineData} object with the provided details.</li>
+     *     <li>Send a POST request to the server to create the airline.</li>
+     *     <li>Log the result of the operation.</li>
+     * </ul>
+     */
     public int createAirline(String name) {
         WebTarget registerAirlineWebTarget = client.getWebTarget().path("/airline/create");
         Invocation.Builder invocationBuilder = registerAirlineWebTarget.request(MediaType.APPLICATION_JSON);
@@ -47,6 +80,18 @@ public class AirlineController {
         }
     }
     
+    /**
+     * Deletes an existing airline by ID.
+     *
+     * @param airlineId The ID of the airline to delete.
+     * @return 0 if the airline is deleted successfully, -1 otherwise.
+     * <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Send a POST request to the server to delete the airline.</li>
+     *     <li>Log the result of the operation.</li>
+     * </ul>
+     */
     public int deleteAirline(int airlineId) {
         WebTarget deleteAirlineWebTarget = client.getWebTarget().path("/airline/delete");
         Invocation.Builder invocationBuilder = deleteAirlineWebTarget.request(MediaType.APPLICATION_JSON);
@@ -62,6 +107,20 @@ public class AirlineController {
         }
     }
     
+    /**
+     * Modifies an existing airline.
+     *
+     * @param id The ID of the airline to modify.
+     * @param name The new name of the airline.
+     * @return 0 if the airline is modified successfully, -1 otherwise.
+     * <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Create a {@link AirlineData} object with the provided details.</li>
+     *     <li>Send a POST request to the server to modify the airline.</li>
+     *     <li>Log the result of the operation.</li>
+     * </ul>
+     */
     public int modifyAirline(int id, String name) {
         WebTarget modifyAirlineWebTarget = client.getWebTarget().path("/airline/modify");
         Invocation.Builder invocationBuilder = modifyAirlineWebTarget.request(MediaType.APPLICATION_JSON);
@@ -81,6 +140,18 @@ public class AirlineController {
         }
     }
     
+    /**
+     * Retrieves an airline by ID.
+     *
+     * @param id The ID of the airline to retrieve.
+     * @return A {@link AirlineData} object containing the airline details, or null if the airline is not found.
+     * <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Send a GET request to the server to retrieve the airline.</li>
+     *     <li>Log the result of the operation.</li>
+     * </ul>
+     */
     public AirlineData getAirline(int id) {
         WebTarget getAirlineWebTarget = client.getWebTarget().path("/airline/get").queryParam("id", id);
         Invocation.Builder invocationBuilder = getAirlineWebTarget.request(MediaType.APPLICATION_JSON);
@@ -97,6 +168,17 @@ public class AirlineController {
         }
     }
     
+    /**
+     * Retrieves all airlines.
+     *
+     * @return A list of {@link AirlineData} objects containing the details of all airlines, or an empty list if no airlines are found.
+     * <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Send a GET request to the server to retrieve all airlines.</li>
+     *     <li>Log the result of the operation.</li>
+     * </ul>
+     */
     public ArrayList<AirlineData> getAllAirlines(){
     	WebTarget getAllAirlinesWebTarget = client.getWebTarget().path("/airline/getAll");
         Invocation.Builder invocationBuilder = getAllAirlinesWebTarget.request(MediaType.APPLICATION_JSON);
