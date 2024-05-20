@@ -31,10 +31,10 @@ import java.awt.Color;
 import javax.swing.JComboBox;
 
 /**
-* Class of the panel for the form to register a new booking.
+* Class of the panel for the form to modify an existent booking.
 * <p>
 * It is a JPanel that contains multiple JTextFields
-* to manually type in the {@link com.aerologix.app.server.jdo.Passenger Passenger}
+* to manually modify the {@link com.aerologix.app.server.jdo.Passenger Passenger}
 * information and a JDatePicker
 * for the passenger birth date. Additionally, it contains a 
 * JComboBox to select the airline for the booking.
@@ -55,7 +55,7 @@ public class BookingModifyPanel extends JPanel {
 	/**
 	 * This is the private constructor of the panel.
 	 * 
-	 * @param flightId	Identification integer of a {@link com.aerologix.app.server.jdo.Flight Flight} for which the booking is being created.
+	 * @param bookingId	Identification integer of a {@link com.aerologix.app.server.jdo.Booking Booking} for which the booking is being created.
 	 */
 	private BookingModifyPanel(int bookingId) {
 		setLayout(null);
@@ -224,10 +224,10 @@ public class BookingModifyPanel extends JPanel {
 	}
 
 	/**
-	 * Method that returns the singleton instance of BookingFormPanel.
+	 * Method that returns the singleton instance of BookingModifyPanel.
 	 * 
-	 * @param flightId	Identification integer of a flight.
-	 * @return	Instance of {@link BookingFormPanel}.
+	 * @param bookingId	Identification integer of a booking.
+	 * @return	Instance of {@link BookingModifyPanel}.
 	 */
 	public static BookingModifyPanel getInstance(int bookingId) {
      if (instance == null) {
@@ -288,6 +288,10 @@ public class BookingModifyPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Method that resets the data stored before changing the JTextFields.
+	 * @param bookingId	Identification integer of a booking.
+	 */
 	public void defaultData(int bookingId) {
 		String passengerDNI = BookingController.getInstance(AeroLogixClient.getInstance()).getBooking(bookingId).getPassengerDNI();
 		PassengerData pd = PassengerController.getInstance(AeroLogixClient.getInstance()).getPassenger(passengerDNI);
@@ -302,6 +306,11 @@ public class BookingModifyPanel extends JPanel {
 		cbAirline.setSelectedIndex(airlineId-1);
 	}
 	
+	/**
+	 * Method that detects if the data has been modified in the JTextFields.
+	 * @param bookingId	Identification integer of a booking.
+	 * @return	Boolean that is true if data has been modified.
+	 */
 	public boolean hasBeenModifyied(int bookingId) {
 		String passengerDNI = BookingController.getInstance(AeroLogixClient.getInstance()).getBooking(bookingId).getPassengerDNI();
 		int airlineId = BookingController.getInstance(AeroLogixClient.getInstance()).getBooking(bookingId).getAirlineId();
