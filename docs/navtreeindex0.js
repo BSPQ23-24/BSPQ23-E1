@@ -1,8 +1,5 @@
 var NAVTREEINDEX0 =
 {
-"":[0,0,0],
-"":[0,0,0,0],
-"":[0,0,0,0,0],
 "AeroLogixClient_8java.html":[2,0,0,0,0,0,0,0,0,2],
 "AeroLogixClient_8java_source.html":[2,0,0,0,0,0,0,0,0,2],
 "AeroLogixServer_8java.html":[2,0,0,0,0,0,0,0,1,3],
@@ -249,5 +246,8 @@ var NAVTREEINDEX0 =
 "classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#af3a5fcfe3f5e3fc30ef129f81d6bc312":[1,0,0,0,0,1,0,3,10],
 "classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#af3e278566709dc26decfe7c7d8443c84":[1,0,0,0,0,1,0,3,8],
 "classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#af523a4f4ed28d32bb7dc1e3577fa90af":[1,0,0,0,0,1,0,3,12],
-"classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#afc87402eccb5fc61d5e388d954b9c0b4":[1,0,0,0,0,1,0,3,5]
+"classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#afc87402eccb5fc61d5e388d954b9c0b4":[1,0,0,0,0,1,0,3,5],
+"classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Passenger.html":[1,0,0,0,0,1,0,4],
+"classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Passenger.html#a06e885048fcb6f1ae253b5928504999c":[1,0,0,0,0,1,0,4,18],
+"classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Passenger.html#a0aaf033672b80273d991c422ec7bb5c1":[1,0,0,0,0,1,0,4,6]
 };
