@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,12 +31,13 @@ public class RegisterWindow extends JFrame {
 
     // Panels
     protected JPanel pPrincipal = new JPanel(new GridLayout(2, 1));
-    protected JPanel pSignup = new JPanel(new GridLayout(5, 1));
+    protected JPanel pSignup = new JPanel(new GridLayout(6, 1));
     protected JPanel pUser = new JPanel(new FlowLayout());
     protected JPanel psb = new JPanel(new FlowLayout());
     protected JPanel pPass = new JPanel(new FlowLayout());
     protected JPanel psPass = new JPanel(new FlowLayout());
     protected JPanel pNombre = new JPanel(new FlowLayout());
+    protected JPanel pLanguage = new JPanel(new FlowLayout());
 
     // Components signup
     protected JLabel lsMail;
@@ -48,6 +50,7 @@ public class RegisterWindow extends JFrame {
     protected JTextField tsNombre = new JTextField(15);
     protected JButton bSignup;
     protected JLabel lsError = new JLabel("");
+    private JComboBox<Locale> languageSelector;
 
     private ResourceBundle messages;
 
@@ -62,8 +65,10 @@ public class RegisterWindow extends JFrame {
         lsNombre = new JLabel(messages.getString("name"));
         bSignup = new JButton(messages.getString("register"));
 
+        languageSelector = new JComboBox<>(new Locale[]{new Locale("es", "ES"), Locale.US});
+        languageSelector.setPreferredSize(new Dimension(100, 25));
         this.setTitle(messages.getString("register") + " - AeroLogix");
-        this.setSize(450, 300);
+        this.setSize(450, 320);
         centerWindow();
         this.setLayout(new FlowLayout());
 
@@ -84,7 +89,10 @@ public class RegisterWindow extends JFrame {
         psb.add(bSignup);
         psb.add(lsError);
         pSignup.add(psb);
+        pLanguage.add(new JLabel("Language:"));
+        pLanguage.add(languageSelector);
         pPrincipal.add(pSignup);
+        pPrincipal.add(pLanguage);
         this.add(pPrincipal);
 
         this.setVisible(true);
@@ -94,6 +102,13 @@ public class RegisterWindow extends JFrame {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 deinit();
                 dispose();
+            }
+        });
+        
+        languageSelector.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeLanguage((Locale) languageSelector.getSelectedItem());
             }
         });
 		// Signup

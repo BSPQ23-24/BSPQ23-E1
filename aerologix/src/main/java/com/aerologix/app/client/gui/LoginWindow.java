@@ -62,7 +62,7 @@ public class LoginWindow extends JFrame {
 
 
         this.setTitle("Login - AeroLogix");
-        this.setSize(450, 280);
+        this.setSize(450, 300);
         centerWindow();
         this.setLayout(new FlowLayout());
 
