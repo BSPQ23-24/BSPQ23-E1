@@ -3,6 +3,8 @@ package com.aerologix.app.client.gui;
 import javax.swing.*;
 
 import com.aerologix.app.client.controller.UserController;
+import com.aerologix.app.server.jdo.User.UserType;
+import com.aerologix.app.server.pojo.UserData;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -126,6 +128,12 @@ public class LoginWindow extends JFrame {
 								lError.setText("");
 								LoginWindow.instanceLogin = null;
 								dispose();
+								UserData user = new UserData();
+								user.setEmail(lMail.getText());
+								user.setName("");
+								user.setPassword(lPass.getText());
+								user.setUserType(UserType.COUNTER_CLERK.toString());
+								MainWindow mw = MainWindow.getInstance(user);
 							}
 						};
 						hilo.start();
