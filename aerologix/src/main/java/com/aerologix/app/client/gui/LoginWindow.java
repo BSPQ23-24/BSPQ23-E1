@@ -1,6 +1,9 @@
 package com.aerologix.app.client.gui;
 
 import javax.swing.*;
+
+import com.aerologix.app.client.controller.UserController;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,7 +56,7 @@ public class LoginWindow extends JFrame {
         bLogin = new JButton(messages.getString("login"));
         lSignup = new JLabel(messages.getString("register"));
         bSignup = new JButton(messages.getString("create"));
-        languageSelector = new JComboBox<>(new Locale[]{Locale.US, new Locale("es", "ES")});
+        languageSelector = new JComboBox<>(new Locale[]{new Locale("es", "ES"),Locale.US});
 
 
         this.setTitle("Login - AeroLogix");
@@ -106,20 +109,51 @@ public class LoginWindow extends JFrame {
         this.setVisible(true);
         pLogin.getRootPane().setDefaultButton(bLogin);
 
-        // Login
-        bLogin.addActionListener(new ActionListener() {
-            @SuppressWarnings("deprecation")
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    // Dummy implementation for login action
-                    // Replace this with actual login logic
-                    System.out.println("Logging in...");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
+        //    	Login
+		bLogin.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if(UserController.getInstance().login(tMail.getText(), tPass.getText())) {
+						Thread hilo = new Thread() {
+								
+							@Override
+							public void run() {
+								lError.setText("Logging in...");
+								waitTime(1000);
+								lError.setText("");
+								LoginWindow.instanceLogin = null;
+								dispose();
+							}
+						};
+						hilo.start();
+					} else {
+						Thread hilo = new Thread() {
+							@Override
+							public void run() {
+								lError.setText("Invalid login credentials");
+								waitTime(4000);
+								lError.setText("");
+							}
+						};
+						hilo.start();
+					}
+				} catch(NullPointerException e1) {
+					Thread hilo = new Thread() {
+						@Override
+						public void run() {
+							lError.setText("Invalid login credentials");
+							waitTime(4000);
+							lError.setText("");
+						}
+					};
+					hilo.start();
+				}
+			}
+			
+		});	
 
         // Close window
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -142,8 +176,8 @@ public class LoginWindow extends JFrame {
         bSignup.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Dummy implementation for opening register window
-                // Replace this with actual code to open register window
+            	RegisterWindow rw = RegisterWindow.getInstance();
+				rw.setVisible(true);
                 System.out.println("Opening register window...");
             }
         });
