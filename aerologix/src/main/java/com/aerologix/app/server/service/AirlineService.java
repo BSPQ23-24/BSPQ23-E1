@@ -15,24 +15,49 @@ import com.aerologix.app.server.pojo.*;
 import com.aerologix.app.server.AeroLogixServer;
 import com.aerologix.app.server.jdo.*;
 
+/**
+ * Service class for managing airline-related operations.
+ * <p>
+ * This class provides CRUD operations for airline.
+ */
 @Path("/aerologix")
 @Produces(MediaType.APPLICATION_JSON)
 public class AirlineService {
 
-	protected static final Logger logger = LogManager.getLogger();
+	/** Logger for logging messages. */
+    protected static final Logger logger = LogManager.getLogger();
+    /** PersistenceManagerFactory for creating PersistenceManager instances. */
+    private PersistenceManagerFactory pmf;
+    /** PersistenceManager for managing JDO operations. */
+    private PersistenceManager pm;
+    /** Transaction for managing database transactions. */
+    private Transaction tx;
 
-	private PersistenceManagerFactory pmf;
-	private PersistenceManager pm;
-	private Transaction tx;
-
+    /**
+     * Default constructor initializing persistence manager and transaction.
+     */
 	public AirlineService() {
 		this.pmf = AeroLogixServer.getInstance().getPersistenceManagerFactory();
 		this.pm = pmf.getPersistenceManager();
 		this.tx = pm.currentTransaction();
 	}
 
-	// CRUD methods
-
+	/**
+     * Retrieves airline details for a given airline ID.
+     *
+     * @param id The ID of the airline to retrieve.
+     * @return A Response containing the airline details or an error message.
+     * <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve the airline from the database using the provided ID.</li>
+     *     <li>If the airline exists, construct a AirlineData object containing the airline details and associated booking IDs.</li>
+     *     <li>Commit the transaction and return the AirlineData object(Finalizing all the changes made during the transaction and making them permanent in the database).</li>
+     *     <li>If the airline does not exist, return a 404 Not Found response.</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
 	@GET
 	@Path("/airline/get")
 	public Response getAirline(@QueryParam("id") int id) {
@@ -67,7 +92,20 @@ public class AirlineService {
 			}
 		}
 	}
-
+    /**
+     * Retrieves all airlines.
+     *
+     * @return A Response containing a list of all airlines or an error message.
+     * <p>
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Retrieve all airlines from the database.</li>
+     *     <li>For each airline, construct a AirlineData object containing the airline details and associated booking IDs.</li>
+     *     <li>Commit the transaction and return the list of AirlineData objects.(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If no airlines are found, return a 204 No Content response.</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
 	@GET
 	@Path("/airline/getAll")
 	public Response getAllAirlines() {
@@ -103,7 +141,23 @@ public class AirlineService {
 			}
 		}
 	}
-
+	 /**
+     * Creates a new airline.
+     *
+     * @param airlineData The data of the airline to create.
+     * @return A Response indicating the result of the creation operation.
+     *<p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve all the required information to create the airline using the provided {@link AirlineData}.</li>
+     *     <li>If all the information can be found, we create a {@link Airline} using all the data.</li>
+     *     <li> We make the airline persistent in the database.</li>
+     *     <li>commit the transaction and return the AirlineData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If something from the airline data does not exist, return a 401 UNAUTHORIZED.</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
 	@POST
 	@Path("/airline/create")
 	public Response createAirline(AirlineData airlineData) {
@@ -137,7 +191,23 @@ public class AirlineService {
 			}
 		}
 	}
-
+    /**
+     * Modifies an existing airline.
+     *
+     * @param airlineData The data of the airline to modify.
+     * @return A Response indicating the result of the modification operation.
+     *<p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve the airline from the database using the provided ID.</li>
+     *     <li>Attempt to retrieve all the required information to modify the airline using the provided {@link AirlineData}.</li>
+     *     <li>If all the information can be found, we modify the data from the {@link Airline} using all the data.</li>
+     *     <li>commit the transaction and return the AirlineData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If something from the airline data does not exist, return a 401 Unauthorized.</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
 	@POST
 	@Path("/airline/modify")
 	public Response modifyAirline(AirlineData airlineData) {
@@ -171,7 +241,22 @@ public class AirlineService {
 			}
 		}
 	}
-
+	 /**
+     * Deletes an existing airline by ID.
+     *
+     * @param id The ID of the airline to delete.
+     * @return A Response indicating the result of the deletion operation.
+      <p>
+     * This method performs the following steps:
+     * <ul>
+     *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
+     *     <li>Attempt to retrieve the airline from the database using the provided ID.</li>
+     *     <li>If the airline exists, we delete the airline from the database.</li>
+     *     <li>Commit the transaction and return the AirlineData object(Finalizing all the changes made during the transaction and making them permanent in the database).</li>
+     *     <li>If the airline does not exist, return a 401 Unauthorized.</li>
+     *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
+     * </ul>
+     */
 	@POST
 	@Path("/airline/delete")
 	public Response deleteAirline(int id) {
@@ -204,18 +289,34 @@ public class AirlineService {
 		}
 	}
 
-	// Other methods
+	   /**
+     * Sets the persistence manager factory.
+     * <p>
+     * This method is primarily used for testing purposes.
+     *
+     * @param pmf The {@link PersistenceManagerFactory} to set.
+     */
+    void setPersistenceManagerFactory(PersistenceManagerFactory pmf) {
+        this.pmf = pmf;
+    }
 
-	// In AirlineService class
-	void setPersistenceManagerFactory(PersistenceManagerFactory pmf) {
-		this.pmf = pmf;
-	}
-
-	// Similarly, create a setter for the PersistenceManager if necessary
-	void setPersistenceManager(PersistenceManager pm) {
-		this.pm = pm;
-	}
-
+    /**
+     * Sets the persistence manager.
+     * <p>
+     * This method is primarily used for testing purposes.
+     *
+     * @param pm The {@link PersistenceManager} to set.
+     */
+    void setPersistenceManager(PersistenceManager pm) {
+        this.pm = pm;
+    }
+    /**
+     * Sets the transaction.
+     * <p>
+     * This method is primarily used for testing purposes.
+     *
+     * @param tx The {@link Transaction} to set.
+     */
 	void setTransaction(Transaction tx) {
 		this.tx = tx;
 	}
