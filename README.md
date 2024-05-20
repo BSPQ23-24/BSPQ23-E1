@@ -66,7 +66,7 @@ AeroLogix is a Maven-based Java project that creates a management system for air
 
 **Generate the documentation**
 -
-To generate the documentation run the command:
+To generate the documentation run the command below. This will generate both html and LaTeX outputs in `aerologix/target/doxygen`.
 
 ```
 mvn doxygen:report
