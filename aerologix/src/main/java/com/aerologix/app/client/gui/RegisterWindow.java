@@ -15,73 +15,87 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 
 import com.aerologix.app.client.controller.UserController;
 
+
 public class RegisterWindow extends JFrame {
 
-	private static RegisterWindow instance;
+    private static RegisterWindow instance;
 
-	private static final long serialVersionUID = 1L;
-	// Panels
-	protected JPanel pPrincipal = new JPanel(new GridLayout(2, 1));
-	protected JPanel pSignup = new JPanel(new GridLayout(5, 1));
-	protected JPanel pUser = new JPanel(new FlowLayout());
-	protected JPanel psb = new JPanel(new FlowLayout());
-	protected JPanel pPass = new JPanel(new FlowLayout());
-	protected JPanel psPass = new JPanel(new FlowLayout());
-	protected JPanel pNombre = new JPanel(new FlowLayout());
+    private static final long serialVersionUID = 1L;
 
-	// Components signup
-	protected JLabel lsMail = new JLabel("Email: ");
-	protected JLabel lsPass = new JLabel("Password: ");
-	protected JLabel lssPass = new JLabel("Confirm password: ");
-	protected JLabel lsNombre = new JLabel("Name:");
-	protected JTextField tsMail = new JTextField(15);
-	protected JTextField tsPass = new JTextField(15);
-	protected JTextField tssPass = new JTextField(15);
-	protected JTextField tsNombre = new JTextField(15);
-	protected JButton bSignup = new JButton("Register");
-	protected JLabel lsError = new JLabel("");
+    // Panels
+    protected JPanel pPrincipal = new JPanel(new GridLayout(2, 1));
+    protected JPanel pSignup = new JPanel(new GridLayout(5, 1));
+    protected JPanel pUser = new JPanel(new FlowLayout());
+    protected JPanel psb = new JPanel(new FlowLayout());
+    protected JPanel pPass = new JPanel(new FlowLayout());
+    protected JPanel psPass = new JPanel(new FlowLayout());
+    protected JPanel pNombre = new JPanel(new FlowLayout());
 
-	private RegisterWindow() {
+    // Components signup
+    protected JLabel lsMail;
+    protected JLabel lsPass;
+    protected JLabel lssPass;
+    protected JLabel lsNombre;
+    protected JTextField tsMail = new JTextField(15);
+    protected JTextField tsPass = new JTextField(15);
+    protected JTextField tssPass = new JTextField(15);
+    protected JTextField tsNombre = new JTextField(15);
+    protected JButton bSignup;
+    protected JLabel lsError = new JLabel("");
 
-		this.setTitle("Register - AeroLogix");
-		this.setSize(450, 300);
-		centerWindow();
-		this.setLayout(new FlowLayout());
+    private ResourceBundle messages;
 
-		// Construccion signup
-		pSignup.setBorder(BorderFactory.createTitledBorder("Register user"));
-		pUser.add(lsMail);
-		pUser.add(tsMail);
-		pNombre.add(lsNombre);
-		pNombre.add(tsNombre);
-		pPass.add(lsPass);
-		pPass.add(tsPass);
-		psPass.add(lssPass);
-		psPass.add(tssPass);
-		pSignup.add(pUser);
-		pSignup.add(pNombre);
-		pSignup.add(pPass);
-		pSignup.add(psPass);
-		psb.add(bSignup);
-		psb.add(lsError);
-		pSignup.add(psb);
-		pPrincipal.add(pSignup);
-		this.add(pPrincipal);
+    private RegisterWindow() {
+        // Initialize ResourceBundle
+        initResourceBundle(Locale.getDefault());
 
-		this.setVisible(true);
+        // Initialize components with ResourceBundle
+        lsMail = new JLabel(messages.getString("mail"));
+        lsPass = new JLabel(messages.getString("password"));
+        lssPass = new JLabel(messages.getString("confirm_password"));
+        lsNombre = new JLabel(messages.getString("name"));
+        bSignup = new JButton(messages.getString("register"));
 
-		this.addWindowListener(new WindowAdapter() {
+        this.setTitle(messages.getString("register") + " - AeroLogix");
+        this.setSize(450, 300);
+        centerWindow();
+        this.setLayout(new FlowLayout());
 
-			@Override
-			public void windowClosing(WindowEvent e) {
-				deinit();
-				dispose();
-			}
-		});
+        // Construction signup
+        pSignup.setBorder(BorderFactory.createTitledBorder(messages.getString("register_user")));
+        pUser.add(lsMail);
+        pUser.add(tsMail);
+        pNombre.add(lsNombre);
+        pNombre.add(tsNombre);
+        pPass.add(lsPass);
+        pPass.add(tsPass);
+        psPass.add(lssPass);
+        psPass.add(tssPass);
+        pSignup.add(pUser);
+        pSignup.add(pNombre);
+        pSignup.add(pPass);
+        pSignup.add(psPass);
+        psb.add(bSignup);
+        psb.add(lsError);
+        pSignup.add(psb);
+        pPrincipal.add(pSignup);
+        this.add(pPrincipal);
 
+        this.setVisible(true);
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                deinit();
+                dispose();
+            }
+        });
 		// Signup
 		bSignup.addActionListener(new ActionListener() {
 
@@ -141,6 +155,29 @@ public class RegisterWindow extends JFrame {
 
 	}
 
+    private void initResourceBundle(Locale locale) {
+        try {
+            messages = ResourceBundle.getBundle("Multilingual.messages", locale);
+        } catch (Exception e) {
+            System.err.println("Failed to load resource bundle: " + e.getMessage());
+        }
+    }
+
+    private void changeLanguage(Locale locale) {
+        Locale.setDefault(locale);
+        initResourceBundle(locale);
+        updateComponents();
+    }
+
+    private void updateComponents() {
+        lsMail.setText(messages.getString("mail"));
+        lsPass.setText(messages.getString("password"));
+        lssPass.setText(messages.getString("confirm_password"));
+        lsNombre.setText(messages.getString("name"));
+        bSignup.setText(messages.getString("register"));
+        this.setTitle(messages.getString("register") + " - AeroLogix");
+    }
+    
 	private void centerWindow() {
 		Dimension windowSize = getSize();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
