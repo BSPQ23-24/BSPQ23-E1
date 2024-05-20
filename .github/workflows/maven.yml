@@ -15,7 +15,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  tests:
 
     runs-on: ubuntu-latest
 
@@ -57,17 +57,31 @@ jobs:
       run: |
           cd aerologix
           mvn verify -Pintegration-tests
-    - name: Install doxygen
-      run: sudo apt-get install -y doxygen
-    - name: Install graphviz
-      run: sudo apt-get install -y graphviz
-    - name: Generate documentation
-      run: |
+
+  document:
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure this line is correctly added
+      - name: Install doxygen
+        run: sudo apt-get install -y doxygen
+
+      - name: Install graphviz
+        run: sudo apt-get install -y graphviz
+
+      - name: Generate documentation
+        run: |
           cd aerologix
           mvn doxygen:report
-    - name: Publish on Github Pages
-      uses: crazy-max/ghaction-github-pages@v2.3.0
-      with:
-        build_dir: aerologix/target/doxygen/html
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: aerologix/target/doxygen/html
+          publish_branch: gh-pages
+          destination_dir: doxygen
+
