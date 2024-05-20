@@ -12,6 +12,7 @@
   	<name>aerologix</name>
 
 	<properties>
+		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jersey.version>3.1.5</jersey.version>
 		<server.hostname>127.0.0.1</server.hostname>
@@ -123,6 +124,14 @@
 		</resources>
 
 		<plugins>
+			<plugin>
+				<groupId>com.soebes.maven.plugins</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<configurationFile>${doxygen.config.file}</configurationFile>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.datanucleus</groupId>
 				<artifactId>datanucleus-maven-plugin</artifactId>
