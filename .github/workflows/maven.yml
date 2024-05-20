@@ -34,7 +34,7 @@ jobs:
     - name: Create the database
       run: |
           cd aerologix
-          mysql -u root -p root < sql/create-aerologix.sql
+          mysql -u root -proot < sql/create-aerologix.sql
     - name: Create database schema
       run: |
           cd aerologix
