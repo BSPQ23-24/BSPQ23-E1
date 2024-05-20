@@ -35,21 +35,24 @@ AeroLogix is a Maven-based Java project that creates a management system for air
 **Testing the application**
 -
 1. **Run unit tests**
-    To run unit test you should run the command below. Do not run the server for units tests since it is using Mockito.
+   
+   To run unit test you should run the command below. Do not run the server for units tests since it is using Mockito.
 
     ```
     mvn test
     ```
 
 2. **Run performance tests**
-    To run perfomance tests you should run the command below. Do not run the server for units tests since it is using Mockito.
+
+   To run perfomance tests you should run the command below. Do not run the server for units tests since it is using Mockito.
 
     ```
     mvn verify -Pperformance-tests
     ```
 
 3. **Run integration tests**
-    In a terminal run the server with:
+   
+   In a terminal run the server with:
 
     ```
     mvn jetty:run
