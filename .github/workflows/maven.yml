@@ -33,8 +33,9 @@ jobs:
           mvn clean compile
     - name: Create the database
       run: |
+          sudo /etc/init.d/mysql start
           cd aerologix
-          mysql -u root -proot -h 127.0.0.1 aerologixdb < sql/create-aerologix.sql
+          mysql -u root -proot < sql/create-aerologix.sql
     - name: Create database schema
       run: |
           cd aerologix
