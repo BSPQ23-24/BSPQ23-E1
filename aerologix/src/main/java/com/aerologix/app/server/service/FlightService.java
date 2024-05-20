@@ -180,9 +180,12 @@ public class FlightService {
      * <ul>
      *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
      *     <li>Attempt to retrieve all the required information to create the flight using the provided {@link FlightData}.</li>
-     *     <li>If all the information can be found, we create a {@link Flight} using all the data.</li>
-     *     <li> We make the flight persistent in the database.</li>
-     *     <li>commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If all the information can be found:
+     *     		<ul>
+	 *             <li>We create a {@link Flight} using all the data.</li>
+	 *             <li>We make the flight persistent in the database.</li>
+	 *             <li>Commit the transaction and return the FlightData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+	 *         	</ul>
      *     <li>If something from the flight data does not exist, return a 401 UNAUTHORIZED.</li>
      *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>

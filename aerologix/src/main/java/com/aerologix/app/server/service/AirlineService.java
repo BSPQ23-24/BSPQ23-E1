@@ -52,9 +52,12 @@ public class AirlineService {
      * <ul>
      *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
      *     <li>Attempt to retrieve the airline from the database using the provided ID.</li>
-     *     <li>If the airline exists, construct a AirlineData object containing the airline details and associated booking IDs.</li>
-     *     <li>Commit the transaction and return the AirlineData object(Finalizing all the changes made during the transaction and making them permanent in the database).</li>
-     *     <li>If the airline does not exist, return a 404 Not Found response.</li>
+     *     <li>If all the information can be found:
+     *     		<ul>
+	 *             <li>We create a {@link Airline} using all the data.</li>
+	 *             <li>We make the airline persistent in the database.</li>
+	 *             <li>Commit the transaction and return the AirlineData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+	 *         	</ul>
      *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>
      */
@@ -100,7 +103,7 @@ public class AirlineService {
      * <ul>
      *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
      *     <li>Retrieve all airlines from the database.</li>
-     *     <li>For each airline, construct a AirlineData object containing the airline details and associated booking IDs.</li>
+     *     <li>For each airline, construct a AirlineData object containing the airline details.</li>
      *     <li>Commit the transaction and return the list of AirlineData objects.(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
      *     <li>If no airlines are found, return a 204 No Content response.</li>
      *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>

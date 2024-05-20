@@ -42,7 +42,7 @@ public class BookingService {
 	}
 
 	/**
-     * Retrieves Booking's details for a given flight ID.
+     * Retrieves Booking's details for a given booking ID.
      *
      * @param id The ID of the booking to retrieve.
      * @return A Response containing the booking details or an error message.
@@ -103,7 +103,7 @@ public class BookingService {
      * <ul>
      *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
      *     <li>Retrieve all bookings from the database.</li>
-     *     <li>For each booking, construct a BookingData object containing the booking details and associated booking IDs.</li>
+     *     <li>For each booking, construct a BookingData object containing the booking details.</li>
      *     <li>Commit the transaction and return the list of BookingData objects.(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
      *     <li>If no bookings are found, return a 204 No Content response.</li>
      *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
@@ -157,9 +157,12 @@ public class BookingService {
      * <ul>
      *     <li>Begin a new transaction(We will take the sequence of steps as a single unit of work).</li>
      *     <li>Attempt to retrieve all the required information to create the booking using the provided {@link BookingData}.</li>
-     *     <li>If all the information can be found, we create a {@link Booking} using all the data.</li>
-     *     <li> We make the booking persistent in the database.</li>
-     *     <li>commit the transaction and return the BookingData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+     *     <li>If all the information can be found:
+     *     		<ul>
+	 *             <li>We create a {@link Booking} using all the data.</li>
+	 *             <li>We make the booking persistent in the database.</li>
+	 *             <li>Commit the transaction and return the BookingData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+	 *         	</ul>
      *     <li>If something from the booking data does not exist, return a 401 UNAUTHORIZED.</li>
      *     <li>RollBack the transaction if an exception occurs(Reverting the changes made during a transaction).</li>
      * </ul>

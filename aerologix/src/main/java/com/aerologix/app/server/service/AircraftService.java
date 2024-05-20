@@ -57,9 +57,12 @@ public class AircraftService {
      * <ul>
      *     <li>Begin a new transaction.</li>
      *     <li>Attempt to retrieve the aircraft from the database using the provided ID.</li>
-     *     <li>If the aircraft exists, construct an AircraftData object containing the aircraft details.</li>
-     *     <li>Commit the transaction and return the AircraftData object.</li>
-     *     <li>If the aircraft does not exist, return a 404 Not Found response.</li>
+     *    <li>If all the information can be found:
+     *     		<ul>
+	 *             <li>We create a {@link Aircraft} using all the data.</li>
+	 *             <li>We make the aircraft persistent in the database.</li>
+	 *             <li>Commit the transaction and return the AircraftData object(Finalizing all the changes made during the transaction and making them permanent in the database)</li>
+	 *         	</ul>
      *     <li>RollBack the transaction if an exception occurs.</li>
      * </ul>
      */
