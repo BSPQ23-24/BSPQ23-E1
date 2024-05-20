@@ -54,9 +54,9 @@ public class RegisterWindow extends JFrame {
 
     private ResourceBundle messages;
 
-    private RegisterWindow() {
+    private RegisterWindow(Locale locale) {
         // Initialize ResourceBundle
-        initResourceBundle(Locale.getDefault());
+        initResourceBundle(locale);
 
         // Initialize components with ResourceBundle
         lsMail = new JLabel(messages.getString("mail"));
@@ -190,6 +190,7 @@ public class RegisterWindow extends JFrame {
         lssPass.setText(messages.getString("confirm_password"));
         lsNombre.setText(messages.getString("name"));
         bSignup.setText(messages.getString("register"));
+        pSignup.setBorder(BorderFactory.createTitledBorder(messages.getString("register_user")));
         this.setTitle(messages.getString("register") + " - AeroLogix");
     }
     
@@ -210,9 +211,9 @@ public class RegisterWindow extends JFrame {
 		}
 	}
 
-	public static RegisterWindow getInstance() {
+	public static RegisterWindow getInstance(Locale locale) {
 		if (RegisterWindow.instance == null) {
-			RegisterWindow.instance = new RegisterWindow();
+			RegisterWindow.instance = new RegisterWindow(locale);
 		}
 		return RegisterWindow.instance;
 	}

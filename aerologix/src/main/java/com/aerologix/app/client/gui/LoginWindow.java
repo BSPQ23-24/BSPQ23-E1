@@ -184,7 +184,7 @@ public class LoginWindow extends JFrame {
         bSignup.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	RegisterWindow rw = RegisterWindow.getInstance();
+            	RegisterWindow rw = RegisterWindow.getInstance(new Locale("es", "ES"));
 				rw.setVisible(true);
                 System.out.println("Opening register window...");
             }
