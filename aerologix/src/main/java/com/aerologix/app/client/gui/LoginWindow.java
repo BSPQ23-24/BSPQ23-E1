@@ -128,7 +128,11 @@ public class LoginWindow extends JFrame {
 								lError.setText("");
 								LoginWindow.instanceLogin = null;
 								dispose();
-								UserData user = UserController.getInstance().getUser(lMail.getText());
+								UserData user = new UserData();
+								user.setEmail(lMail.getText());
+								user.setName("");
+								user.setPassword(lPass.getText());
+								user.setUserType(UserType.COUNTER_CLERK.toString());
 								MainWindow mw = MainWindow.getInstance(user);
 							}
 						};
