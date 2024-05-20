@@ -27,7 +27,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-      run: cd aerologix
+    - run: cd aerologix
     - name: Build with Maven
       run: mvn clean compile
     - name: Create the database
