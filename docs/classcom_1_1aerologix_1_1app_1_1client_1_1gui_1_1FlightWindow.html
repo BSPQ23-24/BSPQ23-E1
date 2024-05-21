@@ -105,8 +105,8 @@ Inheritance diagram for com.aerologix.app.client.gui.FlightWindow:</div>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a866d72ef79c666e54d0d070da27c11ae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html#a866d72ef79c666e54d0d070da27c11ae">bookFlight</a> (int flightId, String userEmail)</td></tr>
 <tr class="separator:a866d72ef79c666e54d0d070da27c11ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a7fe43c98fed4b92db148cb3955a635"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html#a7a7fe43c98fed4b92db148cb3955a635">showBookings</a> (int flightId, String userEmail)</td></tr>
-<tr class="separator:a7a7fe43c98fed4b92db148cb3955a635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa00c78e2ddc0e73723ab346d0573f10a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html#aa00c78e2ddc0e73723ab346d0573f10a">showBookings</a> (int flightId, String userEmail, ResourceBundle messages)</td></tr>
+<tr class="separator:aa00c78e2ddc0e73723ab346d0573f10a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa63f9f207c6adee6c6db49f1f7662910"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html#aa63f9f207c6adee6c6db49f1f7662910">modifyBooking</a> (int bookingId, int flightId, String userEmail)</td></tr>
 <tr class="separator:aa63f9f207c6adee6c6db49f1f7662910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf7915f7906e95dc0e7ba26c2e7d5bf1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html">FlightWindow</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html#aaf7915f7906e95dc0e7ba26c2e7d5bf1">getInstance</a> (int flightId, String userEmail)</td></tr>
@@ -211,7 +211,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Ends the current instance of <a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html">FlightWindow</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="FlightWindow_8java_source.html#l00376">376</a> of file <a class="el" href="FlightWindow_8java_source.html">FlightWindow.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FlightWindow_8java_source.html#l00378">378</a> of file <a class="el" href="FlightWindow_8java_source.html">FlightWindow.java</a>.</p>
 
 </div>
 </div>
@@ -258,7 +258,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If there exists an instance of <a class="el" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html">FlightWindow</a> it will return it. If not, it will create a new one. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="FlightWindow_8java_source.html#l00368">368</a> of file <a class="el" href="FlightWindow_8java_source.html">FlightWindow.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FlightWindow_8java_source.html#l00370">370</a> of file <a class="el" href="FlightWindow_8java_source.html">FlightWindow.java</a>.</p>
 
 </div>
 </div>
@@ -302,12 +302,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="FlightWindow_8java_source.html#l00323">323</a> of file <a class="el" href="FlightWindow_8java_source.html">FlightWindow.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FlightWindow_8java_source.html#l00325">325</a> of file <a class="el" href="FlightWindow_8java_source.html">FlightWindow.java</a>.</p>
 
 </div>
 </div>
-<a id="a7a7fe43c98fed4b92db148cb3955a635"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a7fe43c98fed4b92db148cb3955a635">&#9670;&nbsp;</a></span>showBookings()</h2>
+<a id="aa00c78e2ddc0e73723ab346d0573f10a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa00c78e2ddc0e73723ab346d0573f10a">&#9670;&nbsp;</a></span>showBookings()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +325,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>userEmail</em>&#160;</td>
+          <td class="paramname"><em>userEmail</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ResourceBundle&#160;</td>
+          <td class="paramname"><em>messages</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

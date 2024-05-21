@@ -136,261 +136,262 @@ $(document).ready(function(){initNavTree('MainWindow_8java_source.html',''); ini
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">import</span> com.aerologix.app.client.AeroLogixClient;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">import</span> com.aerologix.app.client.controller.AirlineController;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">import</span> com.aerologix.app.client.controller.FlightController;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">import</span> com.aerologix.app.server.pojo.AirlineData;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">import</span> com.aerologix.app.server.pojo.FlightData;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">import</span> com.aerologix.app.server.pojo.UserData;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">   62</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a> <span class="keyword">extends</span> JFrame {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">long</span> serialVersionUID = 1L;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a> instance;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">private</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html">UserData</a> user;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">private</span> JPanel panel;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">private</span> JLabel logo;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">private</span> JPanel filterPanel;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">private</span> JPanel flightFP;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">private</span> JTextField flightFilter;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">private</span> JLabel flightLabel;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">private</span> JPanel originFP;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">private</span> JComboBox&lt;String&gt; originFilter;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">private</span> JLabel originLabel;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">private</span> JPanel destinationFP;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">private</span> JComboBox&lt;String&gt; destinationFilter;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">private</span> JLabel destinationLabel;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">private</span> JPanel dateFP;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">private</span> JSpinner dateFilter;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">private</span> JLabel dateLabel;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">private</span> JButton bookFlightButton;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">private</span> JTable flightTable;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">private</span> DefaultTableModel flightTableModel;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">private</span> ArrayList&lt;FlightData&gt; flights;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">private</span> ArrayList&lt;AirlineData&gt; airlines;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">private</span> JScrollPane scrollPane;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">private</span> JButton resetFiltersButton;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">private</span> JButton resetFlightFilterButton;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">private</span> JButton resetAirlinesFilterButton;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">private</span> JButton resetOriginFilterButton;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">private</span> JButton resetDestinationFilterButton;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">private</span> JButton resetDateFilterButton;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">private</span> JPanel resetFlightP;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">private</span> JPanel resetAirlinesP;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">private</span> JPanel resetOriginP;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">private</span> JPanel resetDestiantionP;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">private</span> JPanel resetDateP;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">private</span> JLabel lLanguage;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">  101</a></span>&#160;    <span class="keyword">protected</span> JPanel <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a> = <span class="keyword">new</span> JPanel(<span class="keyword">new</span> FlowLayout());</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">  102</a></span>&#160;    <span class="keyword">protected</span> JComboBox&lt;Locale&gt; <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">private</span> ResourceBundle messages;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">private</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a>(<a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html">UserData</a> user, Locale locale) {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        this.user = user;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        initResourceBundle(Locale.getDefault());</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a> = <span class="keyword">new</span> JComboBox&lt;&gt;(<span class="keyword">new</span> Locale[] { <span class="keyword">new</span> Locale(<span class="stringliteral">&quot;es&quot;</span>, <span class="stringliteral">&quot;ES&quot;</span>), Locale.US });</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        messages = ResourceBundle.getBundle(<span class="stringliteral">&quot;Multilingual.messages&quot;</span>, locale);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        ImageIcon originalIcon = <span class="keyword">new</span> ImageIcon(<span class="stringliteral">&quot;static/img/retry.png&quot;</span>);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        Image scaledImage = originalIcon.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        ImageIcon scaledIcon = <span class="keyword">new</span> ImageIcon(scaledImage);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        panel = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        logo = <span class="keyword">new</span> JLabel();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        filterPanel = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        filterPanel.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        flightFP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        flightFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        flightFilter = <span class="keyword">new</span> JTextField();</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        flightLabel = <span class="keyword">new</span> JLabel();</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        originFP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        originFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        originFilter = <span class="keyword">new</span> JComboBox&lt;&gt;();</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        originLabel = <span class="keyword">new</span> JLabel();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        destinationFP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        destinationFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        destinationFilter = <span class="keyword">new</span> JComboBox&lt;&gt;();</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        destinationLabel = <span class="keyword">new</span> JLabel();</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        dateFP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        dateFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        dateFilter = <span class="keyword">new</span> JSpinner();</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        dateLabel = <span class="keyword">new</span> JLabel();</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        bookFlightButton = <span class="keyword">new</span> JButton(messages.getString(<span class="stringliteral">&quot;view_flight&quot;</span>));</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        resetFiltersButton = <span class="keyword">new</span> JButton(messages.getString(<span class="stringliteral">&quot;reset_all&quot;</span>));</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        resetFlightP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        resetFlightP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        resetFlightP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        resetFlightFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        resetFlightFilterButton.addActionListener(e -&gt; resetFlightFilter());</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        resetFlightFilterButton.setBorder(<span class="keyword">null</span>);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        resetFlightFilterButton.setBackground(filterPanel.getBackground());</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        resetOriginP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        resetOriginP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        resetOriginP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        resetOriginFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        resetOriginFilterButton.addActionListener(e -&gt; resetOriginFilter());</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        resetOriginFilterButton.setBorder(<span class="keyword">null</span>);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        resetOriginFilterButton.setBackground(filterPanel.getBackground());</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        resetDestiantionP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        resetDestiantionP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        resetDestiantionP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        resetDestinationFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        resetDestinationFilterButton.addActionListener(e -&gt; resetDestinationFilter());</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        resetDestinationFilterButton.setBorder(<span class="keyword">null</span>);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        resetDestinationFilterButton.setBackground(filterPanel.getBackground());</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        resetDateP = <span class="keyword">new</span> JPanel();</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        resetDateP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        resetDateP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        resetDateFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        resetDateFilterButton.addActionListener(e -&gt; resetDateFilter());</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        resetDateFilterButton.setBorder(<span class="keyword">null</span>);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        resetDateFilterButton.setBackground(filterPanel.getBackground());</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        getContentPane().setLayout(<span class="keyword">new</span> BorderLayout());</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        this.setSize(<span class="keyword">new</span> Dimension(1200, 500));</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        this.setVisible(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        this.setTitle(messages.getString(<span class="stringliteral">&quot;title&quot;</span>));</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        panel.setLayout(<span class="keyword">new</span> BorderLayout());</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        getContentPane().add(panel, BorderLayout.CENTER);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        filterPanel.setLayout(<span class="keyword">new</span> BoxLayout(filterPanel, BoxLayout.X_AXIS));</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        filterPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        logo.setText(messages.getString(<span class="stringliteral">&quot;logo&quot;</span>));</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        logo.setFont(<span class="keyword">new</span> Font(<span class="stringliteral">&quot;Arial&quot;</span>, Font.BOLD, 20));</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        logo.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        filterPanel.add(logo);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        lLanguage = <span class="keyword">new</span> JLabel(messages.getString(<span class="stringliteral">&quot;language&quot;</span>));</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a>.add(lLanguage);</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a>.add(<a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>);</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        panel.add(<a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a>, BorderLayout.SOUTH);</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            @Override</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent e) {</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                changeLanguage(user, (Locale) <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>.getSelectedItem());</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            }</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        });</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        bookFlightButton.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            @Override</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent e) {</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                onBookFlightButtonClick();</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            }</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        });</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        flightFP.setLayout(<span class="keyword">new</span> BoxLayout(flightFP, BoxLayout.Y_AXIS));</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        flightLabel.setText(messages.getString(<span class="stringliteral">&quot;flight_name&quot;</span>));</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        resetFlightP.add(flightLabel);</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        resetFlightP.add(resetFlightFilterButton);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        flightFP.add(resetFlightP);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        flightFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        flightFP.add(flightFilter);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        filterPanel.add(flightFP);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        originFP.setLayout(<span class="keyword">new</span> BoxLayout(originFP, BoxLayout.Y_AXIS));</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        originFilter.setPreferredSize(<span class="keyword">new</span> Dimension(100, 20));</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        originLabel.setText(messages.getString(<span class="stringliteral">&quot;origin&quot;</span>));</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        resetOriginP.add(originLabel);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        resetOriginP.add(resetOriginFilterButton);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        originFP.add(resetOriginP);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        originFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        originFP.add(originFilter);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        filterPanel.add(originFP);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        destinationFP.setLayout(<span class="keyword">new</span> BoxLayout(destinationFP, BoxLayout.Y_AXIS));</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        destinationFilter.setPreferredSize(<span class="keyword">new</span> Dimension(100, 20));</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        destinationLabel.setText(messages.getString(<span class="stringliteral">&quot;destination&quot;</span>));</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        resetDestiantionP.add(destinationLabel);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        resetDestiantionP.add(resetDestinationFilterButton);</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        destinationFP.add(resetDestiantionP);</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        destinationFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        destinationFP.add(destinationFilter);</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        filterPanel.add(destinationFP);</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        dateFP.setLayout(<span class="keyword">new</span> BoxLayout(dateFP, BoxLayout.Y_AXIS));</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        Calendar calendar = Calendar.getInstance();</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        Date initDate = calendar.getTime();</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        calendar.add(Calendar.YEAR, -100);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        Date earliestDate = calendar.getTime();</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        calendar.add(Calendar.YEAR, 200);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        SpinnerDateModel sdm = <span class="keyword">new</span> SpinnerDateModel(initDate, earliestDate, <span class="keyword">null</span>, Calendar.DAY_OF_MONTH);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        dateFilter.setModel(sdm);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        JSpinner.DateEditor editor = <span class="keyword">new</span> JSpinner.DateEditor(dateFilter, <span class="stringliteral">&quot;dd/MM/yyyy&quot;</span>);</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        DateFormatter formatter = (DateFormatter) editor.getTextField().getFormatter();</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        formatter.setAllowsInvalid(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        formatter.setOverwriteMode(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        dateFilter.setEditor(editor);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        dateFilter.setPreferredSize(<span class="keyword">new</span> Dimension(150, 20));</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        dateLabel.setText(messages.getString(<span class="stringliteral">&quot;date&quot;</span>));</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        resetDateP.add(dateLabel);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        resetDateP.add(resetDateFilterButton);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        dateFP.add(resetDateP);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        dateFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        dateFP.add(dateFilter);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        filterPanel.add(dateFP);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(20, 0)));</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        filterPanel.add(resetFiltersButton);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(10, 0)));</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        filterPanel.add(bookFlightButton);</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        panel.add(filterPanel, BorderLayout.NORTH);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        flightTable = <span class="keyword">new</span> JTable();</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        flightTable.setPreferredSize(<span class="keyword">new</span> Dimension(500, 400));</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        loadFlights();</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        loadFilters();</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        centerWindow();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        scrollPane = <span class="keyword">new</span> JScrollPane(flightTable);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        flightTable.addMouseListener(<span class="keyword">new</span> MouseAdapter() {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            @Override</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> mouseClicked(MouseEvent e) {</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="keywordflow">if</span> (e.getClickCount() == 2 &amp;&amp; flightTable.getSelectedRow() != -1) {</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                    <span class="keywordtype">int</span> row = flightTable.getSelectedRow();</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                    <a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1FlightData.html">FlightData</a> flightData = flights.get(row);</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                    onRowDoubleClick(flightData);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                }</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;            }</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        });</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        panel.add(scrollPane, BorderLayout.CENTER);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        panel.revalidate();</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        panel.repaint();</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        flightFilter.getDocument().addDocumentListener(<span class="keyword">new</span> FilterListener(this::filterFlightsByFlightId));</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        originFilter.addActionListener(e -&gt; filterFlightsByOrigin());</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        destinationFilter.addActionListener(e -&gt; filterFlightsByDestination());</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        dateFilter.addChangeListener(<span class="keyword">new</span> ChangeListener() {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            @Override</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> stateChanged(ChangeEvent e) {</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                filterFlightsByDate();</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            }</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        });</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    }</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> initResourceBundle(Locale locale) {</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">try</span> {</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            messages = ResourceBundle.getBundle(<span class="stringliteral">&quot;Multilingual.messages&quot;</span>, locale);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        } <span class="keywordflow">catch</span> (Exception e) {</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            System.err.println(<span class="stringliteral">&quot;Failed to load resource bundle: &quot;</span> + e.getMessage());</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        }</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> changeLanguage(UserData user, Locale locale) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">import</span> com.aerologix.app.client.controller.UserController;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">import</span> com.aerologix.app.server.pojo.AirlineData;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">import</span> com.aerologix.app.server.pojo.FlightData;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">import</span> com.aerologix.app.server.pojo.UserData;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">   63</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a> <span class="keyword">extends</span> JFrame {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">long</span> serialVersionUID = 1L;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a> instance;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">private</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html">UserData</a> user;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">private</span> JPanel panel;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">private</span> JLabel logo;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">private</span> JPanel filterPanel;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">private</span> JPanel flightFP;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">private</span> JTextField flightFilter;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">private</span> JLabel flightLabel;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">private</span> JPanel originFP;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">private</span> JComboBox&lt;String&gt; originFilter;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">private</span> JLabel originLabel;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">private</span> JPanel destinationFP;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">private</span> JComboBox&lt;String&gt; destinationFilter;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">private</span> JLabel destinationLabel;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">private</span> JPanel dateFP;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">private</span> JSpinner dateFilter;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">private</span> JLabel dateLabel;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">private</span> JButton bookFlightButton;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">private</span> JTable flightTable;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">private</span> DefaultTableModel flightTableModel;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">private</span> ArrayList&lt;FlightData&gt; flights;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">private</span> ArrayList&lt;AirlineData&gt; airlines;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">private</span> JScrollPane scrollPane;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">private</span> JButton resetFiltersButton;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">private</span> JButton resetFlightFilterButton;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">private</span> JButton resetAirlinesFilterButton;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">private</span> JButton resetOriginFilterButton;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">private</span> JButton resetDestinationFilterButton;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">private</span> JButton resetDateFilterButton;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">private</span> JPanel resetFlightP;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">private</span> JPanel resetAirlinesP;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">private</span> JPanel resetOriginP;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">private</span> JPanel resetDestiantionP;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">private</span> JPanel resetDateP;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">private</span> JLabel lLanguage;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">  102</a></span>&#160;    <span class="keyword">protected</span> JPanel <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a> = <span class="keyword">new</span> JPanel(<span class="keyword">new</span> FlowLayout());</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">  103</a></span>&#160;    <span class="keyword">protected</span> JComboBox&lt;Locale&gt; <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">private</span> ResourceBundle messages;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">private</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a>(String userEmail, Locale locale) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        this.user = <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController.html">UserController</a>.<a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController.html#a42edcdbcd7058fc51d97883380a89573">getInstance</a>().<a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController.html#a1ad0a74dd0eb30dd73359578f3bfcca6">getUser</a>(userEmail);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        initResourceBundle(Locale.getDefault());</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a> = <span class="keyword">new</span> JComboBox&lt;&gt;(<span class="keyword">new</span> Locale[] { <span class="keyword">new</span> Locale(<span class="stringliteral">&quot;es&quot;</span>, <span class="stringliteral">&quot;ES&quot;</span>), Locale.US });</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        messages = ResourceBundle.getBundle(<span class="stringliteral">&quot;Multilingual.messages&quot;</span>, locale);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        ImageIcon originalIcon = <span class="keyword">new</span> ImageIcon(<span class="stringliteral">&quot;static/img/retry.png&quot;</span>);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        Image scaledImage = originalIcon.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        ImageIcon scaledIcon = <span class="keyword">new</span> ImageIcon(scaledImage);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        panel = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        logo = <span class="keyword">new</span> JLabel();</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        filterPanel = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        filterPanel.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        flightFP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        flightFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        flightFilter = <span class="keyword">new</span> JTextField();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        flightLabel = <span class="keyword">new</span> JLabel();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        originFP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        originFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        originFilter = <span class="keyword">new</span> JComboBox&lt;&gt;();</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        originLabel = <span class="keyword">new</span> JLabel();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        destinationFP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        destinationFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        destinationFilter = <span class="keyword">new</span> JComboBox&lt;&gt;();</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        destinationLabel = <span class="keyword">new</span> JLabel();</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        dateFP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        dateFP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        dateFilter = <span class="keyword">new</span> JSpinner();</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        dateLabel = <span class="keyword">new</span> JLabel();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        bookFlightButton = <span class="keyword">new</span> JButton(messages.getString(<span class="stringliteral">&quot;view_flight&quot;</span>));</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        resetFiltersButton = <span class="keyword">new</span> JButton(messages.getString(<span class="stringliteral">&quot;reset_all&quot;</span>));</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        resetFlightP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        resetFlightP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        resetFlightP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        resetFlightFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        resetFlightFilterButton.addActionListener(e -&gt; resetFlightFilter());</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        resetFlightFilterButton.setBorder(<span class="keyword">null</span>);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        resetFlightFilterButton.setBackground(filterPanel.getBackground());</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        resetOriginP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        resetOriginP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        resetOriginP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        resetOriginFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        resetOriginFilterButton.addActionListener(e -&gt; resetOriginFilter());</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        resetOriginFilterButton.setBorder(<span class="keyword">null</span>);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        resetOriginFilterButton.setBackground(filterPanel.getBackground());</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        resetDestiantionP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        resetDestiantionP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        resetDestiantionP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        resetDestinationFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        resetDestinationFilterButton.addActionListener(e -&gt; resetDestinationFilter());</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        resetDestinationFilterButton.setBorder(<span class="keyword">null</span>);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        resetDestinationFilterButton.setBackground(filterPanel.getBackground());</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        resetDateP = <span class="keyword">new</span> JPanel();</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        resetDateP.setBackground(<span class="keyword">new</span> Color(200, 200, 200));</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        resetDateP.setLayout(<span class="keyword">new</span> FlowLayout(FlowLayout.LEFT));</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        resetDateFilterButton = <span class="keyword">new</span> JButton(scaledIcon);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        resetDateFilterButton.addActionListener(e -&gt; resetDateFilter());</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        resetDateFilterButton.setBorder(<span class="keyword">null</span>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        resetDateFilterButton.setBackground(filterPanel.getBackground());</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        getContentPane().setLayout(<span class="keyword">new</span> BorderLayout());</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        this.setSize(<span class="keyword">new</span> Dimension(1200, 500));</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        this.setVisible(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        this.setTitle(messages.getString(<span class="stringliteral">&quot;title&quot;</span>));</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        panel.setLayout(<span class="keyword">new</span> BorderLayout());</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        getContentPane().add(panel, BorderLayout.CENTER);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        filterPanel.setLayout(<span class="keyword">new</span> BoxLayout(filterPanel, BoxLayout.X_AXIS));</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        filterPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        logo.setText(messages.getString(<span class="stringliteral">&quot;logo&quot;</span>));</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        logo.setFont(<span class="keyword">new</span> Font(<span class="stringliteral">&quot;Arial&quot;</span>, Font.BOLD, 20));</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        logo.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        filterPanel.add(logo);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        lLanguage = <span class="keyword">new</span> JLabel(messages.getString(<span class="stringliteral">&quot;language&quot;</span>));</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a>.add(lLanguage);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a>.add(<a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        panel.add(<a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">pLanguage</a>, BorderLayout.SOUTH);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            @Override</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent e) {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                changeLanguage(userEmail, (Locale) <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">languageSelector</a>.getSelectedItem());</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        });</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        bookFlightButton.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            @Override</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent e) {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                onBookFlightButtonClick();</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        });</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        flightFP.setLayout(<span class="keyword">new</span> BoxLayout(flightFP, BoxLayout.Y_AXIS));</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        flightLabel.setText(messages.getString(<span class="stringliteral">&quot;flight_name&quot;</span>));</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        resetFlightP.add(flightLabel);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        resetFlightP.add(resetFlightFilterButton);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        flightFP.add(resetFlightP);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        flightFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        flightFP.add(flightFilter);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        filterPanel.add(flightFP);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        originFP.setLayout(<span class="keyword">new</span> BoxLayout(originFP, BoxLayout.Y_AXIS));</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        originFilter.setPreferredSize(<span class="keyword">new</span> Dimension(100, 20));</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        originLabel.setText(messages.getString(<span class="stringliteral">&quot;origin&quot;</span>));</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        resetOriginP.add(originLabel);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        resetOriginP.add(resetOriginFilterButton);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        originFP.add(resetOriginP);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        originFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        originFP.add(originFilter);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        filterPanel.add(originFP);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        destinationFP.setLayout(<span class="keyword">new</span> BoxLayout(destinationFP, BoxLayout.Y_AXIS));</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        destinationFilter.setPreferredSize(<span class="keyword">new</span> Dimension(100, 20));</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        destinationLabel.setText(messages.getString(<span class="stringliteral">&quot;destination&quot;</span>));</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        resetDestiantionP.add(destinationLabel);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        resetDestiantionP.add(resetDestinationFilterButton);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        destinationFP.add(resetDestiantionP);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        destinationFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        destinationFP.add(destinationFilter);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        filterPanel.add(destinationFP);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(5, 0)));</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        dateFP.setLayout(<span class="keyword">new</span> BoxLayout(dateFP, BoxLayout.Y_AXIS));</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        Calendar calendar = Calendar.getInstance();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        Date initDate = calendar.getTime();</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        calendar.add(Calendar.YEAR, -100);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        Date earliestDate = calendar.getTime();</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        calendar.add(Calendar.YEAR, 200);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        SpinnerDateModel sdm = <span class="keyword">new</span> SpinnerDateModel(initDate, earliestDate, <span class="keyword">null</span>, Calendar.DAY_OF_MONTH);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        dateFilter.setModel(sdm);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        JSpinner.DateEditor editor = <span class="keyword">new</span> JSpinner.DateEditor(dateFilter, <span class="stringliteral">&quot;dd/MM/yyyy&quot;</span>);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        DateFormatter formatter = (DateFormatter) editor.getTextField().getFormatter();</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        formatter.setAllowsInvalid(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        formatter.setOverwriteMode(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        dateFilter.setEditor(editor);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        dateFilter.setPreferredSize(<span class="keyword">new</span> Dimension(150, 20));</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        dateLabel.setText(messages.getString(<span class="stringliteral">&quot;date&quot;</span>));</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        resetDateP.add(dateLabel);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        resetDateP.add(resetDateFilterButton);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        dateFP.add(resetDateP);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        dateFP.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(0, 5)));</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        dateFP.add(dateFilter);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        filterPanel.add(dateFP);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(20, 0)));</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        filterPanel.add(resetFiltersButton);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        filterPanel.add(Box.createRigidArea(<span class="keyword">new</span> Dimension(10, 0)));</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        filterPanel.add(bookFlightButton);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        panel.add(filterPanel, BorderLayout.NORTH);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        flightTable = <span class="keyword">new</span> JTable();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        flightTable.setPreferredSize(<span class="keyword">new</span> Dimension(500, 400));</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        loadFlights();</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        loadFilters();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        centerWindow();</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        scrollPane = <span class="keyword">new</span> JScrollPane(flightTable);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        flightTable.addMouseListener(<span class="keyword">new</span> MouseAdapter() {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            @Override</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> mouseClicked(MouseEvent e) {</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                <span class="keywordflow">if</span> (e.getClickCount() == 2 &amp;&amp; flightTable.getSelectedRow() != -1) {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                    <span class="keywordtype">int</span> row = flightTable.getSelectedRow();</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                    <a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1FlightData.html">FlightData</a> flightData = flights.get(row);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                    onRowDoubleClick(flightData);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                }</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            }</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        });</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        panel.add(scrollPane, BorderLayout.CENTER);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        panel.revalidate();</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        panel.repaint();</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        flightFilter.getDocument().addDocumentListener(<span class="keyword">new</span> FilterListener(this::filterFlightsByFlightId));</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        originFilter.addActionListener(e -&gt; filterFlightsByOrigin());</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        destinationFilter.addActionListener(e -&gt; filterFlightsByDestination());</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        dateFilter.addChangeListener(<span class="keyword">new</span> ChangeListener() {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            @Override</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> stateChanged(ChangeEvent e) {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                filterFlightsByDate();</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            }</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        });</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> initResourceBundle(Locale locale) {</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">try</span> {</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            messages = ResourceBundle.getBundle(<span class="stringliteral">&quot;Multilingual.messages&quot;</span>, locale);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            System.err.println(<span class="stringliteral">&quot;Failed to load resource bundle: &quot;</span> + e.getMessage());</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    }</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> changeLanguage(String userEmail,Locale locale) {</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        Locale.setDefault(locale);</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        initResourceBundle(locale);</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        loadFlights();</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        loadFilters();</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        updateComponents(MainWindow.getInstance(user, locale));</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        updateComponents(MainWindow.getInstance(userEmail, locale));</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    }</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> updateComponents(MainWindow instance) {</div>
@@ -584,7 +585,7 @@ $(document).ready(function(){initNavTree('MainWindow_8java_source.html',''); ini
 <div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;    }</div>
 <div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160; </div>
 <div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> onRowDoubleClick(FlightData flight) {</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;        FlightWindow.getInstance(flight.getIdFlight(), user.getEmail()).setVisible(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;        FlightWindow.getInstance(flight.getIdFlight(), user.<a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html#a0b114646c33d5992ce18e90b4902e2c8">getEmail</a>()).setVisible(<span class="keyword">true</span>);</div>
 <div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;        ;</div>
 <div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;    }</div>
 <div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160; </div>
@@ -592,7 +593,7 @@ $(document).ready(function(){initNavTree('MainWindow_8java_source.html',''); ini
 <div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;        <span class="keywordtype">int</span> selectedRow = flightTable.getSelectedRow();</div>
 <div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;        <span class="keywordflow">if</span> (selectedRow != -1) {</div>
 <div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;            <span class="keywordtype">int</span> flightId = (int) flightTable.getValueAt(selectedRow, 0);</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;            FlightWindow.getInstance(flightId, user.getEmail()).setVisible(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;            FlightWindow.getInstance(flightId, user.<a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html#a0b114646c33d5992ce18e90b4902e2c8">getEmail</a>()).setVisible(<span class="keyword">true</span>);</div>
 <div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;            JOptionPane.showMessageDialog(<span class="keyword">this</span>, messages.getString(<span class="stringliteral">&quot;error_sel&quot;</span>), <span class="stringliteral">&quot;Error&quot;</span>, JOptionPane.WARNING_MESSAGE);</div>
 <div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        }</div>
@@ -606,24 +607,28 @@ $(document).ready(function(){initNavTree('MainWindow_8java_source.html',''); ini
 <div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        setLocation(largo, alto);</div>
 <div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    }</div>
 <div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160; </div>
-<div class="line"><a name="l00629"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a5d0b3f67a40f6c8c176be341d39cc617">  629</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a5d0b3f67a40f6c8c176be341d39cc617">getInstance</a>(<a class="code" href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html">UserData</a> user, Locale locale) {</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;        <span class="keywordflow">if</span> (instance == <span class="keyword">null</span>) {</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;            instance = <span class="keyword">new</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a>(user, locale);</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;        }</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;        <span class="keywordflow">return</span> instance;</div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    }</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160; </div>
-<div class="line"><a name="l00637"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a54c8d564fa4905eddd3fcc6e3fef1961">  637</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a54c8d564fa4905eddd3fcc6e3fef1961">deinit</a>() {</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;        instance = <span class="keyword">null</span>;</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    }</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;}</div>
-<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">com.aerologix.app.client.gui.MainWindow</a></div><div class="ttdoc">Class for the main menu window.</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00062">MainWindow.java:62</a></div></div>
-<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_a2d2e6a2a0fab8c315de929aba34de621"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">com.aerologix.app.client.gui.MainWindow.pLanguage</a></div><div class="ttdeci">JPanel pLanguage</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00101">MainWindow.java:101</a></div></div>
-<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_a54c8d564fa4905eddd3fcc6e3fef1961"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a54c8d564fa4905eddd3fcc6e3fef1961">com.aerologix.app.client.gui.MainWindow.deinit</a></div><div class="ttdeci">static void deinit()</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00637">MainWindow.java:637</a></div></div>
-<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_a5d0b3f67a40f6c8c176be341d39cc617"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a5d0b3f67a40f6c8c176be341d39cc617">com.aerologix.app.client.gui.MainWindow.getInstance</a></div><div class="ttdeci">static MainWindow getInstance(UserData user, Locale locale)</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00629">MainWindow.java:629</a></div></div>
-<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_ab639874013249019ac45401428d14a27"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">com.aerologix.app.client.gui.MainWindow.languageSelector</a></div><div class="ttdeci">JComboBox&lt; Locale &gt; languageSelector</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00102">MainWindow.java:102</a></div></div>
+<div class="line"><a name="l00627"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a69d6c77bc894f69fc3bc251cedf8e862">  627</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a69d6c77bc894f69fc3bc251cedf8e862">getInstance</a>(String userEmail, Locale locale) {</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;        <span class="keywordflow">if</span> (instance == <span class="keyword">null</span>) {</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;            instance = <span class="keyword">new</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">MainWindow</a>(userEmail, locale);</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;        }</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;        <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;    }</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
+<div class="line"><a name="l00635"></a><span class="lineno"><a class="line" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a54c8d564fa4905eddd3fcc6e3fef1961">  635</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a54c8d564fa4905eddd3fcc6e3fef1961">deinit</a>() {</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;        instance = <span class="keyword">null</span>;</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;    }</div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;}</div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController_html"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController.html">com.aerologix.app.client.controller.UserController</a></div><div class="ttdoc">Controller class for managing user-related operations.</div><div class="ttdef"><b>Definition:</b> <a href="UserController_8java_source.html#l00022">UserController.java:22</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController_html_a1ad0a74dd0eb30dd73359578f3bfcca6"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController.html#a1ad0a74dd0eb30dd73359578f3bfcca6">com.aerologix.app.client.controller.UserController.getUser</a></div><div class="ttdeci">UserData getUser(String email)</div><div class="ttdef"><b>Definition:</b> <a href="UserController_8java_source.html#l00192">UserController.java:192</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController_html_a42edcdbcd7058fc51d97883380a89573"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1controller_1_1UserController.html#a42edcdbcd7058fc51d97883380a89573">com.aerologix.app.client.controller.UserController.getInstance</a></div><div class="ttdeci">static synchronized UserController getInstance()</div><div class="ttdef"><b>Definition:</b> <a href="UserController_8java_source.html#l00039">UserController.java:39</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html">com.aerologix.app.client.gui.MainWindow</a></div><div class="ttdoc">Class for the main menu window.</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00063">MainWindow.java:63</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_a2d2e6a2a0fab8c315de929aba34de621"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a2d2e6a2a0fab8c315de929aba34de621">com.aerologix.app.client.gui.MainWindow.pLanguage</a></div><div class="ttdeci">JPanel pLanguage</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00102">MainWindow.java:102</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_a54c8d564fa4905eddd3fcc6e3fef1961"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a54c8d564fa4905eddd3fcc6e3fef1961">com.aerologix.app.client.gui.MainWindow.deinit</a></div><div class="ttdeci">static void deinit()</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00635">MainWindow.java:635</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_a69d6c77bc894f69fc3bc251cedf8e862"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#a69d6c77bc894f69fc3bc251cedf8e862">com.aerologix.app.client.gui.MainWindow.getInstance</a></div><div class="ttdeci">static MainWindow getInstance(String userEmail, Locale locale)</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00627">MainWindow.java:627</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow_html_ab639874013249019ac45401428d14a27"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1MainWindow.html#ab639874013249019ac45401428d14a27">com.aerologix.app.client.gui.MainWindow.languageSelector</a></div><div class="ttdeci">JComboBox&lt; Locale &gt; languageSelector</div><div class="ttdef"><b>Definition:</b> <a href="MainWindow_8java_source.html#l00103">MainWindow.java:103</a></div></div>
 <div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1FlightData_html"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1FlightData.html">com.aerologix.app.server.pojo.FlightData</a></div><div class="ttdoc">A data transfer object (DTO) representing a flight.</div><div class="ttdef"><b>Definition:</b> <a href="FlightData_8java_source.html#l00010">FlightData.java:10</a></div></div>
 <div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData_html"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html">com.aerologix.app.server.pojo.UserData</a></div><div class="ttdoc">A data transfer object (DTO) representing a user data.</div><div class="ttdef"><b>Definition:</b> <a href="UserData_8java_source.html#l00008">UserData.java:8</a></div></div>
+<div class="ttc" id="aclasscom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData_html_a0b114646c33d5992ce18e90b4902e2c8"><div class="ttname"><a href="classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1UserData.html#a0b114646c33d5992ce18e90b4902e2c8">com.aerologix.app.server.pojo.UserData.getEmail</a></div><div class="ttdeci">String getEmail()</div><div class="ttdef"><b>Definition:</b> <a href="UserData_8java_source.html#l00034">UserData.java:34</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
