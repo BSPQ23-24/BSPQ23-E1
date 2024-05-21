@@ -16,8 +16,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -412,13 +414,35 @@ public class MainWindow extends JFrame {
 	/** Method that loads the data of all flights into the JComboBoxes for the origin, destination and airline ID. */
 	private void loadFilters() {
 		ArrayList<AirlineData> airlines = AirlineController.getInstance(AeroLogixClient.getInstance()).getAllAirlines();
-		for (FlightData flight : flights) {
-			originFilter.addItem(flight.getOrigin().toString());
-			destinationFilter.addItem(flight.getDestination().toString());
-		}
-		for (AirlineData airline : airlines) {
-			airlinesFilter.addItem(airline.getName());
-		}
+		Set<String> origins = new HashSet<>();
+		Set<String> destinations = new HashSet<>();
+		Set<String> airlineNames = new HashSet<>();
+		
+		    // Add unique origins and destinations
+			for (FlightData flight : flights) {
+				origins.add(flight.getOrigin().toString());
+				destinations.add(flight.getDestination().toString());
+			}
+		
+			// Add unique airlines
+			for (AirlineData airline : airlines) {
+				airlineNames.add(airline.getName());
+			}
+		
+			// Populate originFilter with unique origins
+			for (String origin : origins) {
+				originFilter.addItem(origin);
+			}
+		
+			// Populate destinationFilter with unique destinations
+			for (String destination : destinations) {
+				destinationFilter.addItem(destination);
+			}
+		
+			// Populate airlinesFilter with unique airline names
+			for (String airlineName : airlineNames) {
+				airlinesFilter.addItem(airlineName);
+			}
 	}
 
 	/**
@@ -540,11 +564,10 @@ public class MainWindow extends JFrame {
 	 * @param flight {@link FlightData} instance of the flight which data will be added to the table.
 	 */
 	private void addRowToTable(FlightData flight) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		String formattedDate = dateFormat.format(new Date(flight.getDate() * 1000L));
-		String bookings = flight.getBookingIds().toString();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm"); 
+		String formattedDate = dateFormat.format(new Date(flight.getDate()));
 		Object[] row = { flight.getIdFlight(), flight.getOrigin(), flight.getDestination(), formattedDate,
-				flight.getAircraftId(), bookings.length() };
+				flight.getAircraftId(), flight.getBookingIds().size()};
 		flightTableModel.addRow(row);
 	}
 
