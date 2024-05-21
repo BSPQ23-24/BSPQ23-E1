@@ -143,9 +143,9 @@ public class LoginWindow extends JFrame {
 								LoginWindow.instanceLogin = null;
 								dispose();
 								UserData user = new UserData();
-								user.setEmail(lMail.getText());
+								user.setEmail(tMail.getText());
 								user.setName("");
-								user.setPassword(lPass.getText());
+								user.setPassword(tPass.getPassword().toString());
 								user.setUserType(UserType.COUNTER_CLERK.toString());
 								MainWindow mw = MainWindow.getInstance(user,new Locale("es", "ES"));
 							}
