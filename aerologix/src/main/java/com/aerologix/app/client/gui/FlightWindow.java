@@ -10,6 +10,8 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -33,6 +37,7 @@ import com.aerologix.app.server.pojo.PassengerData;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 /**
  * @brief Class for the window that displays the details of a flight.
@@ -50,6 +55,15 @@ public class FlightWindow extends JFrame {
 	
 	static JScrollPane scrollPane;
 	static JPanel pBookings;
+	protected JPanel pLanguage = new JPanel(new FlowLayout());
+	private ResourceBundle messages;
+	protected JComboBox<Locale> languageSelector;
+    protected JLabel lLanguage;
+    protected JLabel lFlightId;
+    protected JLabel lAirports;
+    protected JButton bNewBooking;
+    protected JButton bRefresh;
+    protected JLabel lDate;
 	
 	/**
 	 * Private constructor of the window.
@@ -57,13 +71,22 @@ public class FlightWindow extends JFrame {
 	 * @param userEmail	Email address of the user in the counter.
 	 */
 	private FlightWindow(int flightId, String userEmail) {
+		// Initialize ResourceBundle
+        initResourceBundle(Locale.getDefault());
+    
+        // Initialize components with ResourceBundle
+        languageSelector = new JComboBox<>(new Locale[]{new Locale("es", "ES"),Locale.US});
+        lLanguage = new JLabel(messages.getString("language"));
+		
+		
+		
 		getContentPane().setLayout(null);
 		getContentPane().setPreferredSize(new Dimension(800, 500));
 		this.setSize(new Dimension(830, 500));
 		this.setResizable(false);
-		
-		this.setTitle("AeroLogix - Flight " + flightId + " management");
+		this.setTitle("AeroLogix -" + messages.getString("flight") + flightId + messages.getString("management"));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setBounds(0, 0, 824, 34);
@@ -75,33 +98,37 @@ public class FlightWindow extends JFrame {
 		lAerologix.setFont(new Font("Arial", Font.BOLD, 25));
 		topPanel.add(lAerologix);
 		
-		JLabel lFlightId = new JLabel("Flight: " + flightId);
+		lFlightId = new JLabel(messages.getString("flight") + flightId);
 		lFlightId.setBounds(169, 12, 61, 16);
 		topPanel.add(lFlightId);
 		
 		DateFormat obj = new SimpleDateFormat("dd MMM yyyy HH:mm"); 
-		JLabel lDate = new JLabel("Date: " + obj.format(new Date(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getDate())));
+		lDate = new JLabel(messages.getString("date") + obj.format(new Date(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getDate())));
 		lDate.setBounds(273, 12, 200, 16);
 		topPanel.add(lDate);
 		
-		JLabel lAirports = new JLabel(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getOrigin() + " - " + FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getDestination());
+		lAirports = new JLabel(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getOrigin() + " - " + FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getDestination());
 		lAirports.setBounds(485, 12, 204, 16);
 		topPanel.add(lAirports);
 		
-		JButton bNewBooking = new JButton("Book flight");
+		bNewBooking = new JButton(messages.getString("BookFlight"));
 		bNewBooking.setBounds(701, 3, 117, 29);
 		topPanel.add(bNewBooking);
 		
 		pBookings = new JPanel();
 		pBookings.setLayout(new GridLayout(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getBookingIds().size(), 1));
+		pLanguage.add(lLanguage);
+        pLanguage.add(languageSelector);
+        pLanguage.setBounds(340, 410, 117, 60);
+		getContentPane().add(pLanguage);
 		
 		scrollPane = new JScrollPane(pBookings);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(140, 67, 560, 331);
 		getContentPane().add(scrollPane);
-		
-		JButton bRefresh = new JButton("Refresh list");
-		bRefresh.setBounds(696, 423, 117, 29);
+	
+		bRefresh = new JButton(messages.getString("RefreshList"));
+		bRefresh.setBounds(696, 415, 120, 29);
 		getContentPane().add(bRefresh);
 		
 		/**
@@ -114,7 +141,16 @@ public class FlightWindow extends JFrame {
 				bookFlight(flightId, userEmail);
 			}
 			
+			
 		});
+		
+		languageSelector.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeLanguage((Locale) languageSelector.getSelectedItem(), flightId);
+            }
+        });
+	
 		
 		/**
 		 * ActionListener that refreshes the booking list when '{@code bRefresh}' button is pressed.
@@ -139,6 +175,29 @@ public class FlightWindow extends JFrame {
 			}
 		});
 	}
+	
+	private void initResourceBundle(Locale locale) {
+        try {
+            messages = ResourceBundle.getBundle("Multilingual.messages", locale);
+        } catch (Exception e) {
+            System.err.println("Failed to load resource bundle: " + e.getMessage());
+        }
+    }
+	
+	private void changeLanguage(Locale locale, int flightId) {
+        Locale.setDefault(locale);
+        initResourceBundle(locale);
+        updateComponents(flightId);
+    }
+	
+	private void updateComponents(int flightId) {
+		lFlightId.setText(messages.getString("flight") + flightId);
+	    bNewBooking.setText(messages.getString("BookFlight"));
+	    bRefresh.setText(messages.getString("RefreshList"));
+	    lDate.setText(messages.getString("date"));
+        this.setTitle("AeroLogix -" + messages.getString("flight") + flightId + messages.getString("management"));
+        lLanguage.setText(messages.getString("language"));
+    }
 	
 	/**
 	 * Method that registers a booking in the system.

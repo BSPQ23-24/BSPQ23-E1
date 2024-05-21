@@ -221,7 +221,7 @@ public class RegisterWindow extends JFrame {
         lsPass.setText(messages.getString("password"));
         lssPass.setText(messages.getString("confirm_password"));
         lsNombre.setText(messages.getString("name"));
-        bSignup.setText(messages.getString("register"));
+        bSignup.setText(messages.getString("create"));
         pSignup.setBorder(BorderFactory.createTitledBorder(messages.getString("register_user")));
         this.setTitle(messages.getString("signup") + " - AeroLogix");
         lLanguage.setText(messages.getString("language"));

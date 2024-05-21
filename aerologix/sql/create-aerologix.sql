@@ -1,11 +1,246 @@
-/* DELETE 'aerologixdb' database*/
-DROP SCHEMA IF EXISTS aerologixdb;
-/* DELETE USER 'spq' AT LOCAL SERVER*/
-DROP USER IF EXISTS 'spq'@'localhost';
+CREATE DATABASE  IF NOT EXISTS `aerologixdb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `aerologixdb`;
+-- MySQL dump 10.13  Distrib 8.0.36, for macos14 (arm64)
+--
+-- Host: localhost    Database: aerologixdb
+-- ------------------------------------------------------
+-- Server version	8.0.27
 
-/* CREATE 'aerologixDB' DATABASE */
-CREATE SCHEMA aerologixdb;
-/* CREATE THE USER 'spq' AT LOCAL SERVER WITH PASSWORD 'spq' */
-CREATE USER IF NOT EXISTS 'spq'@'localhost' IDENTIFIED BY 'spq';
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-GRANT ALL ON aerologixdb.* TO 'spq'@'localhost';
+--
+-- Table structure for table `AIRCRAFT`
+--
+
+DROP TABLE IF EXISTS `AIRCRAFT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AIRCRAFT` (
+  `ID` int NOT NULL,
+  `MANUFACTURER` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `MAXCAPACITY` int NOT NULL,
+  `TYPE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AIRCRAFT`
+--
+
+LOCK TABLES `AIRCRAFT` WRITE;
+/*!40000 ALTER TABLE `AIRCRAFT` DISABLE KEYS */;
+INSERT INTO `AIRCRAFT` VALUES (1,'Boeing',300,'737');
+/*!40000 ALTER TABLE `AIRCRAFT` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AIRLINE`
+--
+
+DROP TABLE IF EXISTS `AIRLINE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AIRLINE` (
+  `IDAIRLINE` int NOT NULL,
+  `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`IDAIRLINE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AIRLINE`
+--
+
+LOCK TABLES `AIRLINE` WRITE;
+/*!40000 ALTER TABLE `AIRLINE` DISABLE KEYS */;
+INSERT INTO `AIRLINE` VALUES (1,'Iberia'),(2,'Vueling');
+/*!40000 ALTER TABLE `AIRLINE` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `BOOKING`
+--
+
+DROP TABLE IF EXISTS `BOOKING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `BOOKING` (
+  `ID` int NOT NULL,
+  `AIRLINE_IDAIRLINE_OID` int DEFAULT NULL,
+  `PASSENGER_DNI_OID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `USER_EMAIL_OID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `BOOKING_N49` (`USER_EMAIL_OID`),
+  KEY `BOOKING_N51` (`AIRLINE_IDAIRLINE_OID`),
+  KEY `BOOKING_N50` (`PASSENGER_DNI_OID`),
+  CONSTRAINT `BOOKING_FK1` FOREIGN KEY (`AIRLINE_IDAIRLINE_OID`) REFERENCES `AIRLINE` (`IDAIRLINE`),
+  CONSTRAINT `BOOKING_FK2` FOREIGN KEY (`PASSENGER_DNI_OID`) REFERENCES `PASSENGER` (`DNI`),
+  CONSTRAINT `BOOKING_FK3` FOREIGN KEY (`USER_EMAIL_OID`) REFERENCES `USER` (`EMAIL`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `BOOKING`
+--
+
+LOCK TABLES `BOOKING` WRITE;
+/*!40000 ALTER TABLE `BOOKING` DISABLE KEYS */;
+INSERT INTO `BOOKING` VALUES (1,1,'7868768K','user1'),(2,1,'823712P','user1'),(3,1,'71289731I','user1');
+/*!40000 ALTER TABLE `BOOKING` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `FLIGHT`
+--
+
+DROP TABLE IF EXISTS `FLIGHT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `FLIGHT` (
+  `IDFLIGHT` int NOT NULL,
+  `AIRCRAFT_ID_OID` int DEFAULT NULL,
+  `DATE` bigint NOT NULL,
+  `DESTINATION` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `ORIGIN` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`IDFLIGHT`),
+  KEY `FLIGHT_N49` (`AIRCRAFT_ID_OID`),
+  CONSTRAINT `FLIGHT_FK1` FOREIGN KEY (`AIRCRAFT_ID_OID`) REFERENCES `AIRCRAFT` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `FLIGHT`
+--
+
+LOCK TABLES `FLIGHT` WRITE;
+/*!40000 ALTER TABLE `FLIGHT` DISABLE KEYS */;
+INSERT INTO `FLIGHT` VALUES (1,1,1716201000000,'Bilbao','Madrid');
+/*!40000 ALTER TABLE `FLIGHT` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `FLIGHT_BOOKINGS`
+--
+
+DROP TABLE IF EXISTS `FLIGHT_BOOKINGS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `FLIGHT_BOOKINGS` (
+  `IDFLIGHT_OID` int NOT NULL,
+  `ID_EID` int NOT NULL,
+  PRIMARY KEY (`IDFLIGHT_OID`,`ID_EID`),
+  KEY `FLIGHT_BOOKINGS_N49` (`ID_EID`),
+  KEY `FLIGHT_BOOKINGS_N50` (`IDFLIGHT_OID`),
+  CONSTRAINT `FLIGHT_BOOKINGS_FK1` FOREIGN KEY (`IDFLIGHT_OID`) REFERENCES `FLIGHT` (`IDFLIGHT`),
+  CONSTRAINT `FLIGHT_BOOKINGS_FK2` FOREIGN KEY (`ID_EID`) REFERENCES `BOOKING` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `FLIGHT_BOOKINGS`
+--
+
+LOCK TABLES `FLIGHT_BOOKINGS` WRITE;
+/*!40000 ALTER TABLE `FLIGHT_BOOKINGS` DISABLE KEYS */;
+INSERT INTO `FLIGHT_BOOKINGS` VALUES (1,1),(1,2),(1,3);
+/*!40000 ALTER TABLE `FLIGHT_BOOKINGS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PASSENGER`
+--
+
+DROP TABLE IF EXISTS `PASSENGER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `PASSENGER` (
+  `DNI` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `BIRTHDATE` bigint NOT NULL,
+  `EMAIL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `NATIONALITY` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `PHONE` int NOT NULL,
+  PRIMARY KEY (`DNI`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PASSENGER`
+--
+
+LOCK TABLES `PASSENGER` WRITE;
+/*!40000 ALTER TABLE `PASSENGER` DISABLE KEYS */;
+INSERT INTO `PASSENGER` VALUES ('71289731I',616500000000,'passenger3@mail.com','Passenger 3','France',71362786),('7868768K',795481200000,'passenger1@mail.com','Passenger 1','Spain',6893792),('823712P',982540800000,'passenger2@mail.com','Passenger 2','Italy',7864821);
+/*!40000 ALTER TABLE `PASSENGER` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `SEQUENCE_TABLE`
+--
+
+DROP TABLE IF EXISTS `SEQUENCE_TABLE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `SEQUENCE_TABLE` (
+  `SEQUENCE_NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `NEXT_VAL` bigint NOT NULL,
+  PRIMARY KEY (`SEQUENCE_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `SEQUENCE_TABLE`
+--
+
+LOCK TABLES `SEQUENCE_TABLE` WRITE;
+/*!40000 ALTER TABLE `SEQUENCE_TABLE` DISABLE KEYS */;
+INSERT INTO `SEQUENCE_TABLE` VALUES ('com.aerologix.app.server.jdo.Aircraft',12),('com.aerologix.app.server.jdo.Airline',13),('com.aerologix.app.server.jdo.Booking',23),('com.aerologix.app.server.jdo.Flight',12);
+/*!40000 ALTER TABLE `SEQUENCE_TABLE` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `USER`
+--
+
+DROP TABLE IF EXISTS `USER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `USER` (
+  `EMAIL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `PASSWORD` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `USERTYPE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`EMAIL`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USER`
+--
+
+LOCK TABLES `USER` WRITE;
+/*!40000 ALTER TABLE `USER` DISABLE KEYS */;
+INSERT INTO `USER` VALUES ('user1','User 1','user1','COUNTER_CLERK');
+/*!40000 ALTER TABLE `USER` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-05-21 18:00:28
