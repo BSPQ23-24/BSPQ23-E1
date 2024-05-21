@@ -28,6 +28,8 @@ import javax.swing.border.LineBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JComboBox;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * @brief Class of the panel for the form to modify an existent booking.
@@ -50,6 +52,19 @@ public class BookingModifyPanel extends JPanel {
 	private UtilDateModel model;
 	private JDatePicker datePicker;
 	private JComboBox cbAirline;
+	private JComboBox<Locale> languageSelector;
+	private JLabel lLanguage;
+	private ResourceBundle messages;
+	private JLabel lTitle;
+	private JLabel lDNI;
+	private JLabel lPhone;
+	private JLabel lEmail;
+	private JLabel lName;
+	private JLabel lNationality;
+	private JLabel lBirthdate;
+	private JLabel lAirline;
+	private JButton bRefresh;
+	private JButton bReset;
 	
 	private static BookingModifyPanel instance;
 	
@@ -59,10 +74,11 @@ public class BookingModifyPanel extends JPanel {
 	 * @param bookingId	Identification integer of a {@link com.aerologix.app.server.jdo.Booking Booking} for which the booking is being created.
 	 */
 	private BookingModifyPanel(int bookingId) {
+		initResourceBundle(Locale.getDefault());
 		setLayout(null);
 		setSize(340, 550);
 		
-		JLabel lTitle = new JLabel("Modifying booking no: " + bookingId);
+		lTitle = new JLabel(messages.getString("modifyingBooking") + bookingId);
 		lTitle.setFont(new Font("Arial", Font.PLAIN, 14));
 		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lTitle.setBounds(26, 6, 286, 16);
@@ -78,7 +94,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pDNI);
 		pDNI.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lDNI = new JLabel("Passenger DNI");
+		lDNI = new JLabel(messages.getString("passengerDNI"));
 		lDNI.setFont(new Font("Arial", Font.PLAIN, 13));
 		pDNI.add(lDNI);
 		
@@ -93,7 +109,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pPhone);
 		pPhone.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lPhone = new JLabel("Type in passenger phone number");
+		lPhone = new JLabel(messages.getString("TypeNumber"));
 		lPhone.setFont(new Font("Arial", Font.PLAIN, 13));
 		pPhone.add(lPhone);
 		
@@ -106,7 +122,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pEmail);
 		pEmail.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lEmail = new JLabel("Type in passenger email address");
+		lEmail = new JLabel(messages.getString("TypeEmail"));
 		lEmail.setFont(new Font("Arial", Font.PLAIN, 13));
 		pEmail.add(lEmail);
 		
@@ -119,7 +135,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pName);
 		pName.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lName = new JLabel("Type in passenger full name");
+		lName = new JLabel(messages.getString("TypeName"));
 		lName.setFont(new Font("Arial", Font.PLAIN, 13));
 		pName.add(lName);
 		
@@ -132,7 +148,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pNationality);
 		pNationality.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lNationality = new JLabel("Type in passenger nationality");
+		lNationality = new JLabel(messages.getString("TypeNationality"));
 		lNationality.setFont(new Font("Arial", Font.PLAIN, 13));
 		pNationality.add(lNationality);
 		
@@ -145,7 +161,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pBirthdate);
 		pBirthdate.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lBirthdate = new JLabel("Select passenger birth date");
+		lBirthdate = new JLabel(messages.getString("SelectBirth"));
 		lBirthdate.setFont(new Font("Arial", Font.PLAIN, 13));
 		pBirthdate.add(lBirthdate);
 		
@@ -161,7 +177,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pAirline);
 		pAirline.setLayout(new GridLayout(2, 1, 0, 0));
 		
-		JLabel lAirline = new JLabel("Select the airline");
+		lAirline = new JLabel(messages.getString("SelectAirline"));
 		lAirline.setFont(new Font("Arial", Font.PLAIN, 13));
 		pAirline.add(lAirline);
 		
@@ -174,7 +190,7 @@ public class BookingModifyPanel extends JPanel {
 		pCombobox.add(cbAirline);
 		cbAirline.setFont(new Font("Arial", Font.PLAIN, 13));
 		
-		JButton bRefresh = new JButton("Refresh list");
+		bRefresh = new JButton(messages.getString("RefreshList"));
 		bRefresh.setFont(new Font("Arial", Font.PLAIN, 13));
 		bRefresh.setBounds(167, 4, 117, 29);
 		pCombobox.add(bRefresh);
@@ -198,7 +214,7 @@ public class BookingModifyPanel extends JPanel {
 		pForm.add(pReset);
 		pReset.setLayout(new BorderLayout());
 		
-		JButton bReset = new JButton("Reload default data");
+		bReset = new JButton(messages.getString("ReloadData"));
 		pReset.add(bReset, BorderLayout.SOUTH);
 			
 		bReset.addActionListener(new ActionListener() {
@@ -210,7 +226,57 @@ public class BookingModifyPanel extends JPanel {
 		});
 		
 		defaultData(bookingId);
+		
+		JPanel pLanguage = new JPanel(new GridLayout(2, 1, 0, 0));
+	    lLanguage = new JLabel(messages.getString("language"));
+	    lLanguage.setFont(new Font("Arial", Font.PLAIN, 13));
+	    pLanguage.add(lLanguage);
+
+	    languageSelector = new JComboBox<>(new Locale[]{new Locale("es", "ES"), Locale.US});
+	    languageSelector.setFont(new Font("Arial", Font.PLAIN, 13));
+	    languageSelector.setSelectedItem(Locale.getDefault());
+	    pLanguage.add(languageSelector);
+
+	    pLanguage.setBounds(26, 470, 150, 50);
+	    add(pLanguage);
+
+	    languageSelector.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            changeLanguage((Locale) languageSelector.getSelectedItem(), bookingId);
+	        }
+	    });
 	}
+
+		// Add these methods to handle language change
+		private void initResourceBundle(Locale locale) {
+		    try {
+		        messages = ResourceBundle.getBundle("Multilingual.messages", locale);
+		    } catch (Exception e) {
+		        System.err.println("Failed to load resource bundle: " + e.getMessage());
+		    }
+		}
+
+		private void changeLanguage(Locale locale, int bookingId) {
+		    Locale.setDefault(locale);
+		    initResourceBundle(locale);
+		    updateComponents(bookingId);
+		}
+
+		private void updateComponents(int bookingId) {
+		    lTitle.setText(messages.getString("modifyingBooking") + bookingId);
+		    lDNI.setText(messages.getString("passengerDNI"));
+		    lPhone.setText(messages.getString("TypeNumber"));
+		    lEmail.setText(messages.getString("TypeEmail"));
+		    lName.setText(messages.getString("TypeName"));
+		    lNationality.setText(messages.getString("TypeNationality"));
+		    lBirthdate.setText(messages.getString("SelectBirth"));
+		    lAirline.setText(messages.getString("SelectAirline"));
+		    bRefresh.setText(messages.getString("RefreshList"));
+		    bReset.setText(messages.getString("ReloadData"));
+		    lLanguage.setText(messages.getString("language"));
+		}
+	
 	
 	/**
 	 * Method that cleans the items in the JComboBox that contains the
