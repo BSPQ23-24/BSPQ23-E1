@@ -41,6 +41,7 @@ public class LoginWindow extends JFrame {
     protected JButton bSignup;
     protected JLabel lLogo = new JLabel("AeroLogix");
     protected JComboBox<Locale> languageSelector;
+    protected JLabel lLanguage;
 
 
     // Palette
@@ -58,7 +59,6 @@ public class LoginWindow extends JFrame {
         lSignup = new JLabel(messages.getString("register"));
         bSignup = new JButton(messages.getString("create"));
         languageSelector = new JComboBox<>(new Locale[]{new Locale("es", "ES"),Locale.US});
-
 
         this.setTitle("Login - AeroLogix");
         this.setSize(450, 300);
@@ -85,7 +85,8 @@ public class LoginWindow extends JFrame {
         bSignup.setBorder(BorderFactory.createEmptyBorder());
         pSignup.add(bSignup);
         pLogin.add(pSignup);
-        pLanguage.add(new JLabel("Language:"));
+        lLanguage = new JLabel(messages.getString("language"));
+        pLanguage.add(lLanguage);
         pLanguage.add(languageSelector);
         pLogin.add(pLanguage);
         lLogo.setFont(new Font("Arial", Font.BOLD, 30));
@@ -224,6 +225,7 @@ public class LoginWindow extends JFrame {
         lSignup.setText(messages.getString("register"));
         bSignup.setText(messages.getString("create"));
         this.setTitle(messages.getString("login") + " - AeroLogix");
+        lLanguage.setText(messages.getString("language"));
     }
 
     private void centerWindow() {

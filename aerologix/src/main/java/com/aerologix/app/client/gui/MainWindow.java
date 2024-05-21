@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -88,6 +89,7 @@ public class MainWindow extends JFrame {
 	private JPanel resetOriginP;
 	private JPanel resetDestiantionP;
 	private JPanel resetDateP;
+	private JLabel lLanguage;
 
 	protected JPanel pLanguage = new JPanel(new FlowLayout());
 	protected JComboBox<Locale> languageSelector;
@@ -127,7 +129,7 @@ public class MainWindow extends JFrame {
 		dateFP.setBackground(new Color(200, 200, 200));
 		dateFilter = new JSpinner();
 		dateLabel = new JLabel();
-		bookFlightButton = new JButton(messages.getString("book_flight"));
+		bookFlightButton = new JButton(messages.getString("view_flight"));
 		resetFiltersButton = new JButton(messages.getString("reset_all"));
 		resetFlightP = new JPanel();
 		resetFlightP.setBackground(new Color(200, 200, 200));
@@ -182,14 +184,15 @@ public class MainWindow extends JFrame {
 		logo.setFont(new Font("Arial", Font.BOLD, 20));
 		logo.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 		filterPanel.add(logo);
-		pLanguage.add(new JLabel("Language:"));
+		lLanguage = new JLabel(messages.getString("language"));
+		pLanguage.add(lLanguage);
 		pLanguage.add(languageSelector);
 		panel.add(pLanguage, BorderLayout.SOUTH);
 
 		languageSelector.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeLanguage((Locale) languageSelector.getSelectedItem());
+				changeLanguage(user, (Locale) languageSelector.getSelectedItem());
 			}
 		});
 
@@ -316,24 +319,24 @@ public class MainWindow extends JFrame {
 		}
 	}
 
-	private void changeLanguage(Locale locale) {
+	private void changeLanguage(UserData user,Locale locale) {
 		Locale.setDefault(locale);
 		initResourceBundle(locale);
 		loadFlights();
 		loadFilters();
-		updateComponents();
+		updateComponents(MainWindow.getInstance(user, locale));
 	}
 
-	private void updateComponents() {
+	private void updateComponents(MainWindow instance) {
 		flightLabel.setText(messages.getString("flight_name"));
 		airlinesLabel.setText(messages.getString("airline"));
 		originLabel.setText(messages.getString("origin"));
 		destinationLabel.setText(messages.getString("destination"));
 		dateLabel.setText(messages.getString("date"));
-		bookFlightButton.setText(messages.getString("book_flight"));
+		bookFlightButton.setText(messages.getString("view_flight"));
 		resetFiltersButton.setText(messages.getString("reset_all"));
-
-		this.setTitle(messages.getString("title"));
+		lLanguage.setText(messages.getString("language"));
+		instance.setTitle(messages.getString("title"));
 
 	}
 
@@ -379,7 +382,7 @@ public class MainWindow extends JFrame {
 
 	private void loadFlights() {
 		String[] columnNames = new String[] { "ID", messages.getString("origin"), messages.getString("destination"),
-				messages.getString("date"), "Aircraft ID", messages.getString("bookings") };
+				messages.getString("date"), messages.getString("aircraft"), messages.getString("bookings") };
 
 		flightTableModel = new DefaultTableModel(columnNames, 0) {
 			private static final long serialVersionUID = 1L;
@@ -394,15 +397,13 @@ public class MainWindow extends JFrame {
 
 		flights = FlightController.getInstance(AeroLogixClient.getInstance()).getAllFlights();
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat obj = new SimpleDateFormat("dd MMM yyyy HH:mm"); 
 
 		for (FlightData flight : flights) {
-			String formattedDate = dateFormat.format(new Date(flight.getDate() * 1000L));
-
-			String bookings = flight.getBookingIds().toString();
+			String formattedDate = obj.format(new Date(flight.getDate()));
 
 			Object[] row = { flight.getIdFlight(), flight.getOrigin(), flight.getDestination(), formattedDate,
-					flight.getAircraftId(), bookings.length() };
+					flight.getAircraftId(), Integer.toString(flight.getBookingIds().size()) };
 
 			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -525,7 +526,7 @@ public class MainWindow extends JFrame {
 		int selectedRow = flightTable.getSelectedRow();
 		if (selectedRow != -1) {
 			int flightId = (int) flightTable.getValueAt(selectedRow, 0);
-			BookingFormPanel bfp = BookingFormPanel.getInstance(flightId);
+			FlightWindow.getInstance(flightId, user.getEmail()).setVisible(true);
 		} else {
 			JOptionPane.showMessageDialog(this, messages.getString("error_sel"), "Error", JOptionPane.WARNING_MESSAGE);
 		}

@@ -50,6 +50,7 @@ public class RegisterWindow extends JFrame {
     protected JTextField tsNombre = new JTextField(15);
     protected JButton bSignup;
     protected JLabel lsError = new JLabel("");
+    protected JLabel lLanguage;
     private JComboBox<Locale> languageSelector;
 
     private ResourceBundle messages;
@@ -63,11 +64,12 @@ public class RegisterWindow extends JFrame {
         lsPass = new JLabel(messages.getString("password"));
         lssPass = new JLabel(messages.getString("confirm_password"));
         lsNombre = new JLabel(messages.getString("name"));
-        bSignup = new JButton(messages.getString("register"));
+        bSignup = new JButton(messages.getString("create"));
+        lLanguage = new JLabel(messages.getString("language"));
 
         languageSelector = new JComboBox<>(new Locale[]{new Locale("es", "ES"), Locale.US});
         languageSelector.setPreferredSize(new Dimension(100, 25));
-        this.setTitle(messages.getString("register") + " - AeroLogix");
+        this.setTitle(messages.getString("create") + " - AeroLogix");
         this.setSize(450, 320);
         centerWindow();
         this.setLayout(new FlowLayout());
@@ -89,7 +91,7 @@ public class RegisterWindow extends JFrame {
         psb.add(bSignup);
         psb.add(lsError);
         pSignup.add(psb);
-        pLanguage.add(new JLabel("Language:"));
+        pLanguage.add(lLanguage);
         pLanguage.add(languageSelector);
         pPrincipal.add(pSignup);
         pPrincipal.add(pLanguage);
@@ -191,7 +193,8 @@ public class RegisterWindow extends JFrame {
         lsNombre.setText(messages.getString("name"));
         bSignup.setText(messages.getString("register"));
         pSignup.setBorder(BorderFactory.createTitledBorder(messages.getString("register_user")));
-        this.setTitle(messages.getString("register") + " - AeroLogix");
+        this.setTitle(messages.getString("signup") + " - AeroLogix");
+        lLanguage.setText(messages.getString("language"));
     }
     
 	private void centerWindow() {
