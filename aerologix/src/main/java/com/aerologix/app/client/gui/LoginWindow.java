@@ -135,6 +135,8 @@ public class LoginWindow extends JFrame {
 					if(UserController.getInstance().login(tMail.getText(), tPass.getText())) {
                         UserData ud = UserController.getInstance().getUser(tMail.getText());
 						MainWindow.getInstance(ud.getEmail(), new Locale("es", "ES"));
+                        deinit();
+                        dispose();
 					} else {
 						Thread hilo = new Thread() {
 							@Override

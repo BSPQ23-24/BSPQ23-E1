@@ -61,7 +61,7 @@ public class BookingFormPanel extends JPanel {
 	private BookingFormPanel(int flightId) {
 		initResourceBundle(Locale.getDefault());
 		setLayout(null);
-		setSize(340, 550);
+		setSize(340, 580);
 		
 		JLabel lTitle = new JLabel(messages.getString("creatingBooking") + flightId);
         lTitle.setFont(new Font("Arial", Font.PLAIN, 14));

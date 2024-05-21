@@ -211,7 +211,7 @@ public class FlightWindow extends JFrame {
 	public static void bookFlight(int flightId, String userEmail) {
 		// Create a panel of the data form
 		BookingFormPanel panel = BookingFormPanel.getInstance(flightId);
-		panel.setPreferredSize(new Dimension(340, 500));
+		panel.setPreferredSize(new Dimension(340, 550));
 		int option = JOptionPane.showConfirmDialog(null, panel, "Booking flight " + flightId, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 		if (option == JOptionPane.OK_OPTION) {
 			int option2 = JOptionPane.showConfirmDialog(null, "Booking will be registered. Are you sure?", "Book flight " + flightId, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -325,7 +325,7 @@ public class FlightWindow extends JFrame {
 	public static void modifyBooking(int bookingId, int flightId, String userEmail ) {
 		// Create a panel of the data form
 		BookingModifyPanel panel = BookingModifyPanel.getInstance(bookingId);
-		panel.setPreferredSize(new Dimension(340, 510));
+		panel.setPreferredSize(new Dimension(340, 550));
 		Object[] texts = {"Accept","Cancel"};
 		int option = JOptionPane.showOptionDialog(null, panel, "Modifying booking " + bookingId, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, texts, texts[0]);
 		if (option == JOptionPane.OK_OPTION) { //This is accept button

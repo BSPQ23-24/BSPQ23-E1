@@ -76,7 +76,7 @@ public class BookingModifyPanel extends JPanel {
 	private BookingModifyPanel(int bookingId) {
 		initResourceBundle(Locale.getDefault());
 		setLayout(null);
-		setSize(340, 550);
+		setSize(340, 580);
 		
 		lTitle = new JLabel(messages.getString("modifyingBooking") + bookingId);
 		lTitle.setFont(new Font("Arial", Font.PLAIN, 14));

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -153,6 +154,15 @@ public class MainWindow extends JFrame {
 
 		this.setTitle(messages.getString("title"));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+				LoginWindow.getInstanceLogin();
+                deinit();
+                dispose();
+            }
+		});
 
 		panel.setLayout(new BorderLayout());
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -381,8 +391,7 @@ public class MainWindow extends JFrame {
 		for (FlightData flight : flights) {
 			String formattedDate = obj.format(new Date(flight.getDate()));
 
-			Object[] row = { flight.getIdFlight(), flight.getOrigin(), flight.getDestination(), formattedDate,
-					flight.getAircraftId(), Integer.toString(flight.getBookingIds().size()) };
+			Object[] row = { flight.getIdFlight(), flight.getOrigin(), flight.getDestination(), formattedDate, flight.getBookingIds().size() };
 
 			DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 			centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -398,6 +407,8 @@ public class MainWindow extends JFrame {
 	private void filterFlightsByFlightId() {
 		String flightIdFilter = flightFilter.getText().toLowerCase();
 		flightTableModel.setRowCount(0);
+
+		flights = FlightController.getInstance(AeroLogixClient.getInstance()).getAllFlights();
 
 		for (FlightData flight : flights) {
 			if (!flightIdFilter.isEmpty()
@@ -415,6 +426,8 @@ public class MainWindow extends JFrame {
 				: "";
 		flightTableModel.setRowCount(0);
 
+		flights = FlightController.getInstance(AeroLogixClient.getInstance()).getAllFlights();
+
 		for (FlightData flight : flights) {
 			if (!originFilterText.isEmpty() && !flight.getOrigin().toLowerCase().contains(originFilterText)) {
 				continue;
@@ -429,6 +442,8 @@ public class MainWindow extends JFrame {
 				? destinationFilter.getSelectedItem().toString().toLowerCase()
 				: "";
 		flightTableModel.setRowCount(0);
+
+		flights = FlightController.getInstance(AeroLogixClient.getInstance()).getAllFlights();
 
 		for (FlightData flight : flights) {
 			if (!destinationFilterText.isEmpty()
@@ -448,8 +463,7 @@ public class MainWindow extends JFrame {
 	private void addRowToTable(FlightData flight) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
 		String formattedDate = dateFormat.format(new Date(flight.getDate()));
-		Object[] row = { flight.getIdFlight(), flight.getOrigin(), flight.getDestination(), formattedDate,
-				flight.getAircraftId(), flight.getBookingIds().size() };
+		Object[] row = { flight.getIdFlight(), flight.getOrigin(), flight.getDestination(), formattedDate, flight.getBookingIds().size() };
 		flightTableModel.addRow(row);
 	}
 

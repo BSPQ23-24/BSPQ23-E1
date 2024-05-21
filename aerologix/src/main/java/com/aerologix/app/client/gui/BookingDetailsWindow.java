@@ -97,7 +97,7 @@ public class BookingDetailsWindow extends JFrame {
         panel.add(lAirline);
 
         JButton bClose = new JButton(messages.getString("close"));
-        bClose.setBounds(320, 260, 85, 25);
+        bClose.setBounds(320, 240, 85, 25);
         panel.add(bClose);
 
         bClose.addActionListener(new ActionListener() {
