@@ -91,6 +91,9 @@ $(document).ready(function(){initNavTree('classcom_1_1aerologix_1_1app_1_1server
 <div class="title">com.aerologix.app.server.jdo.Booking Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a booking entity in the system.  
+ <a href="classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Booking.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -135,8 +138,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a72d2f3512fd1784b753e99c1f3cd407a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00009">9</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<div class="textblock"><p>Represents a booking entity in the system. </p>
+<p>This class is annotated for persistence with JDO (Java Data Objects). It includes details about a booking such as the associated passenger, flight, user, and airline. The class provides getter and setter methods to access and modify the fields. </p>
+
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00016">16</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a179175835d6a34df6dadff5f92d8265b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a179175835d6a34df6dadff5f92d8265b">&#9670;&nbsp;</a></span>Booking() <span class="overload">[1/2]</span></h2>
@@ -152,8 +157,9 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Default constructor initializing fields to default values. </p>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00026">26</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00035">35</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -200,8 +206,19 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Parameterized constructor to initialize a booking with the specified values.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The unique identifier for the booking. </td></tr>
+    <tr><td class="paramname">passenger</td><td>The passenger associated with the booking. </td></tr>
+    <tr><td class="paramname">flight</td><td>The flight associated with the booking. </td></tr>
+    <tr><td class="paramname">user</td><td>The user who made the booking. </td></tr>
+    <tr><td class="paramname">airline</td><td>The airline associated with the booking. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00034">34</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00051">51</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -220,8 +237,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the airline associated with the booking.</p>
+<dl class="section return"><dt>Returns</dt><dd>The airline. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00076">76</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00129">129</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -239,8 +258,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the flight associated with the booking.</p>
+<dl class="section return"><dt>Returns</dt><dd>The flight. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00060">60</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00097">97</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -258,8 +279,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the unique identifier for the booking.</p>
+<dl class="section return"><dt>Returns</dt><dd>The ID of the booking. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00044">44</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00065">65</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -277,8 +300,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the passenger associated with the booking.</p>
+<dl class="section return"><dt>Returns</dt><dd>The passenger. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00052">52</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00081">81</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -296,8 +321,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the user who made the booking.</p>
+<dl class="section return"><dt>Returns</dt><dd>The user. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00068">68</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00113">113</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -316,8 +343,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the airline associated with the booking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">airline</td><td>The new airline. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00080">80</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00137">137</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -336,8 +370,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the flight associated with the booking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flight</td><td>The new flight. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00064">64</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00105">105</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -356,8 +397,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the unique identifier for the booking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The new ID of the booking. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00048">48</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00073">73</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -376,8 +424,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the passenger associated with the booking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">passenger</td><td>The new passenger. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00056">56</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00089">89</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -396,8 +451,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the user who made the booking.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>The new user. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00072">72</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00121">121</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -415,8 +477,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns a string representation of the booking.</p>
+<dl class="section return"><dt>Returns</dt><dd>A string representing the booking. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00085">85</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00146">146</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -440,8 +504,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The airline associated with the booking. </p>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00024">24</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00031">31</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -464,8 +529,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The flight associated with the booking. </p>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00018">18</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00025">25</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -488,8 +554,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The unique identifier for the booking, generated incrementally. </p>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00013">13</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00020">20</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -512,8 +579,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The passenger associated with the booking. </p>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00016">16</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00023">23</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>
@@ -536,8 +604,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The user who made the booking. </p>
 
-<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00021">21</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Booking_8java_source.html#l00028">28</a> of file <a class="el" href="Booking_8java_source.html">Booking.java</a>.</p>
 
 </div>
 </div>

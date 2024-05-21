@@ -91,6 +91,9 @@ $(document).ready(function(){initNavTree('classcom_1_1aerologix_1_1app_1_1server
 <div class="title">com.aerologix.app.server.jdo.Flight Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a flight entity in the system.  
+ <a href="classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -141,8 +144,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad362639cd3cbe54ca500ce3477696474"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00013">13</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<div class="textblock"><p>Represents a flight entity in the system. </p>
+<p>This class is annotated for persistence with JDO (Java Data Objects). It includes details about a flight such as origin, destination, date, associated aircraft, and bookings. The class provides getter and setter methods to access and modify the fields. </p>
+
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00020">20</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a97141c109d053f71291f33eda011df3e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97141c109d053f71291f33eda011df3e">&#9670;&nbsp;</a></span>Flight() <span class="overload">[1/2]</span></h2>
@@ -158,8 +163,9 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Default constructor initializing fields to default values. </p>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00035">35</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00044">44</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -212,8 +218,20 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Parameterized constructor to initialize a flight with the specified values.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idFlight</td><td>The unique identifier for the flight. </td></tr>
+    <tr><td class="paramname">origin</td><td>The origin location of the flight. </td></tr>
+    <tr><td class="paramname">destination</td><td>The destination location of the flight. </td></tr>
+    <tr><td class="paramname">date</td><td>The date of the flight. </td></tr>
+    <tr><td class="paramname">aircraft</td><td>The aircraft associated with the flight. </td></tr>
+    <tr><td class="paramname">bookings</td><td>The set of bookings associated with the flight. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00043">43</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00061">61</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -232,8 +250,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the aircraft associated with the flight.</p>
+<dl class="section return"><dt>Returns</dt><dd>The aircraft. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00093">93</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00149">149</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -251,8 +271,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the set of bookings associated with the flight.</p>
+<dl class="section return"><dt>Returns</dt><dd>The set of bookings. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00102">102</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00166">166</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -270,8 +292,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the date of the flight.</p>
+<dl class="section return"><dt>Returns</dt><dd>The date of the flight. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00083">83</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00130">130</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -289,8 +313,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the destination location of the flight.</p>
+<dl class="section return"><dt>Returns</dt><dd>The destination location. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00073">73</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00111">111</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -308,8 +334,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the unique identifier for the flight.</p>
+<dl class="section return"><dt>Returns</dt><dd>The ID of the flight. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00053">53</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00075">75</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -327,8 +355,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the origin location of the flight.</p>
+<dl class="section return"><dt>Returns</dt><dd>The origin location. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00063">63</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00093">93</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -347,8 +377,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the aircraft associated with the flight.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aircraft</td><td>The new aircraft. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00098">98</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00158">158</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -367,8 +404,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the set of bookings associated with the flight.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bookings</td><td>The new set of bookings. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00106">106</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00174">174</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -387,8 +431,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the date of the flight.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">date</td><td>The new date of the flight. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00088">88</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00139">139</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -407,8 +458,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the destination location of the flight.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">destination</td><td>The new destination location. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00078">78</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00120">120</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -427,8 +485,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the unique identifier for the flight.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idFlight</td><td>The new ID of the flight. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00058">58</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00084">84</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -447,8 +512,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the origin location of the flight.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">origin</td><td>The new origin location. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00068">68</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00102">102</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -466,8 +538,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns a string representation of the flight.</p>
+<dl class="section return"><dt>Returns</dt><dd>A string representing the flight. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00110">110</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00182">182</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -491,8 +565,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The aircraft associated with the flight. </p>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00029">29</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00036">36</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -515,8 +590,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The set of bookings associated with the flight. </p>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00033">33</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00040">40</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -539,8 +615,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The date of the flight as a long value. </p>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00026">26</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00033">33</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -563,8 +640,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The destination location of the flight. </p>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00023">23</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00030">30</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -587,8 +665,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The unique identifier for the flight, generated incrementally. </p>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00017">17</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00024">24</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>
@@ -611,8 +690,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The origin location of the flight. </p>
 
-<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00020">20</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Flight_8java_source.html#l00027">27</a> of file <a class="el" href="Flight_8java_source.html">Flight.java</a>.</p>
 
 </div>
 </div>

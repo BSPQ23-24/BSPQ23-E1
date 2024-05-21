@@ -91,6 +91,9 @@ $(document).ready(function(){initNavTree('classcom_1_1aerologix_1_1app_1_1server
 <div class="title">com.aerologix.app.server.jdo.Aircraft Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a aircraft entity in the system.  
+ <a href="classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Aircraft.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -129,8 +132,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a5d50fccfb7ce747c049524a4d12549cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00009">9</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<div class="textblock"><p>Represents a aircraft entity in the system. </p>
+<p>This class is used for persistence with JDO (Java Data Objects). It includes details about an aircraft such as its manufacturer, type, and maximum capacity. The class provides getter and setter methods to access and modify the fields. </p>
+
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00016">16</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad828635210e6609d4417ef43b5f68fa1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad828635210e6609d4417ef43b5f68fa1">&#9670;&nbsp;</a></span>Aircraft() <span class="overload">[1/2]</span></h2>
@@ -146,8 +151,9 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Default constructor initializing fields to default values. </p>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00019">19</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00030">30</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -188,8 +194,18 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Parameterized constructor to initialize an aircraft with the specified values.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The unique identifier for the aircraft. </td></tr>
+    <tr><td class="paramname">manufacturer</td><td>The manufacturer of the aircraft. </td></tr>
+    <tr><td class="paramname">type</td><td>The type of the aircraft. </td></tr>
+    <tr><td class="paramname">maxCapacity</td><td>The maximum capacity of the aircraft. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00026">26</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00044">44</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -208,8 +224,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the unique identifier for the aircraft.</p>
+<dl class="section return"><dt>Returns</dt><dd>The ID of the aircraft. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00034">34</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00056">56</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -227,8 +245,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the manufacturer of the aircraft.</p>
+<dl class="section return"><dt>Returns</dt><dd>The manufacturer of the aircraft. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00043">43</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00073">73</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -246,8 +266,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the maximum capacity of the aircraft.</p>
+<dl class="section return"><dt>Returns</dt><dd>The maximum capacity of the aircraft. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00065">65</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00111">111</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -265,8 +287,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the type of the aircraft.</p>
+<dl class="section return"><dt>Returns</dt><dd>The type of the aircraft. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00055">55</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00093">93</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -285,8 +309,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the unique identifier for the aircraft.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The new ID of the aircraft. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00039">39</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00065">65</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -305,8 +336,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the manufacturer of the aircraft.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">manufacturer</td><td>The new manufacturer of the aircraft. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00049">49</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00083">83</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -325,8 +363,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the maximum capacity of the aircraft.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxCapacity</td><td>The new maximum capacity of the aircraft. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00070">70</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00120">120</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -345,8 +390,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the type of the aircraft.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The new type of the aircraft. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00060">60</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00102">102</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -364,8 +416,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns a string representation of the aircraft.</p>
+<dl class="section return"><dt>Returns</dt><dd>A string representing the aircraft. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00075">75</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00129">129</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -389,8 +443,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The unique identifier for the aircraft, generated incrementally. </p>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00017">17</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00026">26</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -413,8 +468,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The manufacturer of the aircraft. </p>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00011">11</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00018">18</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -437,8 +493,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The maximum capacity of the aircraft. </p>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00013">13</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00022">22</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>
@@ -461,8 +518,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The type of the aircraft. </p>
 
-<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00012">12</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Aircraft_8java_source.html#l00020">20</a> of file <a class="el" href="Aircraft_8java_source.html">Aircraft.java</a>.</p>
 
 </div>
 </div>

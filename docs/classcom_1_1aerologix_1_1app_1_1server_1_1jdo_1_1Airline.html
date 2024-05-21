@@ -91,6 +91,9 @@ $(document).ready(function(){initNavTree('classcom_1_1aerologix_1_1app_1_1server
 <div class="title">com.aerologix.app.server.jdo.Airline Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a airline entity in the system.  
+ <a href="classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Airline.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -117,8 +120,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a570ae4d8000959fd72302847bbed36c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00009">9</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<div class="textblock"><p>Represents a airline entity in the system. </p>
+<p>This class is used for persistence with JDO (Java Data Objects). It includes details about an airline such as its name. The class provides getter and setter methods to access and modify the fields. </p>
+
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00016">16</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1526488910771405ae57b062586873ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1526488910771405ae57b062586873ad">&#9670;&nbsp;</a></span>Airline() <span class="overload">[1/2]</span></h2>
@@ -134,8 +139,9 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Default constructor initializing fields to default values. </p>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00015">15</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00027">27</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -164,8 +170,16 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Parameterized constructor to initialize an airline with the specified values.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idAirline</td><td>The unique identifier for the airline. </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the airline. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00020">20</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00037">37</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -184,8 +198,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the unique identifier for the airline.</p>
+<dl class="section return"><dt>Returns</dt><dd>The ID of the airline. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00026">26</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00047">47</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -203,8 +219,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the name of the airline.</p>
+<dl class="section return"><dt>Returns</dt><dd>The name of the airline. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00034">34</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00063">63</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -223,8 +241,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the unique identifier for the airline.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idAirline</td><td>The new ID of the airline. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00030">30</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00055">55</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -243,8 +268,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the name of the airline.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The new name of the airline. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00038">38</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00071">71</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -262,8 +294,10 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns a string representation of the airline.</p>
+<dl class="section return"><dt>Returns</dt><dd>A string representing the airline. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00043">43</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00080">80</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -287,8 +321,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The unique identifier for the airline, generated incrementally. </p>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00012">12</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00020">20</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
@@ -311,8 +346,9 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The name of the airline. </p>
 
-<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00013">13</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Airline_8java_source.html#l00022">22</a> of file <a class="el" href="Airline_8java_source.html">Airline.java</a>.</p>
 
 </div>
 </div>
