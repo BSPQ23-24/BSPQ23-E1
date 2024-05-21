@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['bookflight_332',['bookFlight',['../classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html#a866d72ef79c666e54d0d070da27c11ae',1,'com::aerologix::app::client::gui::FlightWindow']]],
-  ['booking_333',['Booking',['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Booking.html#a179175835d6a34df6dadff5f92d8265b',1,'com.aerologix.app.server.jdo.Booking.Booking()'],['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Booking.html#aeafe11ec6a49a64fc4d55fd2c822df97',1,'com.aerologix.app.server.jdo.Booking.Booking(int id, Passenger passenger, Flight flight, User user, Airline airline)']]],
-  ['bookingdata_334',['BookingData',['../classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1BookingData.html#a8d9b27b81f9cd2b44aa44d57e6148f77',1,'com::aerologix::app::server::pojo::BookingData']]],
-  ['bookingservice_335',['BookingService',['../classcom_1_1aerologix_1_1app_1_1server_1_1service_1_1BookingService.html#a3a3801fffa33d95e04e155125be654b4',1,'com::aerologix::app::server::service::BookingService']]]
+  ['bookflight_334',['bookFlight',['../classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1FlightWindow.html#a866d72ef79c666e54d0d070da27c11ae',1,'com::aerologix::app::client::gui::FlightWindow']]],
+  ['booking_335',['Booking',['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Booking.html#a179175835d6a34df6dadff5f92d8265b',1,'com.aerologix.app.server.jdo.Booking.Booking()'],['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Booking.html#aeafe11ec6a49a64fc4d55fd2c822df97',1,'com.aerologix.app.server.jdo.Booking.Booking(int id, Passenger passenger, Flight flight, User user, Airline airline)']]],
+  ['bookingdata_336',['BookingData',['../classcom_1_1aerologix_1_1app_1_1server_1_1pojo_1_1BookingData.html#a8d9b27b81f9cd2b44aa44d57e6148f77',1,'com::aerologix::app::server::pojo::BookingData']]],
+  ['bookingservice_337',['BookingService',['../classcom_1_1aerologix_1_1app_1_1server_1_1service_1_1BookingService.html#a3a3801fffa33d95e04e155125be654b4',1,'com::aerologix::app::server::service::BookingService']]]
 ];
