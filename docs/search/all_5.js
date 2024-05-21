@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['flight_76',['Flight',['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html',1,'com.aerologix.app.server.jdo.Flight'],['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#a97141c109d053f71291f33eda011df3e',1,'com.aerologix.app.server.jdo.Flight.Flight()'],['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#a54e4fce206c6d7402dd31598eb4fd040',1,'com.aerologix.app.server.jdo.Flight.Flight(int idFlight, String origin, String destination, long date, Aircraft aircraft, Set&lt; Booking &gt; bookings)']]],
-  ['flight_77',['flight',['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Booking.html#a17f1ee6ea7c500fe3b2bed288445ceea',1,'com::aerologix::app::server::jdo::Booking']]],
+  ['flight_75',['Flight',['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html',1,'com::aerologix::app::server::jdo']]],
+  ['flight_76',['flight',['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Booking.html#a17f1ee6ea7c500fe3b2bed288445ceea',1,'com::aerologix::app::server::jdo::Booking']]],
+  ['flight_77',['Flight',['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#a97141c109d053f71291f33eda011df3e',1,'com.aerologix.app.server.jdo.Flight.Flight()'],['../classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#a54e4fce206c6d7402dd31598eb4fd040',1,'com.aerologix.app.server.jdo.Flight.Flight(int idFlight, String origin, String destination, long date, Aircraft aircraft, Set&lt; Booking &gt; bookings)']]],
   ['flight_2ejava_78',['Flight.java',['../Flight_8java.html',1,'']]],
   ['flightcontroller_79',['FlightController',['../classcom_1_1aerologix_1_1app_1_1client_1_1controller_1_1FlightController.html',1,'com::aerologix::app::client::controller']]],
   ['flightcontroller_2ejava_80',['FlightController.java',['../FlightController_8java.html',1,'']]],
