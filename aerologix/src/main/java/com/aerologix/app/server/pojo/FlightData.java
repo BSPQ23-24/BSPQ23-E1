@@ -2,7 +2,8 @@ package com.aerologix.app.server.pojo;
 
 import java.util.List;
 /**
- * A data transfer object (DTO) representing a flight.
+ * @brief A data transfer object (DTO) representing a flight.
+ * 
  * <p>
  * This class is used to encapsulate flight information and is utilized for communication between different layers of the application.
  */

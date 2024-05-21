@@ -1,6 +1,7 @@
 package com.aerologix.app.server.pojo;
 /**
-	 * A data transfer object (DTO) representing a login session.
+	 * @brief A data transfer object (DTO) representing a login session.
+	 * 
 	 * <p>
 	 * This class is used to encapsulate login attempt information and is utilized for communication between different layers of the application.
 	 */

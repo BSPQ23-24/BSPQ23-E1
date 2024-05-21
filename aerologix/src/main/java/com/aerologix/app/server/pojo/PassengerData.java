@@ -1,6 +1,7 @@
 package com.aerologix.app.server.pojo;
 /**
- * A data transfer object (DTO) representing the passenger data.
+ * @brief A data transfer object (DTO) representing the passenger data.
+ * 
  * <p>
  * This class is used to encapsulate passenger information and is utilized for communication between different layers of the application.
  */
