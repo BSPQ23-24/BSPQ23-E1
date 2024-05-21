@@ -2,6 +2,8 @@
 
 AeroLogix is a Maven-based Java project that creates a management system for airports.
 
+**Building and running the application**
+-
 1. **Set up the database**
     ```
     mysql -u root -p < sql/create-aerologix.sql
@@ -63,7 +65,6 @@ AeroLogix is a Maven-based Java project that creates a management system for air
     ```
     mvn verify -Pintegration-tests
     ```
-
 **Generate the documentation**
 -
 To generate the documentation run the command below. This will generate both html and LaTeX outputs in `aerologix/target/doxygen`.
@@ -71,3 +72,6 @@ To generate the documentation run the command below. This will generate both htm
 ```
 mvn doxygen:report
 ```
+
+## Documentation
+You can find the official project documentation for developers in https://bspq23-24.github.io/BSPQ23-E1/
