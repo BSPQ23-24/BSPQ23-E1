@@ -51,6 +51,7 @@ import com.aerologix.app.server.pojo.UserData;
 
 /**
  * @brief Class for the main menu window.
+ * 
  * Class for the main menu window.
  * <p>
  * It allows users to navigate, search, filter flights and

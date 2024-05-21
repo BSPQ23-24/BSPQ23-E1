@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 
 /**
  * @brief Class for the login window.
+ * 
+ * 
  * Class for the login window.
  * <p>
  * It allows users to log in the application. Additionally, it

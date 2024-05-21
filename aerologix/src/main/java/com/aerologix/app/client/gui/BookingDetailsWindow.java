@@ -23,6 +23,7 @@ import java.awt.Dimension;
 
 /**
  * @brief Class of the window that displays the details of a booking.
+ * 
  * Class of the window that displays the details of a booking.
  */
 public class BookingDetailsWindow extends JFrame {

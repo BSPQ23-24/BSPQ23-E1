@@ -23,7 +23,8 @@ import java.util.ResourceBundle;
 import com.aerologix.app.client.controller.UserController;
 
 /**
- * @brief Class for the login window.
+ * @brief Class for the user registration window.
+ * 
  * 
  * Class for the user registration window.
  * <p>

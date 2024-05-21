@@ -24,6 +24,9 @@ import java.awt.Color;
 import javax.swing.JComboBox;
 
 /**
+ * @brief Class of the panel for the form to register a new booking.
+ * 
+ * 
  * Class of the panel for the form to register a new booking.
  * <p>
  * It is a JPanel that contains multiple JTextFields
