@@ -1,6 +1,7 @@
 var classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1RegisterWindow =
 [
     [ "bSignup", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1RegisterWindow.html#aa42e45e091b8b58f081834233e5dcd2c", null ],
+    [ "lLanguage", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1RegisterWindow.html#a2e779132bb8c4e5804c6dfd29538d4db", null ],
     [ "lsError", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1RegisterWindow.html#acbe252b47f8c7a3d7247079c2b6e6c12", null ],
     [ "lsMail", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1RegisterWindow.html#aa22e2c5077f228c7c32ac1f547d8c837", null ],
     [ "lsNombre", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1RegisterWindow.html#abe00e67cabfb6b0345ac7d1d30f605ec", null ],

@@ -46,9 +46,9 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AeroLogixClient_8java.html",
-"classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Passenger.html#a0f2a615c5b3ada7c228d411f75e2f663",
-"namespacecom_1_1aerologix_1_1app_1_1server_1_1service.html"
+"",
+"classcom_1_1aerologix_1_1app_1_1server_1_1jdo_1_1Flight.html#af523a4f4ed28d32bb7dc1e3577fa90af",
+"namespacecom_1_1aerologix_1_1app_1_1client_1_1controller.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

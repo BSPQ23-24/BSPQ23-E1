@@ -7,6 +7,7 @@ var classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow =
     [ "bSignup", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow.html#ad8ea6a35bc6417653690285f6a9cf119", null ],
     [ "languageSelector", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow.html#a2619d8e88960d7c1e06669d8a78ff15e", null ],
     [ "lError", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow.html#a98443f5f5b423fa085eb0842f334b546", null ],
+    [ "lLanguage", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow.html#a5599bad96d4b82e5109637cf1f564296", null ],
     [ "lLogo", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow.html#a4f0414ae57c3773c66cc34b622e86a47", null ],
     [ "lMail", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow.html#a0fa484ce02b52df8362ad384df9c3e71", null ],
     [ "lPass", "classcom_1_1aerologix_1_1app_1_1client_1_1gui_1_1LoginWindow.html#a80593a4e41a86b62e1110dd48b797e1f", null ],
