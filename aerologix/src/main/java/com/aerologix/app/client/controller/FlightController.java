@@ -20,6 +20,8 @@ import jakarta.ws.rs.core.Response.Status;
 
 
 /**
+ * @brief Controller class for managing flight-related operations.
+ * 
  * Controller class for managing flight-related operations.
  * <p>
  * This class provides methods to interact with the flight service.

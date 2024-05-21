@@ -13,6 +13,8 @@ import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.PassengerData;
 
 /**
+ * @brief Controller class for managing passenger-related operations.
+ * 
  * Controller class for managing passenger-related operations.
  * <p>
  * This class provides methods to interact with the passenger service.

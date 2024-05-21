@@ -24,6 +24,7 @@ import com.aerologix.app.client.controller.UserController;
 
 /**
  * @brief Class for the login window.
+ * 
  * Class for the user registration window.
  * <p>
  * It allows users to create a new user account in the application.

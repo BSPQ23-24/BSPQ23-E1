@@ -30,6 +30,8 @@ import java.awt.Color;
 import javax.swing.JComboBox;
 
 /**
+ * @brief Class of the panel for the form to modify an existent booking.
+ * 
 * Class of the panel for the form to modify an existent booking.
 * <p>
 * It is a JPanel that contains multiple JTextFields

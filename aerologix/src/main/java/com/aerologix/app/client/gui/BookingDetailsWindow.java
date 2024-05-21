@@ -21,7 +21,10 @@ import com.aerologix.app.server.pojo.PassengerData;
 
 import java.awt.Dimension;
 
-
+/**
+ * @brief Class of the window that displays the details of a booking.
+ * Class of the window that displays the details of a booking.
+ */
 public class BookingDetailsWindow extends JFrame {
     
     private static final long serialVersionUID = 1L;

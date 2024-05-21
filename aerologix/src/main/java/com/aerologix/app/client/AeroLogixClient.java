@@ -16,20 +16,45 @@ import com.aerologix.app.client.controller.UserController;
 import com.aerologix.app.client.gui.*;
 import com.aerologix.app.server.pojo.*;
 
+/**
+ * @brief This class is the main entry point for the AeroLogix client application.
+ * 
+ * The {@code AeroLogixClient} class is the main entry point for the AeroLogix client application.
+ * It is responsible for initializing the REST client, setting up the web target,
+ * and providing methods to interact with the server.
+ * <p>
+ * This class follows the Singleton design pattern to ensure only one instance is created.
+ * </p>
+ */
 public class AeroLogixClient {
     
+    /** Logger for logging purposes */
     protected static final Logger logger = LogManager.getLogger();
 
+    /** Singleton instance of AeroLogixClient */
     private static AeroLogixClient instance;
 
+    /** JAX-RS client */
     private Client client;
+
+    /** Web target for REST API */
     private WebTarget webTarget;
 
+    /**
+     * Private constructor to prevent instantiation.
+     * Initializes the JAX-RS client and web target using system properties for hostname and port.
+     */
     private AeroLogixClient() {
         this.client = ClientBuilder.newClient();
         this.webTarget = client.target(String.format("http://%s:%s/rest/aerologix", System.getProperty("aerologix.hostname"), System.getProperty("aerologix.port")));
     }
 
+    /**
+     * Returns the singleton instance of {@code AeroLogixClient}.
+     * If the instance does not exist, it is created.
+     *
+     * @return the singleton instance
+     */
     public static AeroLogixClient getInstance() {
         if (instance == null) {
             instance = new AeroLogixClient();
@@ -37,15 +62,31 @@ public class AeroLogixClient {
         return instance;
     }
 
+    /**
+     * Sets the web target for the REST client using the specified hostname and port.
+     *
+     * @param hostname the hostname of the server
+     * @param port the port of the server
+     */
     public void setWebTarget(String hostname, String port) {
         this.webTarget = client.target(String.format("http://%s:%s/rest/aerologix", hostname, port));
     }
 
+    /**
+     * Returns the current web target.
+     *
+     * @return the web target
+     */
     public WebTarget getWebTarget() {
         return this.webTarget;
     }
 
-    // Method to demonstrate functionality for Sprint 2
+    /**
+     * Demonstrates the functionality of the client by initializing data.
+     * <p>
+     * This method registers users, creates aircraft, airlines, passengers, flights, and bookings.
+     * </p>
+     */
     public void initializeData() {
 
         // User
@@ -98,7 +139,15 @@ public class AeroLogixClient {
 
     }
     
-    // Main
+    /**
+     * The main method is the entry point of the application.
+     * It expects two arguments: the hostname and port of the server.
+     * <p>
+     * It sets system properties for hostname and port, then displays the login window.
+     * </p>
+     *
+     * @param args command line arguments, expects hostname and port
+     */
     public static void main(String[] args) {
         if (args.length != 2) {
             logger.info("Use: java Client.Client [host] [port]");

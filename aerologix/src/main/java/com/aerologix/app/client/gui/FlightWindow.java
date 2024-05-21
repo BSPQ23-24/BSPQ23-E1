@@ -36,6 +36,7 @@ import java.awt.Dimension;
 
 /**
  * @brief Class for the window that displays the details of a flight.
+ * 
  * Class for the window that displays the details of a flight.
  * <p>
  * It contains list of all registered bookings for a flight. It

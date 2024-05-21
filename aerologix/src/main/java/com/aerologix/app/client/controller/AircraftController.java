@@ -18,6 +18,8 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
 /**
+ * @brief Controller class for managing aircraft-related operations.
+ * 
  * Controller class for managing aircraft-related operations.
  * <p>
  * This class provides methods to interact with the aircraft service.

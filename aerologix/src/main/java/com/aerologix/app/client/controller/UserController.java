@@ -13,6 +13,8 @@ import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.server.pojo.*;
 
 /**
+ * @brief Controller class for managing user-related operations.
+ * 
  * Controller class for managing user-related operations.
  * <p>
  * This class provides methods to interact with the user service.
