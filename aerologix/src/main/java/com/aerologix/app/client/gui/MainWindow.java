@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
@@ -32,17 +31,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DateFormatter;
 
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.client.controller.AirlineController;
@@ -77,9 +71,6 @@ public class MainWindow extends JFrame {
 	private JPanel destinationFP;
 	private JComboBox<String> destinationFilter;
 	private JLabel destinationLabel;
-	private JPanel dateFP;
-	private JSpinner dateFilter;
-	private JLabel dateLabel;
 	private JButton bookFlightButton;
 	private JTable flightTable;
 	private DefaultTableModel flightTableModel;
@@ -88,15 +79,11 @@ public class MainWindow extends JFrame {
 	private JScrollPane scrollPane;
 	private JButton resetFiltersButton;
 	private JButton resetFlightFilterButton;
-	private JButton resetAirlinesFilterButton;
 	private JButton resetOriginFilterButton;
 	private JButton resetDestinationFilterButton;
-	private JButton resetDateFilterButton;
 	private JPanel resetFlightP;
-	private JPanel resetAirlinesP;
 	private JPanel resetOriginP;
 	private JPanel resetDestiantionP;
-	private JPanel resetDateP;
 	private JLabel lLanguage;
 
 	protected JPanel pLanguage = new JPanel(new FlowLayout());
@@ -136,10 +123,6 @@ public class MainWindow extends JFrame {
 		destinationFP.setBackground(new Color(200, 200, 200));
 		destinationFilter = new JComboBox<>();
 		destinationLabel = new JLabel();
-		dateFP = new JPanel();
-		dateFP.setBackground(new Color(200, 200, 200));
-		dateFilter = new JSpinner();
-		dateLabel = new JLabel();
 		bookFlightButton = new JButton(messages.getString("view_flight"));
 		resetFiltersButton = new JButton(messages.getString("reset_all"));
 		resetFlightP = new JPanel();
@@ -163,13 +146,6 @@ public class MainWindow extends JFrame {
 		resetDestinationFilterButton.addActionListener(e -> resetDestinationFilter());
 		resetDestinationFilterButton.setBorder(null);
 		resetDestinationFilterButton.setBackground(filterPanel.getBackground());
-		resetDateP = new JPanel();
-		resetDateP.setBackground(new Color(200, 200, 200));
-		resetDateP.setLayout(new FlowLayout(FlowLayout.LEFT));
-		resetDateFilterButton = new JButton(scaledIcon);
-		resetDateFilterButton.addActionListener(e -> resetDateFilter());
-		resetDateFilterButton.setBorder(null);
-		resetDateFilterButton.setBackground(filterPanel.getBackground());
 
 		getContentPane().setLayout(new BorderLayout());
 		this.setSize(new Dimension(1200, 500));
@@ -242,29 +218,6 @@ public class MainWindow extends JFrame {
 		destinationFP.add(destinationFilter);
 		filterPanel.add(destinationFP);
 
-		filterPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-
-		dateFP.setLayout(new BoxLayout(dateFP, BoxLayout.Y_AXIS));
-		Calendar calendar = Calendar.getInstance();
-		Date initDate = calendar.getTime();
-		calendar.add(Calendar.YEAR, -100);
-		Date earliestDate = calendar.getTime();
-		calendar.add(Calendar.YEAR, 200);
-		SpinnerDateModel sdm = new SpinnerDateModel(initDate, earliestDate, null, Calendar.DAY_OF_MONTH);
-		dateFilter.setModel(sdm);
-		JSpinner.DateEditor editor = new JSpinner.DateEditor(dateFilter, "dd/MM/yyyy");
-		DateFormatter formatter = (DateFormatter) editor.getTextField().getFormatter();
-		formatter.setAllowsInvalid(false);
-		formatter.setOverwriteMode(true);
-		dateFilter.setEditor(editor);
-		dateFilter.setPreferredSize(new Dimension(150, 20));
-		dateLabel.setText(messages.getString("date"));
-		resetDateP.add(dateLabel);
-		resetDateP.add(resetDateFilterButton);
-		dateFP.add(resetDateP);
-		dateFP.add(Box.createRigidArea(new Dimension(0, 5)));
-		dateFP.add(dateFilter);
-		filterPanel.add(dateFP);
 		filterPanel.add(Box.createRigidArea(new Dimension(20, 0)));
 		filterPanel.add(resetFiltersButton);
 		filterPanel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -296,12 +249,6 @@ public class MainWindow extends JFrame {
 		flightFilter.getDocument().addDocumentListener(new FilterListener(this::filterFlightsByFlightId));
 		originFilter.addActionListener(e -> filterFlightsByOrigin());
 		destinationFilter.addActionListener(e -> filterFlightsByDestination());
-		dateFilter.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				filterFlightsByDate();
-			}
-		});
 	}
 
 	/**
@@ -344,7 +291,6 @@ public class MainWindow extends JFrame {
 		flightLabel.setText(messages.getString("flight_name"));
 		originLabel.setText(messages.getString("origin"));
 		destinationLabel.setText(messages.getString("destination"));
-		dateLabel.setText(messages.getString("date"));
 		bookFlightButton.setText(messages.getString("view_flight"));
 		resetFiltersButton.setText(messages.getString("reset_all"));
 		lLanguage.setText(messages.getString("language"));
@@ -360,7 +306,6 @@ public class MainWindow extends JFrame {
 		resetFlightFilter();
 		resetOriginFilter();
 		resetDestinationFilter();
-		resetDateFilter();
 	}
 
 	/** Method that resets the filter for the flight ID of flights. */
@@ -376,12 +321,6 @@ public class MainWindow extends JFrame {
 	/** Method that resets the filter for the destination of the flight. */
 	private void resetDestinationFilter() {
 		destinationFilter.setSelectedIndex(-1);
-	}
-
-	/** Method that resets the filter for the date of flights. */
-	private void resetDateFilter() {
-		Calendar calendar = Calendar.getInstance();
-		dateFilter.setValue(calendar.getTime());
 	}
 
 	/**
@@ -498,25 +437,6 @@ public class MainWindow extends JFrame {
 			}
 			addRowToTable(flight);
 		}
-	}
-
-	/** Method that filters flights by the introduced date in the filter. */
-	private void filterFlightsByDate() {
-	    Date dateFilterValue = (Date) dateFilter.getValue();
-	    flightTableModel.setRowCount(0);
-
-	    for (FlightData flight : flights) {
-	        if (dateFilterValue != null) {
-	            Date flightDate = new Date(flight.getDate() * 1000L);
-	            Calendar calendar = Calendar.getInstance();
-	            calendar.setTime(flightDate);
-
-	            if (dateFilterValue.before(calendar.getTime())) {
-	                continue;
-	            }
-	        }
-	        addRowToTable(flight);
-	    }
 	}
 
 	/**
