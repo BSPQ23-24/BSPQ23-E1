@@ -1,5 +1,6 @@
 package com.aerologix.app.client.gui;
 
+// import statements
 import javax.swing.*;
 
 import com.aerologix.app.client.controller.UserController;
@@ -12,6 +13,14 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+
+/**
+ * @brief Class for the login window.
+ * Class for the login window.
+ * <p>
+ * It allows users to log in the application. Additionally, it
+ * offers access to the {@link RegisterWindow}.
+ */
 public class LoginWindow extends JFrame {
 
     private static LoginWindow instanceLogin;
@@ -48,6 +57,9 @@ public class LoginWindow extends JFrame {
     protected final Color background = new Color(240, 240, 240);
     protected final Color url = new Color(0, 93, 232);
 
+    /**
+     * Private constructor of the window.
+     */
     private LoginWindow() {
         // Initialize ResourceBundle
         initResourceBundle(Locale.getDefault());
@@ -190,6 +202,7 @@ public class LoginWindow extends JFrame {
             }
         });
 
+        // Change language
         languageSelector.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,12 +211,28 @@ public class LoginWindow extends JFrame {
         });
     }
 
+    /**
+     * Method that sets a Thread to sleep so that the main Thread
+     * of the application has to wait before executing the next
+     * line of code.
+     * @param tiempo Integer that indicates the milliseconds that the Thread will be sleeping.
+     */
     public static void waitTime(int tiempo) {
         try {
             Thread.sleep(tiempo);
         } catch (InterruptedException e) { }
     }
 
+    /**
+     * Initializes the resource bundle for multilingual support based on the specified locale.
+     * <p>
+     * This method attempts to load a resource bundle named "Multilingual.messages" using the provided locale.
+     * If the resource bundle cannot be loaded, an error message is printed to the standard error stream.
+     * </p>
+     * 
+     * @param locale represents a specific region 
+     * for which the resource bundle is to be loaded.
+     */
     private void initResourceBundle(Locale locale) {
         try {
             messages = ResourceBundle.getBundle("Multilingual.messages", locale);
@@ -212,12 +241,20 @@ public class LoginWindow extends JFrame {
         }
     }
 
+    /**
+     * Method that changes the language of the window.
+     * @param locale represents a specific region 
+     * for which the resource bundle is to be loaded.
+     */
     private void changeLanguage(Locale locale) {
         Locale.setDefault(locale);
         initResourceBundle(locale);
         updateComponents();
     }
 
+    /**
+     * Method that updates the components that support multilingualism.
+     */
     private void updateComponents() {
         lMail.setText(messages.getString("mail"));
         lPass.setText(messages.getString("password"));
@@ -228,6 +265,9 @@ public class LoginWindow extends JFrame {
         lLanguage.setText(messages.getString("language"));
     }
 
+    /**
+     * Method that sets the window in the center of the user screen.
+     */
     private void centerWindow() {
         Dimension windowSize = getSize();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -236,6 +276,9 @@ public class LoginWindow extends JFrame {
         setLocation(largo, alto);
     }
 
+    /**
+     * Method that shows the content of the JPasswordField for 1 second.
+     */
     public void showHide() {
         Thread hilo = new Thread() {
             @SuppressWarnings("deprecation")
@@ -254,6 +297,10 @@ public class LoginWindow extends JFrame {
         hilo.start();
     }
 
+    /**
+     * Method that returns the singleton instance of {@link LoginWindow}.
+     * @return If there exists an instance of {@link LoginWindow} it will return it. If not, it will create a new one.
+     */
     public static LoginWindow getInstanceLogin() {
         if (LoginWindow.instanceLogin == null) {
             LoginWindow.instanceLogin = new LoginWindow();
@@ -261,6 +308,7 @@ public class LoginWindow extends JFrame {
         return LoginWindow.instanceLogin;
     }
 
+    /** Method that ends the current instance of {@link LoginWindow}. */
     public static void deinit() {
         instanceLogin = null;
     }

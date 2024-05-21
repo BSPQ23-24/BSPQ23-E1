@@ -22,7 +22,12 @@ import java.util.ResourceBundle;
 
 import com.aerologix.app.client.controller.UserController;
 
-
+/**
+ * @brief Class for the login window.
+ * Class for the user registration window.
+ * <p>
+ * It allows users to create a new user account in the application.
+ */
 public class RegisterWindow extends JFrame {
 
     private static RegisterWindow instance;
@@ -55,6 +60,11 @@ public class RegisterWindow extends JFrame {
 
     private ResourceBundle messages;
 
+    /**
+     * Private constructor of the window.
+     * @param locale represents a specific region 
+     * for which the resource bundle is to be loaded.
+     */
     private RegisterWindow(Locale locale) {
         // Initialize ResourceBundle
         initResourceBundle(locale);
@@ -99,9 +109,9 @@ public class RegisterWindow extends JFrame {
 
         this.setVisible(true);
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            public void windowClosing(WindowEvent windowEvent) {
                 deinit();
                 dispose();
             }
@@ -172,6 +182,16 @@ public class RegisterWindow extends JFrame {
 
 	}
 
+    /**
+     * Initializes the resource bundle for multilingual support based on the specified locale.
+     * <p>
+     * This method attempts to load a resource bundle named "Multilingual.messages" using the provided locale.
+     * If the resource bundle cannot be loaded, an error message is printed to the standard error stream.
+     * </p>
+     * 
+     * @param locale represents a specific region 
+     * for which the resource bundle is to be loaded.
+     */
     private void initResourceBundle(Locale locale) {
         try {
             messages = ResourceBundle.getBundle("Multilingual.messages", locale);
@@ -180,12 +200,20 @@ public class RegisterWindow extends JFrame {
         }
     }
 
+    /**
+     * Method that changes the language of the window.
+     * @param locale represents a specific region 
+     * for which the resource bundle is to be loaded.
+     */
     private void changeLanguage(Locale locale) {
         Locale.setDefault(locale);
         initResourceBundle(locale);
         updateComponents();
     }
 
+    /**
+     * Method that updates the components that support multilingualism.
+     */
     private void updateComponents() {
         lsMail.setText(messages.getString("mail"));
         lsPass.setText(messages.getString("password"));
@@ -197,6 +225,9 @@ public class RegisterWindow extends JFrame {
         lLanguage.setText(messages.getString("language"));
     }
     
+    /**
+     * Method that sets the window in the center of the user screen.
+     */
 	private void centerWindow() {
 		Dimension windowSize = getSize();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -206,6 +237,12 @@ public class RegisterWindow extends JFrame {
 		setLocation(largo - (largo / 4), alto + (largo / 4));
 	}
 
+    /**
+     * Method that sets a Thread to sleep so that the main Thread
+     * of the application has to wait before executing the next
+     * line of code.
+     * @param tiempo Integer that indicates the milliseconds that the Thread will be sleeping.
+     */
 	public static void waitTime(int time) {
 		try {
 			Thread.sleep(time);
@@ -214,6 +251,10 @@ public class RegisterWindow extends JFrame {
 		}
 	}
 
+    /**
+     * Method that returns the singleton instance of {@link RegisterWindow}.
+     * @return If there exists an instance of {@link RegisterWindow} it will return it. If not, it will create a new one.
+     */
 	public static RegisterWindow getInstance(Locale locale) {
 		if (RegisterWindow.instance == null) {
 			RegisterWindow.instance = new RegisterWindow(locale);
@@ -221,6 +262,7 @@ public class RegisterWindow extends JFrame {
 		return RegisterWindow.instance;
 	}
 
+    /** Method that ends the current instance of {@link RegisterWindow}. */
 	public static void deinit() {
 		instance = null;
 	}

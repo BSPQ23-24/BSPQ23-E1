@@ -12,7 +12,6 @@ import com.aerologix.app.client.controller.AirlineController;
 import com.aerologix.app.client.controller.BookingController;
 import com.aerologix.app.client.controller.PassengerController;
 import com.aerologix.app.server.pojo.AirlineData;
-import com.aerologix.app.server.pojo.BookingData;
 import com.aerologix.app.server.pojo.PassengerData;
 
 import java.awt.Font;

@@ -35,6 +35,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 /**
+ * @brief Class for the window that displays the details of a flight.
  * Class for the window that displays the details of a flight.
  * <p>
  * It contains list of all registered bookings for a flight. It
@@ -302,7 +303,7 @@ public class FlightWindow extends JFrame {
 	 * 
 	 * @param flightId	Identification integer of the flight.
 	 * @param userEmail	Email address of the user in the airport counter.
-	 * @return	Instance of {@link FlightWindow}.
+	 * @return If there exists an instance of {@link FlightWindow} it will return it. If not, it will create a new one.
 	 */
 	public static FlightWindow getInstance(int flightId, String userEmail) {
         if (instance == null) {
@@ -311,6 +312,7 @@ public class FlightWindow extends JFrame {
 		return instance;
 	}
 
+	/** Ends the current instance of {@link FlightWindow}. */
 	public static void deinit() {
 		instance = null;
 	}

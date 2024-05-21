@@ -15,6 +15,7 @@ import java.util.Date;
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.client.controller.BookingController;
 import com.aerologix.app.client.controller.PassengerController;
+import com.aerologix.app.server.jdo.Booking;
 import com.aerologix.app.server.pojo.BookingData;
 import com.aerologix.app.server.pojo.PassengerData;
 
@@ -93,6 +94,11 @@ public class BookingDetailsWindow extends JFrame {
         });
     }
     
+    /**
+     * Method that returns the singleton instance of {@link BookingDetailsWindow}.
+     * @param bookingId Integer of the identification of the {@link Booking}.
+     * @return If there exists an instance of {@link BookingDetailsWindow} it will return it. If not, it will create a new one.
+     */
     public static BookingDetailsWindow getInstance(int bookingId) {
         if (instance == null) {
             instance = new BookingDetailsWindow(bookingId);
@@ -100,6 +106,7 @@ public class BookingDetailsWindow extends JFrame {
         return instance;
     }
 
+    /** Method that ends the current instance of {@link BookingDetailsWindow}. */
     public static void deinit() {
         instance = null;
     }
