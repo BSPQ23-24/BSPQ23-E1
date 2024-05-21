@@ -54,11 +54,10 @@ import com.aerologix.app.server.pojo.UserData;
 /**
  * @brief Class for the main menu window.
  * 
- * Class for the main menu window.
- * <p>
- * It allows users to navigate, search, filter flights and
- * allows to view their details by opening an instance of
- * {@link FlightWindow}.
+ *        Class for the main menu window.
+ *        <p>
+ *        It allows users to navigate, search, filter flights and allows to view
+ *        their details by opening an instance of {@link FlightWindow}.
  */
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -71,9 +70,6 @@ public class MainWindow extends JFrame {
 	private JPanel flightFP;
 	private JTextField flightFilter;
 	private JLabel flightLabel;
-	private JPanel airlinesFP;
-	private JComboBox<String> airlinesFilter;
-	private JLabel airlinesLabel;
 	private JPanel originFP;
 	private JComboBox<String> originFilter;
 	private JLabel originLabel;
@@ -87,6 +83,7 @@ public class MainWindow extends JFrame {
 	private JTable flightTable;
 	private DefaultTableModel flightTableModel;
 	private ArrayList<FlightData> flights;
+	private ArrayList<AirlineData> airlines;
 	private JScrollPane scrollPane;
 	private JButton resetFiltersButton;
 	private JButton resetFlightFilterButton;
@@ -107,9 +104,10 @@ public class MainWindow extends JFrame {
 
 	/**
 	 * Private constructor of the window.
-	 * @param user {@link UserData} of the user that is logged in.
-	 * @param locale represents a specific region 
-     * for which the resource bundle is to be loaded.
+	 * 
+	 * @param user   {@link UserData} of the user that is logged in.
+	 * @param locale represents a specific region for which the resource bundle is
+	 *               to be loaded.
 	 */
 	private MainWindow(UserData user, Locale locale) {
 		this.user = user;
@@ -129,10 +127,6 @@ public class MainWindow extends JFrame {
 		flightFP.setBackground(new Color(200, 200, 200));
 		flightFilter = new JTextField();
 		flightLabel = new JLabel();
-		airlinesFP = new JPanel();
-		airlinesFP.setBackground(new Color(200, 200, 200));
-		airlinesFilter = new JComboBox<>();
-		airlinesLabel = new JLabel();
 		originFP = new JPanel();
 		originFP.setBackground(new Color(200, 200, 200));
 		originFilter = new JComboBox<>();
@@ -154,13 +148,6 @@ public class MainWindow extends JFrame {
 		resetFlightFilterButton.addActionListener(e -> resetFlightFilter());
 		resetFlightFilterButton.setBorder(null);
 		resetFlightFilterButton.setBackground(filterPanel.getBackground());
-		resetAirlinesP = new JPanel();
-		resetAirlinesP.setBackground(new Color(200, 200, 200));
-		resetAirlinesP.setLayout(new FlowLayout(FlowLayout.LEFT));
-		resetAirlinesFilterButton = new JButton(scaledIcon);
-		resetAirlinesFilterButton.addActionListener(e -> resetAirlinesFilter());
-		resetAirlinesFilterButton.setBorder(null);
-		resetAirlinesFilterButton.setBackground(filterPanel.getBackground());
 		resetOriginP = new JPanel();
 		resetOriginP.setBackground(new Color(200, 200, 200));
 		resetOriginP.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -229,16 +216,6 @@ public class MainWindow extends JFrame {
 		filterPanel.add(flightFP);
 
 		filterPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-
-		airlinesFP.setLayout(new BoxLayout(airlinesFP, BoxLayout.Y_AXIS));
-		airlinesFilter.setPreferredSize(new Dimension(100, 20));
-		airlinesLabel.setText(messages.getString("airline"));
-		resetAirlinesP.add(airlinesLabel);
-		resetAirlinesP.add(resetAirlinesFilterButton);
-		airlinesFP.add(resetAirlinesP);
-		airlinesFP.add(Box.createRigidArea(new Dimension(0, 5)));
-		airlinesFP.add(airlinesFilter);
-		filterPanel.add(airlinesFP);
 
 		filterPanel.add(Box.createRigidArea(new Dimension(5, 0)));
 
@@ -316,7 +293,6 @@ public class MainWindow extends JFrame {
 		panel.revalidate();
 		panel.repaint();
 		flightFilter.getDocument().addDocumentListener(new FilterListener(this::filterFlightsByFlightId));
-		airlinesFilter.addActionListener(e -> filterFlightsByAirline());
 		originFilter.addActionListener(e -> filterFlightsByOrigin());
 		destinationFilter.addActionListener(e -> filterFlightsByDestination());
 		dateFilter.addChangeListener(new ChangeListener() {
@@ -328,15 +304,17 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-     * Initializes the resource bundle for multilingual support based on the specified locale.
-     * <p>
-     * This method attempts to load a resource bundle named "Multilingual.messages" using the provided locale.
-     * If the resource bundle cannot be loaded, an error message is printed to the standard error stream.
-     * </p>
-     * 
-     * @param locale represents a specific region 
-     * for which the resource bundle is to be loaded.
-     */
+	 * Initializes the resource bundle for multilingual support based on the
+	 * specified locale.
+	 * <p>
+	 * This method attempts to load a resource bundle named "Multilingual.messages"
+	 * using the provided locale. If the resource bundle cannot be loaded, an error
+	 * message is printed to the standard error stream.
+	 * </p>
+	 * 
+	 * @param locale represents a specific region for which the resource bundle is
+	 *               to be loaded.
+	 */
 	private void initResourceBundle(Locale locale) {
 		try {
 			messages = ResourceBundle.getBundle("Multilingual.messages", locale);
@@ -346,11 +324,12 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-     * Method that changes the language of the window.
-     * @param locale represents a specific region 
-     * for which the resource bundle is to be loaded.
-     */
-	private void changeLanguage(UserData user,Locale locale) {
+	 * Method that changes the language of the window.
+	 * 
+	 * @param locale represents a specific region for which the resource bundle is
+	 *               to be loaded.
+	 */
+	private void changeLanguage(UserData user, Locale locale) {
 		Locale.setDefault(locale);
 		initResourceBundle(locale);
 		loadFlights();
@@ -359,11 +338,10 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-     * Method that updates the components that support multilingualism.
-     */
+	 * Method that updates the components that support multilingualism.
+	 */
 	private void updateComponents(MainWindow instance) {
 		flightLabel.setText(messages.getString("flight_name"));
-		airlinesLabel.setText(messages.getString("airline"));
 		originLabel.setText(messages.getString("origin"));
 		destinationLabel.setText(messages.getString("destination"));
 		dateLabel.setText(messages.getString("date"));
@@ -375,11 +353,11 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-	 * Method that resets all set filters (flight ID, airline ID, origin, destination and date).
+	 * Method that resets all set filters (flight ID, airline ID, origin,
+	 * destination and date).
 	 */
 	private void resetAllFilters() {
 		resetFlightFilter();
-		resetAirlinesFilter();
 		resetOriginFilter();
 		resetDestinationFilter();
 		resetDateFilter();
@@ -388,11 +366,6 @@ public class MainWindow extends JFrame {
 	/** Method that resets the filter for the flight ID of flights. */
 	private void resetFlightFilter() {
 		flightFilter.setText("");
-	}
-
-	/** Method that resets the filter for the airline ID of flights. */
-	private void resetAirlinesFilter() {
-		airlinesFilter.setSelectedIndex(-1);
 	}
 
 	/** Method that resets the filter for the origin of flights. */
@@ -411,46 +384,45 @@ public class MainWindow extends JFrame {
 		dateFilter.setValue(calendar.getTime());
 	}
 
-	/** Method that loads the data of all flights into the JComboBoxes for the origin, destination and airline ID. */
+	/**
+	 * Method that loads the data of all flights into the JComboBoxes for the
+	 * origin, destination and airline ID.
+	 */
 	private void loadFilters() {
-		ArrayList<AirlineData> airlines = AirlineController.getInstance(AeroLogixClient.getInstance()).getAllAirlines();
+		airlines = AirlineController.getInstance(AeroLogixClient.getInstance()).getAllAirlines();
 		Set<String> origins = new HashSet<>();
 		Set<String> destinations = new HashSet<>();
 		Set<String> airlineNames = new HashSet<>();
-		
-		    // Add unique origins and destinations
-			for (FlightData flight : flights) {
-				origins.add(flight.getOrigin().toString());
-				destinations.add(flight.getDestination().toString());
-			}
-		
-			// Add unique airlines
-			for (AirlineData airline : airlines) {
-				airlineNames.add(airline.getName());
-			}
-		
-			// Populate originFilter with unique origins
-			for (String origin : origins) {
-				originFilter.addItem(origin);
-			}
-		
-			// Populate destinationFilter with unique destinations
-			for (String destination : destinations) {
-				destinationFilter.addItem(destination);
-			}
-		
-			// Populate airlinesFilter with unique airline names
-			for (String airlineName : airlineNames) {
-				airlinesFilter.addItem(airlineName);
-			}
+
+		// Add unique origins and destinations
+		for (FlightData flight : flights) {
+			origins.add(flight.getOrigin().toString());
+			destinations.add(flight.getDestination().toString());
+		}
+
+		// Add unique airlines
+		for (AirlineData airline : airlines) {
+			airlineNames.add(airline.getName());
+		}
+
+		// Populate originFilter with unique origins
+		for (String origin : origins) {
+			originFilter.addItem(origin);
+		}
+
+		// Populate destinationFilter with unique destinations
+		for (String destination : destinations) {
+			destinationFilter.addItem(destination);
+		}
 	}
 
 	/**
-	 * Method that loads the data of each flight registered into a new line in the table model of the JTable.
+	 * Method that loads the data of each flight registered into a new line in the
+	 * table model of the JTable.
 	 */
 	private void loadFlights() {
 		String[] columnNames = new String[] { "ID", messages.getString("origin"), messages.getString("destination"),
-				messages.getString("date"), messages.getString("aircraft"), messages.getString("bookings") };
+				messages.getString("date"), messages.getString("bookings") };
 
 		flightTableModel = new DefaultTableModel(columnNames, 0) {
 			private static final long serialVersionUID = 1L;
@@ -465,7 +437,7 @@ public class MainWindow extends JFrame {
 
 		flights = FlightController.getInstance(AeroLogixClient.getInstance()).getAllFlights();
 
-		DateFormat obj = new SimpleDateFormat("dd MMM yyyy HH:mm"); 
+		DateFormat obj = new SimpleDateFormat("dd MMM yyyy HH:mm");
 
 		for (FlightData flight : flights) {
 			String formattedDate = obj.format(new Date(flight.getDate()));
@@ -491,21 +463,6 @@ public class MainWindow extends JFrame {
 		for (FlightData flight : flights) {
 			if (!flightIdFilter.isEmpty()
 					&& !String.valueOf(flight.getIdFlight()).toLowerCase().contains(flightIdFilter)) {
-				continue;
-			}
-			addRowToTable(flight);
-		}
-	}
-
-	/** Method that filters flights by the airline ID selected in the filter. */
-	private void filterFlightsByAirline() {
-		String airlineFilter = airlinesFilter.getSelectedItem() != null
-				? airlinesFilter.getSelectedItem().toString().toLowerCase()
-				: "";
-		flightTableModel.setRowCount(0);
-
-		for (FlightData flight : flights) {
-			if (!airlineFilter.isEmpty() && !flight.getAircraftId().toString().toLowerCase().contains(airlineFilter)) {
 				continue;
 			}
 			addRowToTable(flight);
@@ -545,37 +502,43 @@ public class MainWindow extends JFrame {
 
 	/** Method that filters flights by the introduced date in the filter. */
 	private void filterFlightsByDate() {
-		Date dateFilterValue = (Date) dateFilter.getValue();
-		flightTableModel.setRowCount(0);
+	    Date dateFilterValue = (Date) dateFilter.getValue();
+	    flightTableModel.setRowCount(0);
 
-		for (FlightData flight : flights) {
-			if (dateFilterValue != null) {
-				long flightDateMillis = flight.getDate() * 1000L;
-				if (flightDateMillis < dateFilterValue.getTime()) {
-					continue;
-				}
-			}
-			addRowToTable(flight);
-		}
+	    for (FlightData flight : flights) {
+	        if (dateFilterValue != null) {
+	            Date flightDate = new Date(flight.getDate() * 1000L);
+	            Calendar calendar = Calendar.getInstance();
+	            calendar.setTime(flightDate);
+
+	            if (dateFilterValue.before(calendar.getTime())) {
+	                continue;
+	            }
+	        }
+	        addRowToTable(flight);
+	    }
 	}
 
 	/**
 	 * Method that adds a row to the table model.
-	 * @param flight {@link FlightData} instance of the flight which data will be added to the table.
+	 * 
+	 * @param flight {@link FlightData} instance of the flight which data will be
+	 *               added to the table.
 	 */
 	private void addRowToTable(FlightData flight) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm"); 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
 		String formattedDate = dateFormat.format(new Date(flight.getDate()));
 		Object[] row = { flight.getIdFlight(), flight.getOrigin(), flight.getDestination(), formattedDate,
-				flight.getAircraftId(), flight.getBookingIds().size()};
+				flight.getAircraftId(), flight.getBookingIds().size() };
 		flightTableModel.addRow(row);
 	}
 
 	/**
-	 * A listener that triggers a specified filter method whenever a change occurs in the document.
+	 * A listener that triggers a specified filter method whenever a change occurs
+	 * in the document.
 	 * <p>
-	 * This listener can be used to execute a filtering operation in response to insert, remove, or change events
-	 * in a text component's document.
+	 * This listener can be used to execute a filtering operation in response to
+	 * insert, remove, or change events in a text component's document.
 	 * </p>
 	 */
 	private class FilterListener implements DocumentListener {
@@ -622,15 +585,19 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-	 * Method that opens a new {@link FlightWindow} when a row of the table is double-clicked.
+	 * Method that opens a new {@link FlightWindow} when a row of the table is
+	 * double-clicked.
+	 * 
 	 * @param flight {@link FlightData} instance of the flight in the selected row.
 	 */
 	private void onRowDoubleClick(FlightData flight) {
-		FlightWindow.getInstance(flight.getIdFlight(), user.getEmail()).setVisible(true);;
+		FlightWindow.getInstance(flight.getIdFlight(), user.getEmail()).setVisible(true);
+		;
 	}
 
 	/**
-	 * Method that opens a new {@link FlightWindow} when the JButton {@code bookFlightButton} is pressed.
+	 * Method that opens a new {@link FlightWindow} when the JButton
+	 * {@code bookFlightButton} is pressed.
 	 */
 	private void onBookFlightButtonClick() {
 		int selectedRow = flightTable.getSelectedRow();
@@ -643,8 +610,8 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-     * Method that sets the window in the center of the user screen.
-     */
+	 * Method that sets the window in the center of the user screen.
+	 */
 	private void centerWindow() {
 		Dimension windowSize = getSize();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -654,9 +621,11 @@ public class MainWindow extends JFrame {
 	}
 
 	/**
-     * Method that returns the singleton instance of {@link MainWindow}.
-     * @return If there exists an instance of {@link MainWindow} it will return it. If not, it will create a new one.
-     */
+	 * Method that returns the singleton instance of {@link MainWindow}.
+	 * 
+	 * @return If there exists an instance of {@link MainWindow} it will return it.
+	 *         If not, it will create a new one.
+	 */
 	public static MainWindow getInstance(UserData user, Locale locale) {
 		if (instance == null) {
 			instance = new MainWindow(user, locale);
