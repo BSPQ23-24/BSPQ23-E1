@@ -19,7 +19,8 @@ import com.aerologix.app.server.jdo.Passenger;
 import com.aerologix.app.server.jdo.Passenger;
 
 /**
- * Service class for managing Passenger-related operations.
+ * @brief Service class for managing Passenger-related operations.
+ * 
  * <p>
  * This class provides CRUD operations for passenger.
  */

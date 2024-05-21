@@ -16,7 +16,8 @@ import com.aerologix.app.server.AeroLogixServer;
 import com.aerologix.app.server.jdo.*;
 import com.aerologix.app.server.jdo.User.UserType;
 /**
- * Service class for managing user-related operations.
+ * @brief Service class for managing user-related operations.
+ * 
  * <p>
  * This class provides CRUD operations for users.
  */

@@ -16,7 +16,8 @@ import com.aerologix.app.server.AeroLogixServer;
 import com.aerologix.app.server.jdo.*;
 
 /**
- * Service class for managing airline-related operations.
+ * @brief Service class for managing airline-related operations.
+ * 
  * <p>
  * This class provides CRUD operations for airline.
  */
