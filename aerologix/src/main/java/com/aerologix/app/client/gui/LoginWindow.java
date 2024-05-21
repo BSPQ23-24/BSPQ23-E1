@@ -133,24 +133,8 @@ public class LoginWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(UserController.getInstance().login(tMail.getText(), tPass.getText())) {
-						Thread hilo = new Thread() {
-								
-							@Override
-							public void run() {
-								lError.setText("Logging in...");
-								waitTime(1000);
-								lError.setText("");
-								LoginWindow.instanceLogin = null;
-								dispose();
-								UserData user = new UserData();
-								user.setEmail(tMail.getText());
-								user.setName("");
-								user.setPassword(tPass.getPassword().toString());
-								user.setUserType(UserType.COUNTER_CLERK.toString());
-								MainWindow mw = MainWindow.getInstance(user,new Locale("es", "ES"));
-							}
-						};
-						hilo.start();
+                        UserData ud = UserController.getInstance().getUser(tMail.getText());
+						MainWindow.getInstance(ud.getEmail(), new Locale("es", "ES"));
 					} else {
 						Thread hilo = new Thread() {
 							@Override

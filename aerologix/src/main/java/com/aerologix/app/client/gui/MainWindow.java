@@ -47,6 +47,7 @@ import javax.swing.text.DateFormatter;
 import com.aerologix.app.client.AeroLogixClient;
 import com.aerologix.app.client.controller.AirlineController;
 import com.aerologix.app.client.controller.FlightController;
+import com.aerologix.app.client.controller.UserController;
 import com.aerologix.app.server.pojo.AirlineData;
 import com.aerologix.app.server.pojo.FlightData;
 import com.aerologix.app.server.pojo.UserData;
@@ -111,8 +112,8 @@ public class MainWindow extends JFrame {
 	 * @param locale represents a specific region 
      * for which the resource bundle is to be loaded.
 	 */
-	private MainWindow(UserData user, Locale locale) {
-		this.user = user;
+	private MainWindow(String userEmail, Locale locale) {
+		this.user = UserController.getInstance().getUser(userEmail);
 		initResourceBundle(Locale.getDefault());
 		languageSelector = new JComboBox<>(new Locale[] { new Locale("es", "ES"), Locale.US });
 
@@ -208,7 +209,7 @@ public class MainWindow extends JFrame {
 		languageSelector.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeLanguage(user, (Locale) languageSelector.getSelectedItem());
+				changeLanguage(userEmail, (Locale) languageSelector.getSelectedItem());
 			}
 		});
 
@@ -350,12 +351,12 @@ public class MainWindow extends JFrame {
      * @param locale represents a specific region 
      * for which the resource bundle is to be loaded.
      */
-	private void changeLanguage(UserData user,Locale locale) {
+	private void changeLanguage(String userEmail,Locale locale) {
 		Locale.setDefault(locale);
 		initResourceBundle(locale);
 		loadFlights();
 		loadFilters();
-		updateComponents(MainWindow.getInstance(user, locale));
+		updateComponents(MainWindow.getInstance(userEmail, locale));
 	}
 
 	/**
@@ -657,9 +658,9 @@ public class MainWindow extends JFrame {
      * Method that returns the singleton instance of {@link MainWindow}.
      * @return If there exists an instance of {@link MainWindow} it will return it. If not, it will create a new one.
      */
-	public static MainWindow getInstance(UserData user, Locale locale) {
+	public static MainWindow getInstance(String userEmail, Locale locale) {
 		if (instance == null) {
-			instance = new MainWindow(user, locale);
+			instance = new MainWindow(userEmail, locale);
 		}
 		return instance;
 	}

@@ -84,7 +84,7 @@ public class FlightWindow extends JFrame {
 		getContentPane().setPreferredSize(new Dimension(800, 500));
 		this.setSize(new Dimension(830, 500));
 		this.setResizable(false);
-		this.setTitle("AeroLogix -" + messages.getString("flight") + flightId + messages.getString("management"));
+		this.setTitle("AeroLogix -" + messages.getString("management") +  + flightId);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
@@ -147,7 +147,7 @@ public class FlightWindow extends JFrame {
 		languageSelector.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeLanguage((Locale) languageSelector.getSelectedItem(), flightId);
+                changeLanguage((Locale) languageSelector.getSelectedItem(), flightId, userEmail);
             }
         });
 	
@@ -159,14 +159,12 @@ public class FlightWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pBookings.removeAll(); // Remove all containers
-				pBookings.setLayout(new GridLayout(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getBookingIds().size(), 1));
-				showBookings(flightId, userEmail);	// Add them again
+				showBookings(flightId, userEmail, messages);	// Add them again
 			}
 			
 		});
 		
-		showBookings(flightId, userEmail);
+		showBookings(flightId, userEmail, messages);
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -184,19 +182,21 @@ public class FlightWindow extends JFrame {
         }
     }
 	
-	private void changeLanguage(Locale locale, int flightId) {
+	private void changeLanguage(Locale locale, int flightId, String userEmail) {
         Locale.setDefault(locale);
         initResourceBundle(locale);
-        updateComponents(flightId);
+        updateComponents(flightId, userEmail);
     }
 	
-	private void updateComponents(int flightId) {
+	private void updateComponents(int flightId, String userEmail) {
 		lFlightId.setText(messages.getString("flight") + flightId);
 	    bNewBooking.setText(messages.getString("BookFlight"));
 	    bRefresh.setText(messages.getString("RefreshList"));
-	    lDate.setText(messages.getString("date"));
+		DateFormat obj = new SimpleDateFormat("dd MMM yyyy HH:mm"); 
+	    lDate.setText(messages.getString("date") + obj.format(new Date(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getDate())));
         this.setTitle("AeroLogix -" + messages.getString("flight") + flightId + messages.getString("management"));
         lLanguage.setText(messages.getString("language"));
+		showBookings(flightId, userEmail, messages);
     }
 	
 	/**
@@ -247,8 +247,10 @@ public class FlightWindow extends JFrame {
 	 * 
 	 * @param flightId	Identification integer of the flight.
 	 */
-	public static void showBookings(int flightId, String userEmail) {
+	public static void showBookings(int flightId, String userEmail, ResourceBundle messages) {
 		// Get all booking data
+		pBookings.removeAll(); // Remove all containers
+		pBookings.setLayout(new GridLayout(FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getBookingIds().size(), 1));
 		ArrayList<BookingData> bookingData = new ArrayList<BookingData>();
 		for(int bookingId: FlightController.getInstance(AeroLogixClient.getInstance()).getFlight(flightId).getBookingIds()) {
 			bookingData.add(BookingController.getInstance(AeroLogixClient.getInstance()).getBooking(bookingId));
@@ -259,12 +261,12 @@ public class FlightWindow extends JFrame {
 		for(BookingData booking : bookingData) {
 			JPanel lPanelBooking = new JPanel(new GridLayout(2, 3));
 			lPanelBooking.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-			JLabel lBookingId = new JLabel("Booking: " + Integer.toString(booking.getId()));
-			JLabel lPassenger = new JLabel("Passenger DNI: " + booking.getPassengerDNI());
+			JLabel lBookingId = new JLabel(messages.getString("bookingId") + ": " + Integer.toString(booking.getId()));
+			JLabel lPassenger = new JLabel(messages.getString("passengerDNI") + ": " + booking.getPassengerDNI());
 			JPanel pEmpty = new JPanel();
-			JButton bViewBooking = new JButton("View booking details");
-			JButton bModifyBooking = new JButton("Modify booking");
-			JButton bDeleteBooking = new JButton("Cancel booking");
+			JButton bViewBooking = new JButton(messages.getString("booking_details"));
+			JButton bModifyBooking = new JButton(messages.getString("modify_booking"));
+			JButton bDeleteBooking = new JButton(messages.getString("cancel_booking"));
 			bViewBooking.setForeground(Color.BLUE);
 			bModifyBooking.setForeground(new Color(240, 118, 5));
 			bDeleteBooking.setForeground(Color.RED);
