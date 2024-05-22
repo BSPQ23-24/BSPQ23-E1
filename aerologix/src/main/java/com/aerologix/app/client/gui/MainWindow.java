@@ -253,6 +253,7 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
+		setupListeners();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		panel.revalidate();
 		panel.repaint();
@@ -402,6 +403,47 @@ public class MainWindow extends JFrame {
 			flightTableModel.addRow(row);
 		}
 	}
+	
+	private void filterFlights() {
+        String flightIdFilter = flightFilter.getText().toLowerCase();
+        String originFilterText = originFilter.getSelectedItem() != null
+                ? originFilter.getSelectedItem().toString().toLowerCase()
+                : "";
+        String destinationFilterText = destinationFilter.getSelectedItem() != null
+                ? destinationFilter.getSelectedItem().toString().toLowerCase()
+                : "";
+
+        flightTableModel.setRowCount(0);
+
+        for (FlightData flight : flights) {
+            boolean matches = true;
+
+            // Filtrar por ID de vuelo
+            if (!flightIdFilter.isEmpty() && !String.valueOf(flight.getIdFlight()).toLowerCase().contains(flightIdFilter)) {
+                matches = false;
+            }
+
+            // Filtrar por origen
+            if (!originFilterText.isEmpty() && !flight.getOrigin().toLowerCase().contains(originFilterText)) {
+                matches = false;
+            }
+
+            // Filtrar por destino
+            if (!destinationFilterText.isEmpty() && !flight.getDestination().toLowerCase().contains(destinationFilterText)) {
+                matches = false;
+            }
+
+            if (matches) {
+                addRowToTable(flight);
+            }
+        }
+    }
+	
+	private void setupListeners() {
+        flightFilter.getDocument().addDocumentListener(new FilterListener(this::filterFlights));
+        originFilter.addActionListener(e -> filterFlights());
+        destinationFilter.addActionListener(e -> filterFlights());
+    }
 
 	/** Method that filters flights by the flight ID introduced in the filter. */
 	private void filterFlightsByFlightId() {
@@ -476,47 +518,27 @@ public class MainWindow extends JFrame {
 	 * </p>
 	 */
 	private class FilterListener implements DocumentListener {
-		private Runnable filterMethod;
+        private Runnable filterMethod;
 
-		/**
-		 * Constructs a new {@code FilterListener} with the specified filter method.
-		 *
-		 * @param filterMethod the {@link Runnable} to run when a document event occurs
-		 */
-		public FilterListener(Runnable filterMethod) {
-			this.filterMethod = filterMethod;
-		}
+        public FilterListener(Runnable filterMethod) {
+            this.filterMethod = filterMethod;
+        }
 
-		/**
-		 * Invoked when text is inserted into the document.
-		 *
-		 * @param e the document event
-		 */
-		@Override
-		public void insertUpdate(DocumentEvent e) {
-			filterMethod.run();
-		}
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            filterMethod.run();
+        }
 
-		/**
-		 * Invoked when text is removed from the document.
-		 *
-		 * @param e the document event
-		 */
-		@Override
-		public void removeUpdate(DocumentEvent e) {
-			filterMethod.run();
-		}
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            filterMethod.run();
+        }
 
-		/**
-		 * Invoked when a style change occurs in the document.
-		 *
-		 * @param e the document event
-		 */
-		@Override
-		public void changedUpdate(DocumentEvent e) {
-			filterMethod.run();
-		}
-	}
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            filterMethod.run();
+        }
+    }
 
 	/**
 	 * Method that opens a new {@link FlightWindow} when a row of the table is
