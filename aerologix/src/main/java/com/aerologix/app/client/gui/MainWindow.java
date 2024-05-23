@@ -341,18 +341,14 @@ public class MainWindow extends JFrame {
 	private void loadFilters() {
 		airlines = AirlineController.getInstance(AeroLogixClient.getInstance()).getAllAirlines();
 		Set<String> origins = new HashSet<>();
+		origins.add("");
 		Set<String> destinations = new HashSet<>();
-		Set<String> airlineNames = new HashSet<>();
+		destinations.add("");
 
 		// Add unique origins and destinations
 		for (FlightData flight : flights) {
 			origins.add(flight.getOrigin().toString());
 			destinations.add(flight.getDestination().toString());
-		}
-
-		// Add unique airlines
-		for (AirlineData airline : airlines) {
-			airlineNames.add(airline.getName());
 		}
 
 		// Populate originFilter with unique origins
@@ -417,20 +413,21 @@ public class MainWindow extends JFrame {
 
         for (FlightData flight : flights) {
             boolean matches = true;
-
-            // Filtrar por ID de vuelo
+            
             if (!flightIdFilter.isEmpty() && !String.valueOf(flight.getIdFlight()).toLowerCase().contains(flightIdFilter)) {
                 matches = false;
             }
-
-            // Filtrar por origen
-            if (!originFilterText.isEmpty() && !flight.getOrigin().toLowerCase().contains(originFilterText)) {
-                matches = false;
+            
+            if (originFilterText != "") {
+	            if (!originFilterText.isEmpty() && !flight.getOrigin().toLowerCase().contains(originFilterText)) {
+	            	matches = false;
+	            }
             }
-
-            // Filtrar por destino
-            if (!destinationFilterText.isEmpty() && !flight.getDestination().toLowerCase().contains(destinationFilterText)) {
-                matches = false;
+            
+            if (destinationFilterText != "") {
+	            if (!destinationFilterText.isEmpty() && !flight.getDestination().toLowerCase().contains(destinationFilterText)) {
+	                matches = false;
+	            }
             }
 
             if (matches) {
