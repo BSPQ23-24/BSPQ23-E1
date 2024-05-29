@@ -1,4 +1,4 @@
-# AeroLogix
+# [AeroLogix](https://github.com/BSPQ23-24/BSPQ23-E1)
 
 AeroLogix is a Maven-based Java project that creates a management system for airports.
 
@@ -74,4 +74,4 @@ mvn doxygen:report
 ```
 
 ## Documentation
-You can find the official project documentation for developers in https://bspq23-24.github.io/BSPQ23-E1/
+You can find the official project documentation for developers [here](https://bspq23-24.github.io/BSPQ23-E1).
